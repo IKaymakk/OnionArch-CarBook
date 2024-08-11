@@ -1,8 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
+<!DOCTYPE html>
 
-<h1>Index</h1>
-
+@await Component.InvokeAsync("_AboutUsVC")
+@await Component.InvokeAsync("_AboutBecomeDriverVC")
+@await Component.InvokeAsync("_TestimonialsVC")

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Mediator.SocialMedias.Queries;
 
-public class GetSocialMediasQuery:IRequest<List<GetSocialMediasQueryResult>>
+public class GetSocialMediasQuery : IRequest<List<GetSocialMediasQueryResult>>
 {
     public class GetSocialMediasQueryHandler : IRequestHandler<GetSocialMediasQuery, List<GetSocialMediasQueryResult>>
     {

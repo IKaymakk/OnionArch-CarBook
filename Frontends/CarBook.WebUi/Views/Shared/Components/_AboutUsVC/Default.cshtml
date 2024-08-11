@@ -1,0 +1,21 @@
+﻿@model List<CarBook.DTO.AboutDtos.ResultAboutDto>
+
+<section class="ftco-section ftco-about">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/carbook-master/images/about.jpg);">
+            </div>
+            <div class="col-md-6 wrap-about">
+                <div class="heading-section heading-section-white pl-md-5">
+                    <span class="subheading">Hakkımızda</span>
+                    <h2 class="mb-4">CarBook'a Hoşgeldiniz</h2>
+                    @foreach (var x in Model)
+                    {
+                        <p>@x.Description</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

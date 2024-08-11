@@ -12,6 +12,8 @@ using CarBook.Application.Mediator.Services.Commands;
 using CarBook.Application.Mediator.Services.Results;
 using CarBook.Application.Mediator.SocialMedias.Commands;
 using CarBook.Application.Mediator.SocialMedias.Results;
+using CarBook.Application.Mediator.Testimonials.Commands;
+using CarBook.Application.Mediator.Testimonials.Results;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,12 @@ namespace CarBook.Application.Mapping
             CreateMap<SocialMedia, CreateSocialMediaCommand>().ReverseMap();
             CreateMap<SocialMedia, UpdateSocialMediaCommand>().ReverseMap();
             CreateMap<SocialMedia, RemoveSocialMediaCommand>().ReverseMap();
+
+            CreateMap<Testimonial, GetTestimonialsQueryResult>().ReverseMap();
+            CreateMap<Testimonial, GetTestimonialByIdQueryResult>().ReverseMap();
+            CreateMap<Testimonial, CreateTestimonialCommand>().ReverseMap();
+            CreateMap<Testimonial, UpdateTestimonialCommand>().ReverseMap();
+            CreateMap<Testimonial, RemoveTestimonialCommand>().ReverseMap();
         }
     }
 }
