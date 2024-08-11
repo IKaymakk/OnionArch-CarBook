@@ -26,7 +26,7 @@ public class CarBookContext : DbContext
     public DbSet<FooterAddresses> FooterAddresses { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Pricing> Pricings { get; set; }
-    public DbSet<Services> Services { get; set; }
+    public DbSet<Service> Services { get; set; }
     public DbSet<SocialMedia> SocialMedias { get; set; }
     public DbSet<Testimonial> Testimonials { get; set; }
     public DbSet<Banner> Banners { get; set; }

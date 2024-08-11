@@ -30,7 +30,6 @@ namespace CarBook.Application.Mediator.Features.Commands
             {
                 var feature = _mapper.Map<Feature>(request);
                 await _repository.CreateAsync(feature);
-
             }
         }
 

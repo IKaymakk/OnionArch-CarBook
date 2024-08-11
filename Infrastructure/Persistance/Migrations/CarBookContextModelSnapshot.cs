@@ -343,13 +343,13 @@ namespace CarBook.Persistance.Migrations
                     b.ToTable("Pricings");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Services", b =>
+            modelBuilder.Entity("Domain.Entities.Service", b =>
                 {
-                    b.Property<int>("ServicesId")
+                    b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServicesId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -363,7 +363,7 @@ namespace CarBook.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ServicesId");
+                    b.HasKey("ServiceId");
 
                     b.ToTable("Services");
                 });
@@ -466,7 +466,7 @@ namespace CarBook.Persistance.Migrations
             modelBuilder.Entity("Domain.Entities.CarPricing", b =>
                 {
                     b.HasOne("Domain.Entities.Car", "Car")
-                        .WithMany("CarPricing")
+                        .WithMany("CarPricings")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -493,7 +493,7 @@ namespace CarBook.Persistance.Migrations
 
                     b.Navigation("CarFeatures");
 
-                    b.Navigation("CarPricing");
+                    b.Navigation("CarPricings");
                 });
 
             modelBuilder.Entity("Domain.Entities.Feature", b =>
