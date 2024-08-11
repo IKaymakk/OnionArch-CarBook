@@ -29,4 +29,6 @@ public class CarBookContext : DbContext
     public DbSet<Services> Services { get; set; }
     public DbSet<SocialMedia> SocialMedias { get; set; }
     public DbSet<Testimonial> Testimonials { get; set; }
+    public DbSet<Banner> Banners { get; set; }
+
 }

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Features.Results.AboutResults;
+namespace CarBook.Application.Features.Commands.BannerCommands;
 
-public class GetAboutQueryResult
+public class CreateBannerCommand
 {
     public string Title { get; set; }
     public string Description { get; set; }
-    public string ImageUrl { get; set; }
+    public string VideoDescription { get; set; }
+    public string VideoUrl { get; set; }
 }
