@@ -54,6 +54,6 @@ public class BannersController : ControllerBase
     public async Task<IActionResult> UpdateBanner(UpdateBannerCommand command)
     {
         await _updateBannerCommandHandler.Handle(command);
-        return Ok();
+        return Ok("Kayıt Güncellendi");
     }
 }

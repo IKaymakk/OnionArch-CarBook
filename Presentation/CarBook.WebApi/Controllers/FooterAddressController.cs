@@ -24,7 +24,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAdressList(int id)
+        public async Task<IActionResult> GetAdress(int id)
         {
             var values = await _mediator.Send(new GetFooterAddressByIdQuery(id));
             return Ok(values);

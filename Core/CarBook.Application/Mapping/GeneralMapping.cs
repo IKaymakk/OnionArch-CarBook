@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CarBook.Application.Mediator.Contacts.Commands;
+using CarBook.Application.Mediator.Contacts.Results;
 using CarBook.Application.Mediator.Features.Commands;
 using CarBook.Application.Mediator.Features.Results;
 using CarBook.Application.Mediator.FooterAddress.Commands;
@@ -68,6 +70,12 @@ namespace CarBook.Application.Mapping
             CreateMap<Testimonial, CreateTestimonialCommand>().ReverseMap();
             CreateMap<Testimonial, UpdateTestimonialCommand>().ReverseMap();
             CreateMap<Testimonial, RemoveTestimonialCommand>().ReverseMap();
+
+            CreateMap<Contact, GetContactsQueryResult>().ReverseMap();
+            CreateMap<Contact, GetContactByIdQueryResult>().ReverseMap();
+            CreateMap<Contact, CreateContactCommand>().ReverseMap();
+            CreateMap<Contact, UpdateContactCommand>().ReverseMap();
+            CreateMap<Contact, RemoveContactCommand>().ReverseMap();
         }
     }
 }
