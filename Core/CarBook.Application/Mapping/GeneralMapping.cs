@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using CarBook.Application.Mediator.Authors.Commands;
+using CarBook.Application.Mediator.Authors.Results;
+using CarBook.Application.Mediator.Blogs.Commands;
+using CarBook.Application.Mediator.Blogs.Results;
 using CarBook.Application.Mediator.Cars.Results;
 using CarBook.Application.Mediator.Contacts.Commands;
 using CarBook.Application.Mediator.Contacts.Results;
@@ -17,6 +21,7 @@ using CarBook.Application.Mediator.SocialMedias.Commands;
 using CarBook.Application.Mediator.SocialMedias.Results;
 using CarBook.Application.Mediator.Testimonials.Commands;
 using CarBook.Application.Mediator.Testimonials.Results;
+using CarBook.Domain.Entities;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -30,6 +35,8 @@ namespace CarBook.Application.Mapping
     {
         public GeneralMapping()
         {
+            CreateMap<Car, GetLast5CarsWithBrandQueryResult>().ReverseMap();
+
             CreateMap<Feature, GetFeatureQueryResult>().ReverseMap();
             CreateMap<Feature, GetFeatureByIdQueryResult>().ReverseMap();
             CreateMap<Feature, CreateFeatureCommand>().ReverseMap();
@@ -78,7 +85,19 @@ namespace CarBook.Application.Mapping
             CreateMap<Contact, UpdateContactCommand>().ReverseMap();
             CreateMap<Contact, RemoveContactCommand>().ReverseMap();
 
-            CreateMap<Car, GetLast5CarsWithBrandQueryResult>().ReverseMap();
+            CreateMap<Author, GetAuthorsQueryResult>().ReverseMap();
+            CreateMap<Author, GetAuthorByIdQueryResult>().ReverseMap();
+            CreateMap<Author, CreateAuthorCommand>().ReverseMap();
+            CreateMap<Author, UpdateAuthorCommand>().ReverseMap();
+            CreateMap<Author, RemoveAuthorCommand>().ReverseMap();
+
+            CreateMap<Blog, GetBlogsQueryResult>().ReverseMap();
+            CreateMap<Blog, GetBlogsByIdQueryResult>().ReverseMap();
+            CreateMap<Blog, CreateBlogCommand>().ReverseMap();
+            CreateMap<Blog, UpdateBlogCommand>().ReverseMap();
+            CreateMap<Blog, RemoveBlogCommand>().ReverseMap();
+            CreateMap<Blog, GetLast3BlogsWithAuthorsQueryResult>().ReverseMap();
+
         }
     }
 }
