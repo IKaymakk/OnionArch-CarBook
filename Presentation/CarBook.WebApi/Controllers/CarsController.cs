@@ -1,6 +1,8 @@
 ﻿using CarBook.Application.Features.Commands.CarCommands;
 using CarBook.Application.Features.Handlers.CarHandlers;
 using CarBook.Application.Features.Queries.CarQueries;
+using CarBook.Application.Mediator.Cars.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -17,9 +19,9 @@ public class CarsController : ControllerBase
     private readonly GetCarQueryHandler _getCarQueryHandler;
     private readonly GetCarByIdQueryHandler _getCarByIdQueryHandler;
     private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandle;
+    IMediator mediator;
 
-
-    public CarsController(CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarQueryHandler getCarQueryHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandle)
+    public CarsController(CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarQueryHandler getCarQueryHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandle, IMediator mediator)
     {
         _createCarCommandHandler = createCarCommandHandler;
         _updateCarCommandHandler = updateCarCommandHandler;
@@ -27,6 +29,7 @@ public class CarsController : ControllerBase
         _getCarQueryHandler = getCarQueryHandler;
         _getCarByIdQueryHandler = getCarByIdQueryHandler;
         _getCarWithBrandQueryHandle = getCarWithBrandQueryHandle;
+        this.mediator = mediator;
     }
 
     [HttpGet]
@@ -57,6 +60,12 @@ public class CarsController : ControllerBase
     public async Task<IActionResult> GetCarsListWithBrands()
     {
         var value = await _getCarWithBrandQueryHandle.Handle();
+        return Ok(value);
+    }
+    [HttpGet("GetLast5CarsWithBrand")]
+    public async Task<IActionResult> GetLast5CarsWithBrand()
+    {
+        var value = await mediator.Send(new GetLast5CarsWithBrandQuery());
         return Ok(value);
     }
     [HttpPut]

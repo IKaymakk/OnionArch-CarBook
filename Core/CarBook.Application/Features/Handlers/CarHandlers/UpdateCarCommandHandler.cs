@@ -24,11 +24,13 @@ namespace CarBook.Application.Features.Handlers.CarHandlers
             values.Fuel = command.Fuel;
             values.Km = command.Km;
             values.Seat = command.Seat; 
+            values.CoverImageUrl = command.CoverImageUrl;
             values.BigImageUrl = command.BigImageUrl;   
             values.BrandId = command.BrandId;
             values.Luggage = command.Luggage;
             values.Model = command.Model;
             values.Transmission = command.Transmission;
+            await _repository.UpdateAsync(values);
         }
     }
 }

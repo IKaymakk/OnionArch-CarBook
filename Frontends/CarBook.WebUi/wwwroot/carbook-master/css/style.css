@@ -9019,12 +9019,14 @@ h1, h2, h3, h4, h5,
   background-repeat: no-repeat;
   background-position: top center;
   overflow: hidden;
+
   z-index: 0; }
   @media (min-width: 768px) {
     .ftco-intro .overlay {
         position: absolute;
-        top: -120px;
-        left: -100px;
+        top: -140px;
+        left: -260px;
+        opacity :1;
         right: 0;
         bottom: -120px;
         width: 40%;

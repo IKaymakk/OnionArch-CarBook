@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarBook.Application.Mediator.Cars.Results;
 using CarBook.Application.Mediator.Contacts.Commands;
 using CarBook.Application.Mediator.Contacts.Results;
 using CarBook.Application.Mediator.Features.Commands;
@@ -76,6 +77,8 @@ namespace CarBook.Application.Mapping
             CreateMap<Contact, CreateContactCommand>().ReverseMap();
             CreateMap<Contact, UpdateContactCommand>().ReverseMap();
             CreateMap<Contact, RemoveContactCommand>().ReverseMap();
+
+            CreateMap<Car, GetLast5CarsWithBrandQueryResult>().ReverseMap();
         }
     }
 }
