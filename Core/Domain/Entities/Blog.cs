@@ -14,4 +14,5 @@ public class Blog
     public Category Category { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; }
+    public List<BlogTagCloud> BlogTagClouds{ get; set; }
 }

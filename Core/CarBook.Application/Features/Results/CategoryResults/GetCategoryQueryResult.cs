@@ -9,5 +9,6 @@ namespace CarBook.Application.Features.Results.CategoryResults
     public class GetCategoryQueryResult
     {
         public string Name { get; set; }
+        public int Count { get; set; }
     }
 }

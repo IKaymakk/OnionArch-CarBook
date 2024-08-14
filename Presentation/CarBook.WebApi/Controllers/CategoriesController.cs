@@ -17,20 +17,28 @@ public class CategoriesController : ControllerBase
     private readonly GetCategoryQueryHandler getCategoryQueryHandler;
     private readonly RemoveCategoryCommandHandler removeCategoryCommandHandler;
     private readonly UpdateCategoryCommandHandler updateCategoryCommandHandler;
+    private readonly GetCategoriesWithBlogCountsQueryHandler getCategoriesWithBlogCountsQueryHandler;
 
-    public CategoriesController(CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, GetCategoryQueryHandler getCategoryQueryHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler)
+    public CategoriesController(CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, GetCategoryQueryHandler getCategoryQueryHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler, GetCategoriesWithBlogCountsQueryHandler getCategoriesWithBlogCountsQueryHandler)
     {
         this.createCategoryCommandHandler = createCategoryCommandHandler;
         this.getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
         this.getCategoryQueryHandler = getCategoryQueryHandler;
         this.removeCategoryCommandHandler = removeCategoryCommandHandler;
         this.updateCategoryCommandHandler = updateCategoryCommandHandler;
+        this.getCategoriesWithBlogCountsQueryHandler = getCategoriesWithBlogCountsQueryHandler;
     }
 
     [HttpGet]
     public async Task<IActionResult> SCategorieslist()
     {
         var values = await getCategoryQueryHandler.Handle();
+        return Ok(values);
+    }
+    [HttpGet("CategoriesWithBlogCounts")]
+    public async Task<IActionResult> GetCategoriesListWithBlogCounts()
+    {
+        var values = await getCategoriesWithBlogCountsQueryHandler.Handle();
         return Ok(values);
     }
     [HttpPost]

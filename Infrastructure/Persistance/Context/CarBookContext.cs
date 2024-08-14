@@ -33,5 +33,25 @@ public class CarBookContext : DbContext
     public DbSet<Banner> Banners { get; set; }
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Author> Authors { get; set; }
+    public DbSet<TagCloud> TagClouds { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // Çoka çok ilişki konfigürasyonu
+        modelBuilder.Entity<BlogTagCloud>()
+            .HasKey(bt => new { bt.BlogId, bt.TagCloudId });
+
+        modelBuilder.Entity<BlogTagCloud>()
+            .HasOne(bt => bt.Blogs)
+            .WithMany(b => b.BlogTagClouds)
+            .HasForeignKey(bt => bt.BlogId);
+
+        modelBuilder.Entity<BlogTagCloud>()
+            .HasOne(bt => bt.TagClouds)
+            .WithMany(t => t.BlogTagClouds)
+            .HasForeignKey(bt => bt.TagCloudId);
+    }
 
 }
