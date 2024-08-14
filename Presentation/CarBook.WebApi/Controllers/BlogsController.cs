@@ -56,12 +56,19 @@ public class BlogsController : ControllerBase
         var value = await _mediator.Send(new GetBlogsByIdQuery(id));
         return Ok(value);
     }
+
+
     [HttpGet("Recent3Blogs")]
     public async Task<IActionResult> GetRecent3Blogs()
     {
         var values = await _mediator.Send(new GetLast3BlogsWithAuthorsQuery());
         return Ok(values);
     }
-    
+    [HttpGet("blog/{blogid}")]
+    public async Task<IActionResult> GetBlogWithTagCloud(int blogid)
+    {
+        var value = await _mediator.Send(new GetBlogWithTagCloudQuery(blogid));
+        return Ok(value);
+    }
 }
 

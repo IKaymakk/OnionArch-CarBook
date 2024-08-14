@@ -1,8 +1,22 @@
-﻿<div class="tag-widget post-tag-container mb-5 mt-5">
-    <div class="tagcloud">
-        <a href="#" class="tag-cloud-link">asdsadsadLife</a>
-        <a href="#" class="tag-cloud-link">Sport</a>
-        <a href="#" class="tag-cloud-link">Tech</a>
-        <a href="#" class="tag-cloud-link">Travel</a>
+﻿@model CarBook.DTO.BlogDtos.BlogWithTagCloudDto
+<style>
+    .tag-cloud-container {
+        display: flex;
+        gap: 10px; /* Tag'ler arasındaki boşluk */
+        flex-wrap: wrap; /* Alan daraldığında, tag'lerin bir alt satıra geçmesini sağlar */
+    }
+
+    .tag-widget {
+        display: inline-block;
+        margin: 0; /* Varsayılan margin'i kaldır */
+    }
+
+</style>
+@foreach (var x in Model.TagClouds)
+{
+    <div class="tag-widget post-tag-container mb-5 mt-5">
+        <div class="tagcloud">
+            <a href="#" class="tag-cloud-link">@x.TagCloudTitle</a>
+        </div>
     </div>
-</div>
+}

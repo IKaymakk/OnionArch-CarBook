@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Inferfaces
 {
-    public interface IBlogRepository
+    public interface ITagCloudRepository
     {
-        Task<List<Blog>> GetLast3BlogsWithAuthors();
-        Task<List<Blog>> GetBlogsWithAuthors();
-        Task<Blog> GetBlogWithTagCloud(int blogid);
+        Task<TagCloud> GetTagCloudWithBlogsAsync(int tagCloudId);
 
     }
 }

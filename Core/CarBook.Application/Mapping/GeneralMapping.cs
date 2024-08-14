@@ -20,6 +20,7 @@ using CarBook.Application.Mediator.Services.Commands;
 using CarBook.Application.Mediator.Services.Results;
 using CarBook.Application.Mediator.SocialMedias.Commands;
 using CarBook.Application.Mediator.SocialMedias.Results;
+using CarBook.Application.Mediator.TagClouds.Results;
 using CarBook.Application.Mediator.Testimonials.Commands;
 using CarBook.Application.Mediator.Testimonials.Results;
 using CarBook.Domain.Entities;
@@ -99,6 +100,11 @@ namespace CarBook.Application.Mapping
             CreateMap<Blog, RemoveBlogCommand>().ReverseMap();
             CreateMap<Blog, GetLast3BlogsWithAuthorsQueryResult>().ReverseMap();
             CreateMap<Blog, GetBlogsWithAuthorsQueryResult>().ReverseMap();
+            CreateMap<Blog, GetBlogWithTagCloudQueryResult>().ReverseMap();
+
+
+            CreateMap<TagCloud, TagCloudWithBlogsQueryResult>()
+            .ForMember(dest => dest.BlogTitles, opt => opt.MapFrom(src => src.BlogTagClouds.Select(btc => btc.Blogs.Title).ToList()));
 
             CreateMap<CarPricing, GetCarsWithPricingsQueryResult>()
                 .ForMember(x => x.BrandName, y => y.MapFrom(x => x.Car.Brand.Name)).ReverseMap();

@@ -25,6 +25,16 @@ namespace CarBook.Persistance.Repositories
             return values;
         }
 
+        public async Task<Blog> GetBlogWithTagCloud(int blogid)
+        {
+            return await _context.Blogs
+                           .Include(x => x.Author)
+                           .Include(b => b.BlogTagClouds)
+                           .ThenInclude(btc => btc.TagClouds)
+                           .SingleOrDefaultAsync(b => b.BlogId == blogid);
+        }
+
+
         public async Task<List<Blog>> GetLast3BlogsWithAuthors()
         {
             var values = await _context.Blogs.Include(x => x.Author).Include(x => x.Category).OrderByDescending(x => x.BlogId).Take(3).ToListAsync();

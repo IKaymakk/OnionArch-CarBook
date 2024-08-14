@@ -17,4 +17,6 @@ public class BlogsWithAuthorDto
     public string categoryName { get; set; }
     public string authorName { get; set; }
 
+
+
 }
