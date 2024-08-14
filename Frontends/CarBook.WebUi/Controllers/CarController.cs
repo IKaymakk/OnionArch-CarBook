@@ -16,7 +16,7 @@ public class CarController : Controller
     public async Task<IActionResult> Index()
     {
         var client = _httpClientFactory.CreateClient();
-        var responsemessage = await client.GetAsync("https://localhost:7149/api/Cars/CarsListWithBrands");
+        var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings");
         if (responsemessage.IsSuccessStatusCode)
         {
             var jsondata = await responsemessage.Content.ReadAsStringAsync();

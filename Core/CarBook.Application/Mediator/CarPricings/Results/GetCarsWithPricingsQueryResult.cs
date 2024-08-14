@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.DTO.CarDtos
+namespace CarBook.Application.Mediator.CarPricings.Results
 {
-    public class CarResultDto
+    public class GetCarsWithPricingsQueryResult
     {
         public int CarPricingId { get; set; }
         public string CarModel { get; set; }

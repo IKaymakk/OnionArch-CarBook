@@ -21,13 +21,19 @@ public class CarRepository : ICarRepository
 
     public async Task<List<Car>> GetCarsListWithBrand()
     {
-        var values = await _context.Cars.Include(c => c.Brand).AsNoTracking().ToListAsync();
+        var values = await _context.Cars
+            .Include(c => c.Brand).AsNoTracking().ToListAsync();
         return values;
     }
 
+  
+
     public async Task<List<Car>> GeTLast5CarsWithBrand()
     {
-        var values = await _context.Cars.Include(x => x.Brand).OrderByDescending(x => x.CarId).Take(5).ToListAsync();
+        var values = await _context.Cars
+            .Include(x => x.Brand)
+                .OrderByDescending(x => x.CarId)
+                    .Take(5).ToListAsync();
         return values;
     }
 }

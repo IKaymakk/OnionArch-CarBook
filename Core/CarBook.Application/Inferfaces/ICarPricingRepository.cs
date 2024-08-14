@@ -1,4 +1,4 @@
-﻿using CarBook.Domain.Entities;
+﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Inferfaces
 {
-    public interface IBlogRepository
+    public interface ICarPricingRepository
     {
-        Task<List<Blog>> GetLast3BlogsWithAuthors();
-        Task<List<Blog>> GetBlogsWithAuthors();
+        Task<List<CarPricing>> CarPricingsWithCars();
     }
 }

@@ -11,6 +11,5 @@ namespace CarBook.Application.Inferfaces
     {
         Task<List<Car>> GetCarsListWithBrand();
         Task<List<Car>> GeTLast5CarsWithBrand();
-        Task<List<Car>> GetCarsWitchPricings();
     }
 }

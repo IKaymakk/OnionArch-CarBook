@@ -44,6 +44,12 @@ public class BlogsController : ControllerBase
         await _mediator.Send(new RemoveBlogCommand(id));
         return Ok("Kayıt Silindi");
     }
+    [HttpGet("GetAllBlogsWithAuthors")]
+    public async Task<IActionResult> GetAllBlogsWithAuthors()
+    {
+        var values = await _mediator.Send(new GetBlogsWithAuthorsQuery());
+        return Ok(values);
+    }
     [HttpGet("{id}")]
     public async Task<IActionResult> GetBlog(int id)
     {

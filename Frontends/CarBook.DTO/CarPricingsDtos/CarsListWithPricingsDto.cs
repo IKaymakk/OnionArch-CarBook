@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.DTO.CarDtos
+namespace CarBook.DTO.CarPricingsDtos
 {
-    public class CarResultDto
+    public class CarsListWithPricingsDto
     {
         public int CarPricingId { get; set; }
         public string CarModel { get; set; }
