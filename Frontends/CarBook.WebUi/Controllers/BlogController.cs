@@ -19,7 +19,7 @@ public class BlogController : Controller
         ViewBag.v2 = "Bloglarımız";
 
         var client = _httpclientfactory.CreateClient();
-        var responseMessage = await client.GetAsync("https://localhost:7149/api/Blogs/GetAllBlogsWithAuthors\r\n");
+        var responseMessage = await client.GetAsync("https://localhost:7149/api/Blogs/GetAllBlogsWithAuthors");
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -28,10 +28,20 @@ public class BlogController : Controller
         }
         return View();
     }
-    public async Task<IActionResult> BlogDetail()
+    public async Task<IActionResult> BlogDetail(int id)
     {
         ViewBag.v1 = "Bloglar";
-        ViewBag.v2 = "";
+        ViewBag.v2 = "Bloglarımız";
+        var client = _httpclientfactory.CreateClient();
+        var responseMessage = await client.GetAsync("https://localhost:7149/api/Blogs/" + id);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<BlogDetailDto>(jsonData);
+            return View(values);
+        }
+        
+        ViewBag.id = id;
         return View();
     }
 }

@@ -1,13 +1,34 @@
-﻿<div class="col-md-8 ftco-animate">
-    <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+﻿@model CarBook.DTO.BlogDtos.BlogDetailDto
+<style>
+    .tag-cloud-container {
+        display: flex;
+        gap: 10px; /* Tag'ler arasındaki boşluk */
+        flex-wrap: wrap; /* Alan daraldığında, tag'lerin bir alt satıra geçmesini sağlar */
+    }
+
+    .tag-widget {
+        display: inline-block;
+        margin: 0; /* Varsayılan margin'i kaldır */
+    }
+
+</style>
+
+<div class="col-md-8 ftco-animate">
+    <h2 class="mb-3">@Model.Title</h2>
+    <p>@Model.Description</p>
     <p>
         <img src="" alt="" class="img-fluid">
     </p>
-    <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
+  
+    @foreach (var x in Model.TagClouds)
+    {
+        <div class="tag-widget post-tag-container mb-5 mt-5">
+            <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">@x.TagCloudTitle</a>
+            </div>
+        </div>
+    }
 
-    <!----------------------------------------------------------->
-    @await Component.InvokeAsync("_BlogDetailTagCloudByBlogVC")
     <!----------------------------------------------------------->
     @await Component.InvokeAsync("_BlogDetailAuthorAboutVC")
     <!----------------------------------------------------------->
@@ -19,7 +40,7 @@
 
         <!----------------------------------------------------------->
         @await Component.InvokeAsync("_CommentListByBlogVC")
-        <!-----------------------------------------------------------> 
+        <!----------------------------------------------------------->
         @await Component.InvokeAsync("_CommentAddVC")
         <!----------------------------------------------------------->
 

@@ -94,14 +94,17 @@ namespace CarBook.Application.Mapping
             CreateMap<Author, RemoveAuthorCommand>().ReverseMap();
 
             CreateMap<Blog, GetBlogsQueryResult>().ReverseMap();
-            CreateMap<Blog, GetBlogsByIdQueryResult>().ReverseMap();
+            CreateMap<Blog, GetBlogsByIdQueryResult>()
+           .ForMember(dest => dest.TagClouds, opt => opt.MapFrom(src => src.BlogTagClouds)).ReverseMap();
             CreateMap<Blog, CreateBlogCommand>().ReverseMap();
             CreateMap<Blog, UpdateBlogCommand>().ReverseMap();
             CreateMap<Blog, RemoveBlogCommand>().ReverseMap();
             CreateMap<Blog, GetLast3BlogsWithAuthorsQueryResult>().ReverseMap();
             CreateMap<Blog, GetBlogsWithAuthorsQueryResult>().ReverseMap();
             CreateMap<Blog, GetBlogWithTagCloudQueryResult>().ReverseMap();
-
+            CreateMap<BlogTagCloud, TagCloudDto>()
+           .ForMember(dest => dest.TagCloudId, opt => opt.MapFrom(src => src.TagCloudId))
+           .ForMember(dest => dest.TagCloudTitle, opt => opt.MapFrom(src => src.TagClouds));
 
             CreateMap<TagCloud, TagCloudWithBlogsQueryResult>()
             .ForMember(dest => dest.BlogTitles, opt => opt.MapFrom(src => src.BlogTagClouds.Select(btc => btc.Blogs.Title).ToList()));

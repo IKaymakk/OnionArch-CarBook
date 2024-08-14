@@ -13,10 +13,10 @@ public class _BlogDetailTagCloudByBlogVC : ViewComponent
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync(int blogid)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("https://localhost:7149/api/Blogs/blog/27");
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/Blogs/" + blogid);
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();

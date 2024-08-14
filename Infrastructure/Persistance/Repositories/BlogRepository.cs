@@ -19,6 +19,34 @@ namespace CarBook.Persistance.Repositories
             _context = context;
         }
 
+        public async Task AddTagCloudToBlogAsync(int blogId, int tagCloudId)
+        {
+            var blog = await _context.Blogs
+             .Include(b => b.BlogTagClouds)
+             .SingleOrDefaultAsync(b => b.BlogId == blogId);
+
+
+            blog.BlogTagClouds.Add(new BlogTagCloud
+            {
+                BlogId = blogId,
+                TagCloudId = tagCloudId,
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Blog> GetBlogByIdWithAuthorCategoryTagCloud(int blogId)
+        {
+            var blog = await _context.Blogs
+                .Include(x => x.Category) // İlişkili Category verisini yükle
+                .Include(x => x.Author)   // İlişkili Author verisini yükle
+                .Include(x => x.BlogTagClouds)
+                .ThenInclude(x=>x.TagClouds)
+                .FirstOrDefaultAsync(x => x.BlogId == blogId); // Belirli bir blogu bul
+            return blog;
+        }
+
+
         public async Task<List<Blog>> GetBlogsWithAuthors()
         {
             var values = await _context.Blogs.Include(x => x.Author).Include(x => x.Category).AsNoTracking().ToListAsync();
@@ -28,12 +56,10 @@ namespace CarBook.Persistance.Repositories
         public async Task<Blog> GetBlogWithTagCloud(int blogid)
         {
             return await _context.Blogs
-                           .Include(x => x.Author)
                            .Include(b => b.BlogTagClouds)
                            .ThenInclude(btc => btc.TagClouds)
                            .SingleOrDefaultAsync(b => b.BlogId == blogid);
         }
-
 
         public async Task<List<Blog>> GetLast3BlogsWithAuthors()
         {
@@ -41,5 +67,10 @@ namespace CarBook.Persistance.Repositories
             return values;
         }
 
+        public async Task<TagCloud> GetTagCloudByIdAsync(int tagCloudId)
+        {
+            var value = await _context.TagClouds.FindAsync(tagCloudId);
+            return value;
+        }
     }
 }

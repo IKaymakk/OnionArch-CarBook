@@ -37,14 +37,8 @@ namespace CarBook.Application.Mediator.Blogs.Queries
 
                 var result = new GetBlogWithTagCloudQueryResult
                 {
-                    blogId = blog.BlogId,
-                    title = blog.Title,
-                    coverImageUrl= blog.CoverImageUrl,
-                    description= blog.Description,
-                    mainImage= blog.MainImage,
-                    createdDate = blog.CreatedDate,
                     TagClouds = blog.BlogTagClouds
-            .Select(btc => new TagCloudDto
+            .Select(btc => new TagCloud
             {
                 TagCloudId = btc.TagCloudId,
                 TagCloudTitle = btc.TagClouds.TagCloudTitle

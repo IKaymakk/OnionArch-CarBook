@@ -64,8 +64,8 @@ public class BlogsController : ControllerBase
         var values = await _mediator.Send(new GetLast3BlogsWithAuthorsQuery());
         return Ok(values);
     }
-    [HttpGet("blog/{blogid}")]
-    public async Task<IActionResult> GetBlogWithTagCloud(int blogid)
+    [HttpGet("GetBlogListWithTagClouds{blogid}")]
+    public async Task<IActionResult> GetBlogListWithTagClouds(int blogid)
     {
         var value = await _mediator.Send(new GetBlogWithTagCloudQuery(blogid));
         return Ok(value);
