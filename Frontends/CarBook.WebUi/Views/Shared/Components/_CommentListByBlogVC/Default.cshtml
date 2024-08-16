@@ -1,13 +1,26 @@
-﻿<ul class="comment-list">
-    <li class="comment">
-        <div class="vcard bio">
-            <img src="/carbook-master/images/person_1.jpg" alt="Image placeholder">
-        </div>
-        <div class="comment-body">
-            <h3>John Doe</h3>
-            <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-            <p><a href="#" class="reply">Reply</a></p>
-        </div>
-    </li>
-</ul>
+﻿@model List<CarBook.DTO.CommentDtos.CommentListDto>
+
+@if (Model == null || !Model.Any())
+{
+    <h1>Henüz yorum yok</h1>
+}
+else
+{
+    <h3 class="mb-5">@ViewBag.Count Yorum Yapılmış</h3>
+
+    <ul class="comment-list">
+        @foreach (var comment in Model)
+        {
+            <li class="comment">
+                <div class="vcard bio">
+                    <img src="https://cdn0.iconfinder.com/data/icons/social-media-logo-4/32/Social_Media_instagram_comment-512.png" alt="Image placeholder">
+                </div>
+                <div class="comment-body">
+                    <h3>@comment.Name</h3>
+                    <div class="meta">@comment.CreatedDate.ToShortDateString()</div>
+                    <p>@comment.Description</p>
+                </div>
+            </li>
+        }
+    </ul>
+}

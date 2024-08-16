@@ -12,7 +12,7 @@ namespace CarBook.Application.Mediator.Blogs.Commands;
 
 public class UpdateBlogCommand : IRequest
 {
-    public int id { get; set; }
+    public int BlogId { get; set; }
     public string Title { get; set; }
     public string? CoverImageUrl { get; set; }
     public string MainImage { get; set; }
@@ -33,7 +33,7 @@ public class UpdateBlogCommand : IRequest
 
         public async Task Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
         {
-            var value = await _repository.GetByIdAsync(request.id);
+            var value = await _repository.GetByIdAsync(request.BlogId);
             _mapper.Map(request, value);
             await _repository.UpdateAsync(value);
         }

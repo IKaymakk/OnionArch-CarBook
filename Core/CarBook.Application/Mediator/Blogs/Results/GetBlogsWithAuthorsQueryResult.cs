@@ -18,5 +18,7 @@ namespace CarBook.Application.Mediator.Blogs.Results
         public DateTime CreatedDate { get; set; }
         public string CategoryName { get; set; }
         public string AuthorName { get; set; }
+        public string AuthorDescription { get; set; }
+        public string AuthorImageUrl { get; set; }
     }
 }

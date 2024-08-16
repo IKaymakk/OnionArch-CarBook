@@ -16,11 +16,11 @@ public class _BlogDetailTagCloudByBlogVC : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync(int blogid)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync($"https://localhost:7149/api/Blogs/" + blogid);
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/Blogs/GetBlogListWithTagClouds" + blogid);
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<BlogWithTagCloudDto>(jsonData);
+            var values = JsonConvert.DeserializeObject<BlogDetailTagCloudDto>(jsonData);
             return View(values);
         }
         return View();

@@ -34,6 +34,7 @@ public class CarBookContext : DbContext
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Author> Authors { get; set; }
     public DbSet<TagCloud> TagClouds { get; set; }
+    public DbSet<Comments> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

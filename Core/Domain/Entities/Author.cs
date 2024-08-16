@@ -12,5 +12,6 @@ public class Author
     public string Name { get; set; }
     public string Surname { get; set; }
     public string Description { get; set; }
+    public string ImageUrl { get; set; }
     public List<Blog> Blogs { get; set; }
 }

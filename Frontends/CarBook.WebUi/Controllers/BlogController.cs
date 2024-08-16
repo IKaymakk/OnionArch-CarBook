@@ -38,10 +38,10 @@ public class BlogController : Controller
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<BlogDetailDto>(jsonData);
+            ViewBag.id = id;
             return View(values);
         }
         
-        ViewBag.id = id;
         return View();
     }
 }

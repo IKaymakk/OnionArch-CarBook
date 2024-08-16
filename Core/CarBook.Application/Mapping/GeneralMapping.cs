@@ -5,6 +5,7 @@ using CarBook.Application.Mediator.Blogs.Commands;
 using CarBook.Application.Mediator.Blogs.Results;
 using CarBook.Application.Mediator.CarPricings.Results;
 using CarBook.Application.Mediator.Cars.Results;
+using CarBook.Application.Mediator.Comment.Results;
 using CarBook.Application.Mediator.Contacts.Commands;
 using CarBook.Application.Mediator.Contacts.Results;
 using CarBook.Application.Mediator.Features.Commands;
@@ -38,6 +39,9 @@ namespace CarBook.Application.Mapping
         public GeneralMapping()
         {
             CreateMap<Car, GetLast5CarsWithBrandQueryResult>().ReverseMap();
+
+            CreateMap<Comments, CommentListQueryResult>().ReverseMap();
+
 
             CreateMap<Feature, GetFeatureQueryResult>().ReverseMap();
             CreateMap<Feature, GetFeatureByIdQueryResult>().ReverseMap();
@@ -97,6 +101,7 @@ namespace CarBook.Application.Mapping
             CreateMap<Blog, GetBlogsByIdQueryResult>()
            .ForMember(dest => dest.TagClouds, opt => opt.MapFrom(src => src.BlogTagClouds)).ReverseMap();
             CreateMap<Blog, CreateBlogCommand>().ReverseMap();
+            CreateMap<Blog, GetBlogsAuthorDetailsResult>().ReverseMap();
             CreateMap<Blog, UpdateBlogCommand>().ReverseMap();
             CreateMap<Blog, RemoveBlogCommand>().ReverseMap();
             CreateMap<Blog, GetLast3BlogsWithAuthorsQueryResult>().ReverseMap();
