@@ -29,6 +29,7 @@ namespace CarBook.Application.Features.Handlers.CarHandlers
                 Km = command.Km,
                 Model = command.Model,
                 Seat = command.Seat,
+                Year = command.Year,
                 Transmission = command.Transmission,
                 Luggage = command.Luggage,
                 

@@ -1,8 +1,60 @@
-﻿
+﻿@model List<CarBook.DTO.CarDtos.AdminCarListDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                    <li class="breadcrumb-item active">Araç Listesi</li>
+                </ol>
+            </div>
+            <a href="/AdminCars/CreateCar" class="btn btn-outline-primary ml-auto">Yeni Araç Girişi</a>
+        </div>
+    </div>
+</div>
 
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Marka</th>
+                                <th>Model</th>
+                                <th>Yıl</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                                <th>Detaylar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var car in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@car.BrandName</td>
+                                    <td>@car.Model</td>
+                                    <td>@car.Year</td>
+                                    <td><a href="/AdminCars/RemoveCar/@car.CarId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="" class="btn btn-outline-success">Güncelle</a> </td>
+                                    <td><a href="" class="btn btn-outline-info">Detaylar</a> </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

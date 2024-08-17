@@ -9,7 +9,6 @@
 @await Html.PartialAsync("AdminHeaderPartial.cshtml")
 <!---------------------------------------------------->
 
-
 <body>
     <div id="layout-wrapper">
         <div class="main-content">
@@ -190,39 +189,35 @@
 
             <div class="page-content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-flex align-items-center justify-content-between">
-                            
-                                <!---------------------------------------------------->
-                                @RenderBody()
-                                <!---------------------------------------------------->
-                             
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                                        <li class="breadcrumb-item active">Starter</li>
-                                    </ol>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
+                    <!---------------------------------------------------->
+                    @RenderBody()
+                    <!---------------------------------------------------->
+
                 </div>
             </div>
 
             <!---------------------------------------------------->
             @await Html.PartialAsync("AdminFooterPartial.cshtml")
             <!---------------------------------------------------->
-         
+
         </div>
     </div>
-
     <script src="~/Admin/horizontal/assets/js/jquery.min.js"></script>
     <script src="~/Admin/horizontal/assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/Admin/horizontal/assets/js/waves.js"></script>
     <script src="~/Admin/horizontal/assets/js/simplebar.min.js"></script>
     <script src="~/Admin/horizontal/assets/js/theme.js"></script>
+    <!-- Plugins js -->
+    <script src="~/Admin/plugins/autonumeric/autoNumeric-min.js"></script>
+    <script src="~/Admin/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="~/Admin/plugins/switchery/switchery.min.js"></script>
+    <script src="~/Admin/horizontal/assets/pages/advanced-plugins-demo.js"></script>
+    <!-- Plugins js -->
+    <script src="~/Admin/horizontal/assets/js/jquery.min.js"></script>
+    <script src="~/Admin/horizontal/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Admin/horizontal/assets/js/waves.js"></script>
+    <script src="~/Admin/horizontal/assets/js/simplebar.min.js"></script>
 
 </body>
 </html>

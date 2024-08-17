@@ -30,6 +30,7 @@ public class GetCarWithBrandQueryHandler
             Fuel = x.Fuel,
             Km = x.Km,
             Luggage = x.Luggage,
+            Year = x.Year,
             Model = x.Model,
             Seat = x.Seat,
             Transmission = x.Transmission

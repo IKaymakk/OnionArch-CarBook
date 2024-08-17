@@ -13,6 +13,8 @@ public class GetCarWithBrandQueryResult
     public int BrandId { get; set; }
     public string Model { get; set; }
     public string CoverImageUrl { get; set; }
+    public int Year { get; set; }
+
     public int Km { get; set; }
     public string Transmission { get; set; }
     public byte Seat { get; set; }

@@ -24,6 +24,7 @@ namespace CarBook.Application.Features.Handlers.BrandHandlers
             return values.Select(x => new GetBrandQueryResult
             {
                 name = x.Name,
+                BrandId = x.BrandId,
             }).ToList();
         }
     }

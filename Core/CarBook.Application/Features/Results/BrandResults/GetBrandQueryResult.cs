@@ -8,5 +8,6 @@ namespace CarBook.Application.Features.Results.BrandResults;
 
 public class GetBrandQueryResult
 {
+    public int BrandId { get; set; }
     public string name { get; set; }
 }
