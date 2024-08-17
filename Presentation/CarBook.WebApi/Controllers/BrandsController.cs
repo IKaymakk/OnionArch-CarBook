@@ -1,6 +1,8 @@
 ﻿using CarBook.Application.Features.Commands.BrandCommands;
 using CarBook.Application.Features.Handlers.BrandHandlers;
 using CarBook.Application.Features.Queries.BrandQueries;
+using CarBook.Application.Mediator.Brands.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,14 +17,16 @@ namespace CarBook.WebApi.Controllers
         private readonly RemoveBrandCommandHandler _removeBrandCommandHandler;
         private readonly GetBrandQueryHandler _getBrandQueryHandler;
         private readonly GetBrandByIdQueryHandler _getBrandByIdQueryHandler;
+        IMediator _mediator;
 
-        public BrandsController(CreateBrandCommandHandler createBrandCommandHandler, UpdateBrandCommandHandler updateBrandCommandHandler, RemoveBrandCommandHandler removeBrandCommandHandler, GetBrandQueryHandler getBrandQueryHandler, GetBrandByIdQueryHandler getBrandByIdQueryHandler)
+        public BrandsController(CreateBrandCommandHandler createBrandCommandHandler, UpdateBrandCommandHandler updateBrandCommandHandler, RemoveBrandCommandHandler removeBrandCommandHandler, GetBrandQueryHandler getBrandQueryHandler, GetBrandByIdQueryHandler getBrandByIdQueryHandler, IMediator mediator)
         {
             _createBrandCommandHandler = createBrandCommandHandler;
             _updateBrandCommandHandler = updateBrandCommandHandler;
             _removeBrandCommandHandler = removeBrandCommandHandler;
             _getBrandQueryHandler = getBrandQueryHandler;
             _getBrandByIdQueryHandler = getBrandByIdQueryHandler;
+            _mediator = mediator;
         }
         [HttpGet]
         public async Task<IActionResult> BrandList()
@@ -30,6 +34,13 @@ namespace CarBook.WebApi.Controllers
             var values = await _getBrandQueryHandler.Handle();
             return Ok(values);
         }
+        [HttpGet("carsbybrand{id}")]
+        public async Task<IActionResult> CarListByBrand(int id)
+        {
+            var values = await _mediator.Send(new CarListByBrandQuery(id));
+            return Ok(values);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateBrand(CreateBrandCommand command)
         {
@@ -38,9 +49,9 @@ namespace CarBook.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveBrand(RemoveBrandCommand command)
+        public async Task<IActionResult> RemoveBrand(int id)
         {
-            await _removeBrandCommandHandler.Handle(command);
+            await _removeBrandCommandHandler.Handle(new RemoveBrandCommand(id));
             return Ok("Kayıt Silindi");
         }
 

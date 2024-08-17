@@ -9,6 +9,30 @@
 @await Html.PartialAsync("AdminHeaderPartial.cshtml")
 <!---------------------------------------------------->
 
+<style>
+    .btn-outline-danger {
+        color: #FF6F61; /* Sil butonu text rengi */
+        border-color: #FF6F61; /* Sil butonu kenarlık rengi */
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #FF6F61; /* Sil butonu hover arka plan rengi */
+            color: #FFFFFF; /* Sil butonu hover yazı rengi */
+        }
+
+    .btn-secondary {
+        color: white; /* Güncelle butonu text rengi */
+        background-color: #FF6F61;
+        border-color: #FF6F61; /* Güncelle butonu kenarlık rengi */
+    }
+
+        .btn-secondary:hover {
+            background-color: #FF6F61; /* Güncelle butonu hover arka plan rengi */
+            color: white;
+            border-color: #FF6F61; /* Güncelle butonu hover yazı rengi */
+        }
+</style>
+
 <body>
     <div id="layout-wrapper">
         <div class="main-content">

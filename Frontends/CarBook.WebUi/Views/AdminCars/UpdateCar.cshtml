@@ -1,0 +1,84 @@
+﻿@model CarBook.DTO.CarDtos.UpdateCarDto
+
+@{
+    ViewData["Title"] = "UpdateCar";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Araç Bilgileri</h4>
+
+                <form asp-controller="AdminCars" asp-action="UpdateCar" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Marka</label>
+                                <select asp-for="BrandId" asp-items="@ViewBag.BrandValues" class="form-control">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Km</label>
+                                <input asp-for="Km" type="number" class="form-control" maxlength="7" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Şanzıman Tipi</label>
+                                <input asp-for="Transmission" type="text" class="form-control" maxlength="25" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Koltuk Sayısı</label>
+                                <input asp-for="Seat" type="number" class="form-control" maxlength="2" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Kapak Fotoğrafı</label>
+                                <input asp-for="CoverImageUrl" type="text" class="form-control" maxlength="300" id="placement" />
+                            </div>
+
+                            <button class="btn btn-primary">Kaydet</button>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input asp-for="Model" type="text" class="form-control" maxlength="100" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Yıl</label>
+                                <input asp-for="Year" type="number" class="form-control" maxlength="4" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Yakıt Tipi</label>
+                                <input asp-for="Fuel" type="text" class="form-control" maxlength="15" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bagaj Bilgisi</label>
+                                <input asp-for="Luggage" type="number" class="form-control" maxlength="4" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Büyük Resim</label>
+                                <input asp-for="BigImageUrl" type="text" class="form-control" maxlength="300" id="placement" />
+                            </div>
+
+                            <input readonly="readonly" type="hidden" asp-for="CarId">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,13 +1,12 @@
-﻿using Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Features.Results.CarResults;
+namespace CarBook.DTO.CarDtos;
 
-public class GetCarByIdQueryResult
+public class UpdateCarDto
 {
     public int CarId { get; set; }
     public int BrandId { get; set; }
@@ -15,9 +14,9 @@ public class GetCarByIdQueryResult
     public string CoverImageUrl { get; set; }
     public int Km { get; set; }
     public string Transmission { get; set; }
-    public int Year { get; set; }
     public byte Seat { get; set; }
     public byte Luggage { get; set; }
     public string Fuel { get; set; }
+    public int Year { get; set; }
     public string BigImageUrl { get; set; }
 }

@@ -1,0 +1,29 @@
+﻿@model CarBook.DTO.FeatureDtos.FeatureDto
+@{
+    ViewData["Title"] = "UpdateFeature";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Araç Özelliği</h4>
+                <form asp-controller="AdminFeature" asp-action="UpdateFeature" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Marka</label>
+                                <input asp-for="Name" type="text" class="form-control" maxlength="25" id="placement" />
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                            <input type="hidden" readonly="readonly" asp-for="FeatureId" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

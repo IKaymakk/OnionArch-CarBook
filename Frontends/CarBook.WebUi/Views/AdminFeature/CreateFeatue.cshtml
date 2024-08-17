@@ -1,0 +1,27 @@
+﻿@model CarBook.DTO.FeatureDtos.FeatureDto
+@{
+    ViewData["Title"] = "CreateFeatue";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Araç Özelliği Girişi</h4>
+                <form asp-controller="AdminFeature" asp-action="CreateFeatue" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Marka</label>
+                                <input asp-for="Name" type="text" class="form-control" maxlength="25" id="placement" />
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

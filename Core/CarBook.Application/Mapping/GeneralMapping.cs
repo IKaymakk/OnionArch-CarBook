@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarBook.Application.Features.Commands.CarCommands;
 using CarBook.Application.Mediator.Authors.Commands;
 using CarBook.Application.Mediator.Authors.Results;
 using CarBook.Application.Mediator.Blogs.Commands;
@@ -39,6 +40,7 @@ namespace CarBook.Application.Mapping
         public GeneralMapping()
         {
             CreateMap<Car, GetLast5CarsWithBrandQueryResult>().ReverseMap();
+            CreateMap<Car, UpdateCarCommand>().ReverseMap();
 
             CreateMap<Comments, CommentListQueryResult>().ReverseMap();
 

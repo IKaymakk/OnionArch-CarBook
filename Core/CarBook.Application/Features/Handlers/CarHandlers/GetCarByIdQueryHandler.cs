@@ -26,6 +26,7 @@ public class GetCarByIdQueryHandler
         {
             BigImageUrl = values.BigImageUrl,
             BrandId = values.BrandId,
+            Year = values.Year,
             CarId = values.CarId,
             CoverImageUrl = values.CoverImageUrl,
             Fuel = values.Fuel,

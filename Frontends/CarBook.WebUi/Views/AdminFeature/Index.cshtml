@@ -1,4 +1,4 @@
-﻿@model List<CarBook.DTO.CarDtos.AdminCarListDto>
+﻿@model List<CarBook.DTO.FeatureDtos.FeatureDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -15,7 +15,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0 font-weight-bolder">
                             <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
-                            <li class="breadcrumb-item "><a href="#">Araç Listesi</a></li>
+                            <li class="breadcrumb-item "><a href="#">Araç Özellikleri</a></li>
                         </ol>
                     </div>
                     <a href="/AdminCars/CreateCar" class="btn btn-secondary ml-auto">Yeni Araç Girişi</a>
@@ -25,38 +25,24 @@
                         <thead class="text-white" style="background-color:#E57373">
                             <tr>
                                 <th>#</th>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Yıl</th>
-                                <th style="width:150px">Sil</th>
-                                <th style="width:150px">Güncelle</th>
-                                <th style="width:150px">Detaylar</th>
+                                <th style="width:70%">Özellik Adı</th>
+                                <th>Düzenleme</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var car in Model)
+                            @foreach (var feature in Model)
                             {
                                 count++;
 
                                 <tr>
                                     <td>@count</td>
-                                    <td>@car.BrandName</td>
-                                    <td>@car.Model</td>
-                                    <td>@car.Year</td>
+                                    <td>@feature.Name</td>
                                     <td>
-                                        <a style="padding:0.5em 1.7em 0.5em 1.7em" href="/AdminCars/RemoveCar/@car.CarId" class="btn btn-outline-danger">
-                                            Sil
+                                        <a href="/AdminFeature/RemoveFeature/@feature.FeatureId" class="btn btn-danger">
+                                            <span class="mdi mdi-delete-empty mdi-18px"></span>
                                         </a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminCars/UpdateCar/@car.CarId" class="btn btn-outline-success">
-                                            Güncelle
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-outline-secondary">
-                                            <span class="mdi mdi-arrow-down-drop-circle-outline mdi-18px"></span>
-                                            Detaylar
+                                        <a href="/AdminFeature/UpdateFeature/@feature.FeatureId" class="btn btn-success">
+                                            <span class="mdi mdi-pen mdi-18px"></span>
                                         </a>
                                     </td>
                                 </tr>
@@ -68,3 +54,4 @@
         </div>
     </div>
 </div>
+

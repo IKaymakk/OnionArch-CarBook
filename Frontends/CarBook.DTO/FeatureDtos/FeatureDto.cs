@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Mediator.Features.Results;
+namespace CarBook.DTO.FeatureDtos;
 
-public class GetFeatureQueryResult
+public class FeatureDto
 {
     public int FeatureId { get; set; }
     public string Name { get; set; }

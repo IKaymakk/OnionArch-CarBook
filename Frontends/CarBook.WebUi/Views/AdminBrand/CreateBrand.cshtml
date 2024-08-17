@@ -1,0 +1,29 @@
+﻿@model CarBook.DTO.BrandDtos.CreateCarBrandListDto
+@{
+    ViewData["Title"] = "CreateBrand";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Araç Özelliği Girişi</h4>
+                <form asp-controller="AdminBrand" asp-action="CreateBrand" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Marka</label>
+                                <input asp-for="Name" type="text" class="form-control" maxlength="25" id="placement" />
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

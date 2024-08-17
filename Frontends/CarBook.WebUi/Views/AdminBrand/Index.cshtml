@@ -1,0 +1,65 @@
+﻿@model List<CarBook.DTO.BrandDtos.CreateCarBrandListDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item "><a href="#">Marka Listesi</a></li>
+                        </ol>
+                    </div>
+                    <a href="/AdminBrand/CreateBrand" class="btn btn-secondary ml-auto">Yeni Marka Girişi</a>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead style="background-color:#E57373">
+                            <tr class="text-white">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Marka</th>
+                                <th style="width:100px">Sil</th>
+                                <th style="width:100px">Güncelle</th>
+                                <th style="width:130px">Araç Listesi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var brand in Model)
+                            {
+
+                                <tr>
+                                    <td>@brand.BrandId</td>
+                                    <td>@brand.Name</td>
+                                    <td>
+                                        <a style="padding:0.4em 1.7em 0.4em 1.7em" href="/AdminBrand/RemoveBrand/@brand.BrandId" class="btn btn-outline-danger">
+                                            Sil
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminBrand/UpdateBrand/@brand.BrandId" class="btn btn-outline-success">
+                                            Güncelle
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminBrand/CarListByBrand/@brand.BrandId" class="btn btn-outline-primary">
+                                            <span class="mdi mdi-car mdi-24px"></span>
+                                            Araç Listesi
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
