@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    string badgeclass = "";
 }
 @if (TempData["Message"] != null)
 {
@@ -36,24 +37,54 @@
                                 <th style="width:100px">#</th>
                                 <th style="width:100px">Kapak Resmi</th>
                                 <th style="width:100px">Blog Başlığı</th>
-                                <th style="width:100px">Kategori Adı</th>
                                 <th style="width:100px">Yazar Adı</th>
                                 <th style="width:100px">Tarih</th>
+                                <th style="width:100px">Kategori Adı</th>
                                 <th style="width:100px">Sil</th>
                                 <th style="width:100px">Güncelle</th>
                                 <th style="width:100px">Yorumlar</th>
+                                <th style="width:130px">Sitede Gör</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var blog in Model)
                             {
-                                <tr >
+                                switch (blog.CategoryName)
+                                {
+                                    case "Benzinli Araçlar":
+                                        badgeclass = "danger";
+                                        break;
+                                    case "Dizel Araçlar":
+                                        badgeclass = "warning";
+                                        break;
+                                    case "Araç Bakımı":
+                                        badgeclass = "success";
+                                        break;
+                                    case "Gündelik Yaşam":
+                                        badgeclass = "info";
+                                        break;
+                                    case "Otomobil Sporları":
+                                        badgeclass = "primary";
+                                        break;
+                                    case "Hybrid Araçlar":
+                                        badgeclass = "dark";
+                                        break;
+                                    default:
+                                        badgeclass = "light text-dark";
+                                        break;
+                                }
+
+
+                                <tr>
                                     <td>@blog.BlogId</td>
                                     <td><img src="@blog.CoverImageUrl" style="width:100px;height:60px;border-radius:20%" /></td>
                                     <td>@blog.Title</td>
-                                    <td>@blog.CategoryName</td>
                                     <td>@blog.AuthorName @blog.AuthorSurname</td>
                                     <td>@blog.CreatedDate.ToShortDateString()</td>
+                                    <td>
+                                        <span style="font-size:12px" class=" badge rounded-pill bg-@badgeclass font-weight-bold text-white">@blog.CategoryName</span>
+
+                                    </td>
                                     <td>
                                         <a href="/Admin/Blog/RemoveBlog/@blog.BlogId" class="btn btn-outline-danger">
                                             Sil
@@ -66,8 +97,13 @@
                                     </td>
                                     <td>
                                         <a href="/Admin/Blog/CommentListByBlog/@blog.BlogId" class="btn btn-outline-info">
-                                            <span class="mdi mdi-comment mdi-18px"></span>
                                             Yorumlar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/Blog/BlogDetail/@blog.BlogId" class="btn btn-outline-primary">
+                                            <span class="mdi mdi-book mdi-18px"></span>
+                                            Sitede Gör
                                         </a>
                                     </td>
                                 </tr>
