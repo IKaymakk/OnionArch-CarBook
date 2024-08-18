@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Mediator.Comment.Queries
 {
-    public class CommentListQuery:IRequest<List<CommentListQueryResult>>
+    public class CommentListQuery : IRequest<List<CommentListQueryResult>>
     {
-        public CommentListQuery(int blogid)
+        public CommentListQuery(int id)
         {
-            this.blogid = blogid;
+           blogid = id;
         }
 
         public int blogid { get; set; }

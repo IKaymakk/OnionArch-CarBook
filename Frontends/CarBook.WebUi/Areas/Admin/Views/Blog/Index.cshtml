@@ -1,0 +1,85 @@
+﻿@model List<CarBook.DTO.BlogDtos.AdminBlogListDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+<style>
+    .vertical-align-middle td, .vertical-align-middle th {
+        vertical-align: middle;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item"><a href="/Admin/Author/Index">Blog Listesi</a></li>
+                        </ol>
+                    </div>
+                    <a href="/Admin/Blog/CreateBlog" style="background-color:#FF6F61" class="btn text-white ml-auto">Yeni Blog Girişi</a>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0 vertical-align-middle">
+                        <thead style="background-color:#8F9DFF">
+                            <tr class="text-white font-weight-bolder">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Kapak Resmi</th>
+                                <th style="width:100px">Blog Başlığı</th>
+                                <th style="width:100px">Kategori Adı</th>
+                                <th style="width:100px">Yazar Adı</th>
+                                <th style="width:100px">Tarih</th>
+                                <th style="width:100px">Sil</th>
+                                <th style="width:100px">Güncelle</th>
+                                <th style="width:100px">Yorumlar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var blog in Model)
+                            {
+                                <tr >
+                                    <td>@blog.BlogId</td>
+                                    <td><img src="@blog.CoverImageUrl" style="width:100px;height:60px;border-radius:20%" /></td>
+                                    <td>@blog.Title</td>
+                                    <td>@blog.CategoryName</td>
+                                    <td>@blog.AuthorName @blog.AuthorSurname</td>
+                                    <td>@blog.CreatedDate.ToShortDateString()</td>
+                                    <td>
+                                        <a href="/Admin/Blog/RemoveBlog/@blog.BlogId" class="btn btn-outline-danger">
+                                            Sil
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/Blog/UpdateBlog/@blog.BlogId" class="btn btn-outline-success">
+                                            Güncelle
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/Blog/CommentListByBlog/@blog.BlogId" class="btn btn-outline-info">
+                                            <span class="mdi mdi-comment mdi-18px"></span>
+                                            Yorumlar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

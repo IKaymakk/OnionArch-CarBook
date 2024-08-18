@@ -14,10 +14,10 @@ public class GetBlogsQuery : IRequest<List<GetBlogsQueryResult>>
 {
     public class GetBlogsQueryHandler : IRequestHandler<GetBlogsQuery, List<GetBlogsQueryResult>>
     {
-        private readonly IRepository<Blog> _repository;
+        private readonly IBlogRepository _repository;
         IMapper _mapper;
 
-        public GetBlogsQueryHandler(IRepository<Blog> repository, IMapper mapper)
+        public GetBlogsQueryHandler(IBlogRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -25,7 +25,7 @@ public class GetBlogsQuery : IRequest<List<GetBlogsQueryResult>>
 
         public async Task<List<GetBlogsQueryResult>> Handle(GetBlogsQuery request, CancellationToken cancellationToken)
         {
-            var values = await _repository.GetAllAsync();
+            var values = _repository.GetBlogListWithAll();
             var mappedvalues = _mapper.Map<List<GetBlogsQueryResult>>(values);
             return mappedvalues;
         }

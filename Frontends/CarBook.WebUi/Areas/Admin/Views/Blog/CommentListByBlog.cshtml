@@ -1,0 +1,43 @@
+﻿@model List<CarBook.DTO.CommentDtos.CommentListDto>
+
+@{
+    ViewData["Title"] = "CommentListByBlog";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color:#FF6F61">@ViewBag.blogid Numaralı Bloga Ait Yorumlar</h4>
+                        <br />
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <h5 class="card-header font-weight-bolder">
+                                        #@item.CommentId  <span style="float: right;"><b>@item.CreatedDate.ToShortDateString()</b></span>
+                                    </h5>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><b>@item.Name</b></h4>
+                                        <p class="card-text">
+                                            @item.Description.
+                                        </p>
+                                        <a href="#" class="btn btn-primary waves-effect waves-light">Yorumu Kaldır</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

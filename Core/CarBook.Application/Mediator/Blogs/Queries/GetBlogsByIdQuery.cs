@@ -34,7 +34,6 @@ public class GetBlogsByIdQuery : IRequest<GetBlogsByIdQueryResult>
             return new GetBlogsByIdQueryResult
             {
                 BlogId = blog.BlogId,
-
                 Title = blog.Title,
                 CoverImageUrl = blog.CoverImageUrl,
                 MainImage = blog.MainImage,

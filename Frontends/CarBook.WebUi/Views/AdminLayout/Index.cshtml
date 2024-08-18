@@ -10,6 +10,19 @@
 <!---------------------------------------------------->
 
 <style>
+    table thead {
+        background-color: transparent !important;
+    }
+
+        table thead th {
+            color: black !important;
+            font-weight: bolder !important;
+        }
+
+    .table-hover table thead th:hover {
+        background-color: #FF6F61; /* Hover efekti için uygun renk */
+    }
+
     .btn-outline-danger {
         color: #FF6F61; /* Sil butonu text rengi */
         border-color: #FF6F61; /* Sil butonu kenarlık rengi */
@@ -32,16 +45,19 @@
             border-color: #FF6F61; /* Güncelle butonu hover yazı rengi */
         }
 
+    .btn {
+        border-radius: 20px; /* İstediğiniz değeri buraya yazabilirsiniz */
+    }
 </style>
 
 <body>
     <div id="layout-wrapper">
         <div class="main-content">
-            <header id="page-topbar" style="background-color:#8F9DFF">
+            <header id="page-topbar" style="background-color:#304454">
                 <div class="navbar-header">
                     <!-- LOGO -->
                     <div class="navbar-brand-box d-flex align-items-left">
-                        <a href="index.html" class="logo">
+                        <a href="/Default/Index" class="logo">
                             <i class="mdi mdi-alpha-x-circle"></i>
                             <span>
                                 CarBook Admin
@@ -211,7 +227,6 @@
             <!---------------------------------------------------->
             @await Html.PartialAsync("AdminNavBarPartial.cshtml")
             <!---------------------------------------------------->
-
             <!---------------------------------------------------->
             @RenderSection("message", false)
             <!---------------------------------------------------->
@@ -232,6 +247,7 @@
 
         </div>
     </div>
+
     <script src="~/Admin/horizontal/assets/js/jquery.min.js"></script>
     <script src="~/Admin/horizontal/assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/Admin/horizontal/assets/js/waves.js"></script>
@@ -248,5 +264,19 @@
     <script src="~/Admin/horizontal/assets/js/waves.js"></script>
     <script src="~/Admin/horizontal/assets/js/simplebar.min.js"></script>
 
+    <script src="~/Admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/Admin/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/Admin/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/Admin/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/Admin/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="~/Admin/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="~/Admin/plugins/datatables/buttons.print.min.js"></script>
+    <script src="~/Admin/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Admin/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="~/Admin/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Admin/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Admin/vertical/assets/pages/datatables-demo.js"></script>
 </body>
 </html>

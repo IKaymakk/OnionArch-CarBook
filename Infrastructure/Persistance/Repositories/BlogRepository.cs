@@ -46,6 +46,15 @@ namespace CarBook.Persistance.Repositories
             return blog;
         }
 
+        public List<Blog> GetBlogListWithAll()
+        {
+            var blogs = _context.Blogs
+                            .Include(x => x.Category) // İlişkili Category verisini yükle
+                            .Include(x => x.Author)   // İlişkili Author verisini yükle
+                            .ToList(); // Belirli bir blogu bul
+            return blogs;
+        }
+
         public async Task<Blog> GetBlogsAuthorDetail(int id)
         {
             var values = await _context.Blogs.Include(x => x.Author).Where(x => x.BlogId == id).FirstOrDefaultAsync();

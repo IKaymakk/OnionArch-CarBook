@@ -1,0 +1,69 @@
+﻿@model CarBook.DTO.BlogDtos.AdminBlogUpdateDto
+
+@{
+    ViewData["Title"] = "UpdateBlog";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@if (TempData["Message2"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message2"])
+    }
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@ViewBag.blogid Numaralı Blog Bilgileri</h4>
+
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Yazar</label>
+                                <select asp-for="authorId" asp-items="@ViewBag.AuthorValues" class="form-control">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Kapak Fotoğrafı</label>
+                                <input asp-for="coverImageUrl" type="text" class="form-control" maxlength="300" id="placement" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Kategori</label>
+                                <select asp-for="categoryId" asp-items="@ViewBag.CategoryValues" class="form-control">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ana Resim</label>
+                                <input asp-for="mainImage" type="text" class="form-control" maxlength="300" id="placement" />
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Başlık</label>
+                                <input asp-for="title" type="text" class="form-control" maxlength="300" id="placement" />
+                            </div>
+                            <div class="form-group">
+                                <label>Blog İçeriği</label>
+                                <textarea asp-for="description" class="form-control" rows="6" maxlength="5000" id="placement"></textarea>
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                        </div>
+                        <input type="hidden" readonly="readonly" asp-for="blogid" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

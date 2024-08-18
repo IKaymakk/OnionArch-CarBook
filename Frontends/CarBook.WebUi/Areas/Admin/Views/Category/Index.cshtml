@@ -30,7 +30,8 @@
                                 <th style="width:100px">#</th>
                                 <th style="width:100px">Kategori Adı</th>
                                 <th style="width:100px">Blog Sayısı</th>
-                                <th style="width:100px">Düzenle</th>
+                                <th style="width:100px">Güncelle</th>
+                                <th style="width:100px">Bloglar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,11 +42,17 @@
                                     <td>@category.name</td>
                                     <td>@category.count</td>
                                     <td>
-                                        <a href="/Admin/Category/UpdateCategory/@category.categoryId" class="btn btn-outline-primary">
-                                            <span class="mdi mdi-book mdi-24px"></span>
+                                        <a href="/Admin/Category/UpdateCategory/@category.categoryId" class="btn btn-outline-success">
                                             Güncelle
                                         </a>
                                     </td>
+                                    <td>
+                                        <a href="/Admin/Category/BloglistByCategory/@category.categoryId" class="btn btn-outline-primary">
+                                            <span class="mdi mdi-book mdi-24px"></span>
+                                            Blog Listesi
+                                        </a>
+                                    </td>
+                                   
                                 </tr>
                             }
                         </tbody>

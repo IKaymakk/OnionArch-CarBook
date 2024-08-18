@@ -15,10 +15,10 @@ public class CommentsController : ControllerBase
     {
         _mediator = mediator;
     }
-    [HttpGet("{blogid}")]
-    public async Task<IActionResult> GetCommentListByBlog(int blogid)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCommentListByBlog(int id)
     {
-        var values = await _mediator.Send(new CommentListQuery(blogid));
+        var values = await _mediator.Send(new CommentListQuery(id));
         return Ok(values);
     }
 }

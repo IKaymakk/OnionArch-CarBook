@@ -13,6 +13,7 @@ namespace CarBook.Application.Inferfaces
         Task<List<Blog>> GetBlogsWithAuthors();
         Task<Blog> GetBlogWithTagCloud(int blogid);
         Task<Blog> GetBlogByIdWithAuthorCategoryTagCloud(int blogid);
+        List<Blog> GetBlogListWithAll();
         Task AddTagCloudToBlogAsync(int blogId, int tagCloudId);
         Task<Blog> GetBlogsAuthorDetail(int id);
 

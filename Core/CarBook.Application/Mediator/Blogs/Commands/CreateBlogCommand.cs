@@ -14,6 +14,7 @@ namespace CarBook.Application.Mediator.Blogs.Commands
     {
         public string Title { get; set; }
         public string? CoverImageUrl { get; set; }
+        public string Description { get; set; }
         public string MainImage { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CategoryId { get; set; }
@@ -31,6 +32,7 @@ namespace CarBook.Application.Mediator.Blogs.Commands
             public async Task Handle(CreateBlogCommand request, CancellationToken cancellationToken)
             {
                 var values =  _mapper.Map<Blog>(request);
+                values.CreatedDate = DateTime.Now;
                 await _repo.CreateAsync(values);
             }
         }
