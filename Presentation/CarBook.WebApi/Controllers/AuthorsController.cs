@@ -23,6 +23,12 @@ public class AuthorsController : ControllerBase
         var values = await _mediator.Send(new GetAuthorsQuery());
         return Ok(values);
     }
+    [HttpGet("BlogListByAuthor{id}")]
+    public async Task<IActionResult> GetBlogListByAuthor(int id)
+    {
+        var values = await _mediator.Send(new GetBlogListByAuthorQuery(id));
+        return Ok(values);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateAuthor(CreateAuthorCommand command)
     {

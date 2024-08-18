@@ -1,0 +1,53 @@
+﻿@model CarBook.DTO.AboutDtos.AdminAboutDto
+
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hakkımzıda Bilgileri</h4>
+                <form asp-controller="About" asp-action="UpdateAbout" asp-area="Admin" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Başlık</label>
+                                <input asp-for="title" type="text" class="form-control" maxlength="300" />
+                            </div>
+                            <div class="form-group">
+                                <label>Açıklama</label>
+                                <textarea style="width:100%" rows="5" asp-for="description" type="text" class="form-control" maxlength="300" id="placement"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Resim Yolu</label>
+                                <input asp-for="imageUrl" type="text" class="form-control" maxlength="300" />
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                            <input readonly="readonly" type="hidden" asp-for="aboutId">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            @if (TempData["Message"] != null)
+            {
+                @section message
+            {
+                @await Html.PartialAsync("_message", (string)TempData["Message"])
+                }
+            }
+            else
+            {
+                @section message
+            {
+                @await Html.PartialAsync("_message", (string)TempData["Message2"])
+                }
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model List<CarBook.DTO.CategoryDtos.AdminCategoryListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item"><a href="/Admin/Author/Index">Kategori Listesi</a></li>
+                        </ol>
+                    </div>
+                    <a href="/Admin/Category/CreateCategory" style="background-color:#FF6F61" class="btn text-white ml-auto">Yeni Kategori Girişi</a>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead style="background-color:#8F9DFF">
+                            <tr class="text-white font-weight-bolder">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Kategori Adı</th>
+                                <th style="width:100px">Blog Sayısı</th>
+                                <th style="width:100px">Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var category in Model)
+                            {
+                                <tr>
+                                    <td>@category.categoryId</td>
+                                    <td>@category.name</td>
+                                    <td>@category.count</td>
+                                    <td>
+                                        <a href="/Admin/Category/UpdateCategory/@category.categoryId" class="btn btn-outline-primary">
+                                            <span class="mdi mdi-book mdi-24px"></span>
+                                            Güncelle
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

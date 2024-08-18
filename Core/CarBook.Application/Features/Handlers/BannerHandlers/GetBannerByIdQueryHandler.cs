@@ -25,6 +25,7 @@ public class GetBannerByIdQueryHandler
         return new GetBanneByIdQueryResult
         {
             Description = value.Description,
+            BannerId = value.BannerId,
             Title = value.Title,
             VideoDescription = value.VideoDescription,
             VideoUrl = value.VideoUrl

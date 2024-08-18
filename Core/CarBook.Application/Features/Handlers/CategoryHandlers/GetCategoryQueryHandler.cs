@@ -24,7 +24,6 @@ public class GetCategoryQueryHandler
         return values.Select(categories => new GetCategoryQueryResult
         {
             Name = categories.Name,
-
         }).ToList();
     }
 }

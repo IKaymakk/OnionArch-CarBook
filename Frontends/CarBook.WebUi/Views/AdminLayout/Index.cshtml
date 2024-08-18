@@ -31,19 +31,20 @@
             color: white;
             border-color: #FF6F61; /* Güncelle butonu hover yazı rengi */
         }
+
 </style>
 
 <body>
     <div id="layout-wrapper">
         <div class="main-content">
-            <header id="page-topbar">
+            <header id="page-topbar" style="background-color:#8F9DFF">
                 <div class="navbar-header">
                     <!-- LOGO -->
                     <div class="navbar-brand-box d-flex align-items-left">
                         <a href="index.html" class="logo">
                             <i class="mdi mdi-alpha-x-circle"></i>
                             <span>
-                                Xacton
+                                CarBook Admin
                             </span>
                         </a>
 
@@ -209,6 +210,10 @@
 
             <!---------------------------------------------------->
             @await Html.PartialAsync("AdminNavBarPartial.cshtml")
+            <!---------------------------------------------------->
+
+            <!---------------------------------------------------->
+            @RenderSection("message", false)
             <!---------------------------------------------------->
 
             <div class="page-content">

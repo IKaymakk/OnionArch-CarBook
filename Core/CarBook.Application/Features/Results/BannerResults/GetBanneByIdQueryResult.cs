@@ -8,6 +8,7 @@ namespace CarBook.Application.Features.Results.BannerResults;
 
 public class GetBanneByIdQueryResult
 {
+    public int BannerId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string VideoDescription { get; set; }

@@ -1,0 +1,51 @@
+﻿@model CarBook.DTO.AuthorDtos.UpdateAuthorDto
+@{
+    ViewData["Title"] = "UpdateAuthor";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@if (TempData["Message2"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message2"])
+    }
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yazar Oluştur</h4>
+                <form asp-controller="Author" asp-action="UpdateAuthor" asp-area="Admin" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Adı</label>
+                                <input asp-for="Name" type="text" class="form-control" maxlength="50" id="placement" />
+                            </div>
+                            <div class="form-group">
+                                <label>Resim Yolu</label>
+                                <textarea rows="5" asp-for="ImageUrl" type="text" class="form-control" id="placement" maxlength="300"></textarea>
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Soyadı</label>
+                                <input asp-for="Surname" type="text" class="form-control" maxlength="50" id="placement" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Açıklama</label>
+                                <textarea rows="5" asp-for="Description" type="text" class="form-control" maxlength="300" id="placement"></textarea>
+                                <input type="hidden" readonly="readonly" asp-for="AuthorId" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

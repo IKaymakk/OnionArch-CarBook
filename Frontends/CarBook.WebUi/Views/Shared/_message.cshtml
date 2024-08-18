@@ -1,0 +1,18 @@
+﻿@model String
+
+@if (TempData["Message2"] != null)
+{
+    <div class="text-center font-weight-bolder @ViewBag.Fail">
+        @Model
+    </div>
+}
+else if (TempData["Message"] != null)
+{
+    <div class="text-center font-weight-bolder alert alert-success">
+        @Model
+    </div>
+}
+else
+{
+}
+

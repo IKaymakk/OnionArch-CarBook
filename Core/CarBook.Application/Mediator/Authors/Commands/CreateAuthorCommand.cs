@@ -15,6 +15,7 @@ namespace CarBook.Application.Mediator.Authors.Commands
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
         public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand>
         {
             private readonly IRepository<Author> _repository;

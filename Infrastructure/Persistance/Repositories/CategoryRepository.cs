@@ -23,14 +23,9 @@ namespace CarBook.Persistance.Repositories
         public async Task<List<Category>> GetCategoriesWithBlogCount()
         {
             var categories = await _context.Categories
-                .Include(c => c.Blogs) // Blogs navigation property'i dahil ediliyor
-                    .Select(c => new Category
-                    {
-                        Name = c.Name,
-                        BlogCount = c.Blogs.Count() // Blog sayısını almak için
-                    })
-                        .AsNoTracking()
-                            .ToListAsync();
+                .Include(c => c.Blogs)
+                     .AsNoTracking()
+                          .ToListAsync();
             return categories;
         }
     }

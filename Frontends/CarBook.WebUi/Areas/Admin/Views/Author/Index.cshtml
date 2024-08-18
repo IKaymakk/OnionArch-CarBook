@@ -1,0 +1,70 @@
+﻿@model List<CarBook.DTO.AuthorDtos.AdminAuthorDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item"><a href="#">Yazar Listesi</a></li>
+                        </ol>
+                    </div>
+                    <a href="/Admin/Author/CreateAuthor" style="background-color:#FF6F61" class="btn text-white ml-auto">Yeni Yazar Girişi</a>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead style="background-color:#8F9DFF">
+                            <tr class="text-white font-weight-bolder">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Resim</th>
+                                <th style="width:100px">Adı</th>
+                                <th style="width:100px">Sil</th>
+                                <th style="width:100px">Güncelle</th>
+                                <th style="width:100px">Blog Listesi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var author in Model)
+                            {
+                                <tr>
+                                    <td style="vertical-align: middle;">@author.AuthorId</td>
+                                    <td style="vertical-align: middle;"><img src="@author.ImageUrl" style="width:80px; height:80px; border-radius:50%;" width="70" /></td>
+                                    <td style="vertical-align: middle;">@author.Name @author.Surname</td>
+                                    <td style="vertical-align: middle;">
+                                        <a style="padding:0.4em 1.7em 0.4em 1.7em" href="/Admin/Author/RemoveAuthor/@author.AuthorId" class="btn btn-outline-danger">
+                                            Sil
+                                        </a>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <a href="/Admin/Author/UpdateAuthor/@author.AuthorId" class="btn btn-outline-success">
+                                            Güncelle
+                                        </a>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <a href="/Admin/Author/BlogListByAuthor/@author.AuthorId" class="btn btn-outline-primary">
+                                            <span class="mdi mdi-book mdi-24px"></span>
+                                            Blog Listesi
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model List<CarBook.DTO.BannerDtos.BannerCoverDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item "><a href="#">Banner</a></li>
+                        </ol>
+                    </div>
+                    @if (Model.Count == 0)
+                    {
+                        <a href="/Admin/Banner/CreateBanner" style="background-color:#FF6F61" class="btn text-white ml-auto">Banner Oluştur</a>
+                    }
+                </div>
+                @if (Model.Count == 0)
+                {
+                    <div class="alert alert-danger at-3" role="alert">
+                        <p><i>Daha önce eklenen herhangi bir banner <b>bulunamadı.</b></i></p>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center table-responsive">
+                        <table class="table mb-0">
+                            <thead class="text-white" style="background-color:#8F9DFF">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Başlık</th>
+                                    <th>Açıklama</th>
+                                    <th>Sil</th>
+                                    <th>Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var banner in Model)
+                                {
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>@banner.title</td>
+                                        <td>@banner.description</td>
+                                        <td>
+                                            <a href="/Admin/Banner/RemoveBanner/@banner.bannerId" class="btn btn-outline-danger">
+                                                Sil
+                                            </a>
+                                        </td>
+                                        <h1>
+                                        </h1>
+                                        <td>
+                                            <a href="/Admin/Banner/UpdateBanner/@banner.bannerId" class="btn btn-outline-success">
+                                                Güncelle
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

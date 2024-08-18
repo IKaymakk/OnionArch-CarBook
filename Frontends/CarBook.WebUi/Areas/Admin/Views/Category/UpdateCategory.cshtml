@@ -1,0 +1,36 @@
+﻿@model CarBook.DTO.CategoryDtos.AdminCategoryUpdateDto
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@if (TempData["Message2"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message2"])
+    }
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Kategori Bilgisi</h4>
+                <form asp-controller="Category" asp-action="UpdateCategory" asp-area="Admin" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Kategori Adı</label>
+                                <input asp-for="name" type="text" class="form-control" maxlength="35" />
+                            </div>
+                            <button class="btn btn-primary">Kaydet</button>
+                            <input readonly="readonly" type="hidden" asp-for="id">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

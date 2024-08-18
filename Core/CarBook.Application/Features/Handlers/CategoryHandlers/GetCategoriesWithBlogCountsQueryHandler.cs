@@ -23,8 +23,9 @@ namespace CarBook.Application.Features.Handlers.CategoryHandlers
             var values = await _repository.GetCategoriesWithBlogCount();
             return values.Select(categories => new GetCategoryQueryResult
             {
+                CategoryId = categories.CategoryId,
                 Name = categories.Name,
-                Count = categories.BlogCount
+                Count = categories.Blogs.Count()
             }).ToList();
         }
     }

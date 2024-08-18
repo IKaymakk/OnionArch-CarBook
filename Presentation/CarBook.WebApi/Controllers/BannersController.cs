@@ -45,9 +45,9 @@ public class BannersController : ControllerBase
         return Ok("Yeni Bilgi Eklendi");
     }
     [HttpDelete]
-    public async Task<IActionResult> DeleteBanner(RemoveBannerCommand command)
+    public async Task<IActionResult> DeleteBanner(int id)
     {
-        await _removeBannerCommandHandler.Handle(command);
+        await _removeBannerCommandHandler.Handle(new RemoveBannerCommand(id));
         return Ok("Bilgi Silindi");
     }
     [HttpPut]

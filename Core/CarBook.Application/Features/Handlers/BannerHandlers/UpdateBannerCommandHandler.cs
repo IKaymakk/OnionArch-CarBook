@@ -20,8 +20,8 @@ public class UpdateBannerCommandHandler
 
     public async Task Handle(UpdateBannerCommand command)
     {
-        var values = await _repository.GetByIdAsync(command.Id);
-
+        var values = await _repository.GetByIdAsync(command.BannerId);
+        values.BannerId = command.BannerId;
         values.Description = command.Description;
         values.Title = command.Title;
         values.VideoUrl = command.VideoUrl;

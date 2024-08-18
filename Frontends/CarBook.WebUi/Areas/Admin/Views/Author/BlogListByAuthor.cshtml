@@ -1,0 +1,56 @@
+﻿@model List<CarBook.DTO.AuthorDtos.BlogListByAuthorDto>
+@{
+    ViewData["Title"] = "BlogListByAuthor";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item"><a href="/Admin/Author/Index">Yazar Listesi</a></li>
+                            <li class="breadcrumb-item"><a href="#">@ViewBag.authorid Numaralı Yazarın Blogları</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead style="background-color:#8F9DFF">
+                            <tr class="text-white font-weight-bolder">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Başlık</th>
+                                <th style="width:100px">Açıklama</th>
+                                <th style="width:100px">Kategori</th>
+                                <th style="width:100px">Tarih</th>
+                                <th style="width:100px">Detaylar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var blog in Model)
+                            {
+                                <tr>
+                                    <td>@blog.blogId</td>
+                                    <td>@blog.title</td>
+                                    <td>@blog.description.Substring(0, 35)  ... </td>
+                                    <td>@blog.categoryName</td>
+                                    <td>@blog.createdDate.ToShortDateString()</td>
+                                    <td>
+                                    <a href="/Admin/Blog/BlogDetail/@blog.blogId" class="btn btn-outline-primary">
+                                        <span class="mdi mdi-book mdi-24px"></span>
+                                        Blog Detayları
+                                    </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

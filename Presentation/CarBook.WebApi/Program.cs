@@ -27,6 +27,7 @@ builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepositor
 builder.Services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
 builder.Services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
 builder.Services.AddScoped(typeof(IBrandRepository), typeof(BrandRepository));
+builder.Services.AddScoped(typeof(IAuthorRepository), typeof(AuthorRepository));
 
 
 

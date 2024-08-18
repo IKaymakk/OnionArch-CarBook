@@ -15,43 +15,53 @@
                             <li class="breadcrumb-item "><a href="#">@ViewBag.brandid Numaralı Markanın Araç Listesi</a></li>
                         </ol>
                     </div>
-                    <a href="/AdminCars/CreateCar" class="btn btn-secondary ml-auto">Araçlar</a>
+                    <a href="/AdminBrand/Index" style="background-color:#FF6F61" class="btn text-white ml-auto">Geri Dön</a>
                 </div>
-                <div class="text-center table-responsive">
-                    <table class="table mb-0">
-                        <thead class="text-white" style="background-color:#E57373">
-                            <tr>
-                                <th>#</th>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Yıl</th>
-                                <th>Şanzıman Tipi</th>
-                                <th>Yakıt Tipi</th>
-                                <th style="width:150px">Detaylar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var car in Model)
-                            {
-
+                @if (Model.Count == 0)
+                {
+                    <div class="alert alert-danger at-3" role="alert">
+                        <b>Bu Markaya Ait Araç Bulunamadı</b>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center table-responsive">
+                        <table class="table mb-0">
+                            <thead class="text-white" style="background-color:#8F9DFF">
                                 <tr>
-                                    <td>@car.carId</td>
-                                    <td>@car.brandname</td>
-                                    <td>@car.model</td>
-                                    <td>@car.year</td>
-                                    <td>@car.transmission</td>
-                                    <td>@car.fuel</td>
-                                    <td>
-                                        <a href="" class="btn btn-outline-secondary">
-                                            <span class="mdi mdi-arrow-down-drop-circle-outline mdi-18px"></span>
-                                            Detaylar
-                                        </a>
-                                    </td>
+                                    <th>#</th>
+                                    <th>Marka</th>
+                                    <th>Model</th>
+                                    <th>Yıl</th>
+                                    <th>Şanzıman Tipi</th>
+                                    <th>Yakıt Tipi</th>
+                                    <th style="width:150px">Detaylar</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach (var car in Model)
+                                {
+
+                                    <tr>
+                                        <td>@car.carId</td>
+                                        <td>@car.brandname</td>
+                                        <td>@car.model</td>
+                                        <td>@car.year</td>
+                                        <td>@car.transmission</td>
+                                        <td>@car.fuel</td>
+                                        <td>
+                                            <a href="" class="btn btn-outline-secondary">
+                                                <span class="mdi mdi-arrow-down-drop-circle-outline mdi-18px"></span>
+                                                Detaylar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ public class GetBannerQueryHandler
         {
             Description = value.Description,
             Title = value.Title,
+            BannerId = value.BannerId,
             VideoDescription = value.VideoDescription,
             VideoUrl = value.VideoUrl,
         }).ToList();
