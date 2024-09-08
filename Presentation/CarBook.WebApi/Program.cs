@@ -29,6 +29,7 @@ builder.Services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository)
 builder.Services.AddScoped(typeof(IBrandRepository), typeof(BrandRepository));
 builder.Services.AddScoped(typeof(IAuthorRepository), typeof(AuthorRepository));
 builder.Services.AddScoped(typeof(IStatsRepository), typeof(StatsRepository));
+builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
 
 
 

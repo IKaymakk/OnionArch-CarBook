@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Inferfaces;
 using CarBook.Application.Mediator.Stats.Results;
+using CarBook.Domain.Entities;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -10,23 +11,23 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Mediator.Stats.Queries;
 
-public class GetCarCountQuery : IRequest<CountQueryResult>
+public class GetBrandCountQuery : IRequest<CountQueryResult>
 {
-    public class GetCarCountQueryHandler : IRequestHandler<GetCarCountQuery, CountQueryResult>
+    public class GetBrandCountQueryHandler : IRequestHandler<GetBrandCountQuery, CountQueryResult>
     {
-        private readonly IRepository<Car> _repository;
+        private readonly IRepository<Brand> _repository;
 
-        public GetCarCountQueryHandler(IRepository<Car> repository)
+        public GetBrandCountQueryHandler(IRepository<Brand> repository)
         {
             _repository = repository;
         }
 
-        public async Task<CountQueryResult> Handle(GetCarCountQuery request, CancellationToken cancellationToken)
+        public async Task<CountQueryResult> Handle(GetBrandCountQuery request, CancellationToken cancellationToken)
         {
             var value = await _repository.Count();
             return new CountQueryResult
             {
-               Count = value
+                Count = value
             };
         }
     }

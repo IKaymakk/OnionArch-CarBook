@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarBook.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ public class Car
     public List<CarFeature> CarFeatures { get; set; }
     public List<CarDescription> CarDescriptions { get; set; }
     public List<CarPricing> CarPricings { get; set; }
+    public List<RentACar> RentACars{ get; set; }
+    public List<RentACarProcess> RentACarProcesses { get; set; }
 
 
 }

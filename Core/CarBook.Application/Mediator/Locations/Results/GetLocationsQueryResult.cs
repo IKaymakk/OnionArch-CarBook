@@ -9,4 +9,5 @@ namespace CarBook.Application.Mediator.Locations.Results;
 public class GetLocationsQueryResult
 {
     public string Name { get; set; }
+    public int LocationId { get; set; }
 }

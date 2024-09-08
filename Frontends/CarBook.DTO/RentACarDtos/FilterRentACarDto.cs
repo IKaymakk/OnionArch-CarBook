@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Mediator.Stats.Results
+namespace CarBook.DTO.RentACarDtos
 {
-    public class GetCarCountQueryResult
+    public class FilterRentACarDto
     {
-        public int CarCount { get; set; } 
+        public int CarId { get; set; }
     }
 }
