@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistance.Context;
 
@@ -11,9 +12,11 @@ using Persistance.Context;
 namespace CarBook.Persistance.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    partial class CarBookContextModelSnapshot : ModelSnapshot
+    [Migration("20240909112233_remove")]
+    partial class remove
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,57 +213,6 @@ namespace CarBook.Persistance.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("RentACarProcess");
-                });
-
-            modelBuilder.Entity("CarBook.Domain.Entities.Rezervasyon", b =>
-                {
-                    b.Property<int>("RezervasyonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RezervasyonId"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DriverLicenseYear")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DropOffLocationID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PickUpLocationID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RezervasyonId");
-
-                    b.HasIndex("DropOffLocationID");
-
-                    b.HasIndex("PickUpLocationID");
-
-                    b.ToTable("Rezervasyons");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.TagCloud", b =>
@@ -780,21 +732,6 @@ namespace CarBook.Persistance.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("CarBook.Domain.Entities.Rezervasyon", b =>
-                {
-                    b.HasOne("Domain.Entities.Location", "DropOffLocation")
-                        .WithMany("DropOffReservation")
-                        .HasForeignKey("DropOffLocationID");
-
-                    b.HasOne("Domain.Entities.Location", "PickUpLocation")
-                        .WithMany("PickUpReservation")
-                        .HasForeignKey("PickUpLocationID");
-
-                    b.Navigation("DropOffLocation");
-
-                    b.Navigation("PickUpLocation");
-                });
-
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
                     b.HasOne("Domain.Entities.Brand", "Brand")
@@ -926,10 +863,6 @@ namespace CarBook.Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Location", b =>
                 {
-                    b.Navigation("DropOffReservation");
-
-                    b.Navigation("PickUpReservation");
-
                     b.Navigation("RentACars");
                 });
 

@@ -18,6 +18,7 @@ using CarBook.Application.Mediator.Locations.Queries;
 using CarBook.Application.Mediator.Locations.Results;
 using CarBook.Application.Mediator.Pricings.Commands;
 using CarBook.Application.Mediator.Pricings.Results;
+using CarBook.Application.Mediator.Reservations.Commands;
 using CarBook.Application.Mediator.Services.Commands;
 using CarBook.Application.Mediator.Services.Results;
 using CarBook.Application.Mediator.SocialMedias.Commands;
@@ -119,6 +120,7 @@ namespace CarBook.Application.Mapping
             CreateMap<CarPricing, GetCarsWithPricingsQueryResult>()
                 .ForMember(x => x.BrandName, y => y.MapFrom(x => x.Car.Brand.Name)).ReverseMap();
 
+            CreateMap<Rezervasyon,CreateReservationCommand>() .ReverseMap();
         }
     }
 }

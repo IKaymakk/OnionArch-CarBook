@@ -28,7 +28,10 @@ public class GetRentACarQuery : IRequest<List<GetRentACarQueryResult>>
             var values = await _repository.GetByFilterAsync(x => x.Location.LocationId == request.LocationId && request.IsAvaible == true);
             return values.Select(x => new GetRentACarQueryResult
             {
-                CarId = x.CarId
+                CarId = x.CarId,
+                BrandName = x.Car.Brand.Name,
+                CarModel = x.Car.Model,
+                CarCoverImageUrl = x.Car.CoverImageUrl        
             }).ToList();
         }
     }

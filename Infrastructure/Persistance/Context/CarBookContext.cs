@@ -35,7 +35,8 @@ public class CarBookContext : DbContext
     public DbSet<Author> Authors { get; set; }
     public DbSet<TagCloud> TagClouds { get; set; }
     public DbSet<Comments> Comments { get; set; }
-    public DbSet<RentACar> RentACars{ get; set; }
+    public DbSet<RentACar> RentACars { get; set; }
+    public DbSet<Rezervasyon> Rezervasyons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,6 +55,19 @@ public class CarBookContext : DbContext
             .HasOne(bt => bt.TagClouds)
             .WithMany(t => t.BlogTagClouds)
             .HasForeignKey(bt => bt.TagCloudId);
+
+        modelBuilder.Entity<Rezervasyon>()
+            .HasOne(l => l.PickUpLocation)
+            .WithMany(r => r.PickUpReservation)
+            .HasForeignKey(x => x.PickUpLocationID)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        modelBuilder.Entity<Rezervasyon>()
+          .HasOne(l => l.DropOffLocation)
+          .WithMany(r => r.DropOffReservation)
+          .HasForeignKey(x => x.DropOffLocationID)
+          .OnDelete(DeleteBehavior.ClientSetNull);
+
     }
 
 }

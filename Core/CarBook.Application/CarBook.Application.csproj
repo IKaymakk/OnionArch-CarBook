@@ -17,4 +17,9 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mediator\Reservations\Results\" />
+    <Folder Include="Mediator\Reservations\Queries\" />
+  </ItemGroup>
+
 </Project>
