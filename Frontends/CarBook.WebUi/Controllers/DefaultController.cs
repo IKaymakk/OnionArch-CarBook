@@ -1,4 +1,5 @@
 ﻿using CarBook.DTO.LocationDtos;
+using CarBook.DTO.StatsDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -40,4 +41,5 @@ public class DefaultController : Controller
         TempData["locationid"] = LocationId;
         return RedirectToAction("Index","RentACar");
     }
+
 }

@@ -1,42 +1,60 @@
-﻿@model CarBook.DTO.LocationDtos.RentACarLocationDto
+﻿@model CarBook.DTO.ReservationDtos.CreateReservationDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
-
+    @if (TempData["Message2"] != null)
+    {
+        @section message
+    {
+        @await Html.PartialAsync("_message", (string)TempData["Message2"])
+        }
+    }
+    @if (TempData["Message"] != null)
+    {
+        @section message
+    {
+        @await Html.PartialAsync("_message", (string)TempData["Message"])
+        }
+    }
 <div class="col-md-12 block-9 mb-mbd-5">
-    <form class="bg-light p-5 contact-form" method="post">
+    <form class="bg-light p-5 contact-form" method="post" asp-controller="Reservation" asp-action="Index">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Kiralamak İstediğiniz Araç" />
+            <input asp-for="CarId"  readonly="readonly" type="hidden" value="@ViewBag.v3 " class="form-control" />
+            <h2>@ViewBag.v3 Numaralı Araç</h2>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Adınız" />
+            <input asp-for="Name" type="text" class="form-control" placeholder="Adınız" />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Soyadınız" />
+            <input type="text" asp-for="Surname" class="form-control" placeholder="Soyadınız" />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Mail Adresiniz" />
+            <input type="text" class="form-control" asp-for="Email" placeholder="Mail Adresiniz" />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Telefon Numaranız" />
+            <input type="text" class="form-control" asp-for="Phone" placeholder="Telefon Numaranız" />
         </div>
         <div class="form-group">
-            <select name="locationid" asp-for="LocationId" asp-items="@ViewBag.locations" class="form-control custom-select">
-                <option value="1">Aracı Teslim Alma Yeri</option>
+            <select asp-for="PickUpLocationID" asp-items="@ViewBag.locations" class="form-control custom-select">
+                <option disabled selected>Aracı Teslim Alma Yeri</option>
             </select>
         </div>
         <div class="form-group">
-            <select name="locationid" asp-for="LocationId" asp-items="@ViewBag.locations" class="form-control custom-select">
-                <option value="1">Aracı Teslim Etme Yeri</option>
+            <select asp-for="DropOffLocationID" asp-items="@ViewBag.locations" class="form-control custom-select">
+                <option disabled selected>Aracı Teslim Etme Yeri</option>
             </select>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Yaşınız" />
+            <input type="text" class="form-control" asp-for="Age" placeholder="Yaşınız" />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Sürücü Belgesi Geçerlilik Yılı" />
+            <input type="text" class="form-control" asp-for="DriverLicenseYear" placeholder="Sürücü Belgesi Geçerlilik Yılı" />
         </div>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Eklemek İstedikleriniz" rows="3"></textarea>
+        </div>
+        <button style="pading 2em 2em 2em 2em" class="btn btn-outline-primary">Rezervasyon Oluştur</button>
     </form>
 </div>
 

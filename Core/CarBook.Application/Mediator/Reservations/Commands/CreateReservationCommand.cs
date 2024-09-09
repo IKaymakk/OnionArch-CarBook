@@ -5,6 +5,7 @@ using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ public class CreateReservationCommand : IRequest
         public async Task Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
             var mappedvalues = _mapper.Map<Rezervasyon>(request);
+            mappedvalues.Status = "Rezervasyon Oluşturuldu";
             await _repository.CreateAsync(mappedvalues);
 
 

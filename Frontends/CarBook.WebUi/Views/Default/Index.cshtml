@@ -31,6 +31,7 @@
 
     <!------------------------------------------------------>
     @await Component.InvokeAsync("_UILayoutNavbarVC")
+
     <!------------------------------------------------------>
     @await Component.InvokeAsync("_DefaultCoverVC")
     <!------------------------------------------------------>
@@ -44,6 +45,7 @@
                     <br />
                     <br />
                     <br />
+                 
                     <br />
                     <br />
                     <br />
@@ -112,12 +114,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+                                <p><a href="/CarPricings/Index" class="btn btn-primary py-3 px-4">Araç Kiralama Ücretleri</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @if (TempData["Message2"] != null)
+            {
+                @section message
+            {
+                @await Html.PartialAsync("_message", (string)TempData["Message2"])
+                }
+            }
     </section>
     <!------------------------------------------------------>
     @await Component.InvokeAsync("_DefaultLast5CarsVC")
