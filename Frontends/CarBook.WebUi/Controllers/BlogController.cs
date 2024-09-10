@@ -1,6 +1,10 @@
 ﻿using CarBook.DTO.BlogDtos;
+using CarBook.DTO.CommentDtos;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
 
 namespace CarBook.WebUi.Controllers;
 
@@ -41,7 +45,28 @@ public class BlogController : Controller
             ViewBag.id = id;
             return View(values);
         }
-        
         return View();
     }
+    [HttpGet]
+    public PartialViewResult AddComment()
+    {
+        return PartialView();
+    }
+    [HttpPost]
+    public async Task<IActionResult> AddComment(AddCommentDto dto)
+    {
+
+        var client = _httpclientfactory.CreateClient();
+        var jsondata = JsonConvert.SerializeObject(dto);
+        StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync("https://localhost:7149/api/Comments", content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("BlogDetail", "Blog", new { id = dto.BlogId });
+        }
+
+        return View(); // Başarısız olursa mevcut view geri döner
+    }
 }
+

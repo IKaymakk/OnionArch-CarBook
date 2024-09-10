@@ -39,9 +39,9 @@
                                     <td>@brand.BrandId</td>
                                     <td>@brand.Name</td>
                                     <td>
-                                        <a style="padding:0.4em 1.7em 0.4em 1.7em" href="/AdminBrand/RemoveBrand/@brand.BrandId" class="btn btn-outline-danger">
+                                        <button class="btn btn-outline-danger delete-brand" data-id="@brand.BrandId" style="padding:0.4em 1.7em 0.4em 1.7em">
                                             Sil
-                                        </a>
+                                        </button>
                                     </td>
                                     <td>
                                         <a href="/AdminBrand/UpdateBrand/@brand.BrandId" class="btn btn-outline-success">
@@ -62,4 +62,37 @@
             </div>
         </div>
     </div>
+
+
+
+
+
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.delete-brand').on('click', function () {
+            var brandId = $(this).data('id');
+            var row = $(this).closest('tr'); // Silinen markanın bulunduğu satırı al
+            if (confirm('Markayı silmek istediğinizden emin misiniz?')) {
+                $.ajax({
+                    url: '/AdminBrand/RemoveBrand/' + brandId, // Silme işlemi için doğru URL
+                    type: 'POST', // HTTP isteğinin türü
+                    success: function (response) {
+                        if (response.success) {
+                            row.remove(); // Silme başarılıysa, tablo satırını kaldır
+                        } else {
+                            alert('Silme işlemi başarısız.'); // Başarısız olursa mesaj göster
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Bir hata oluştu: ' + error); // Hata mesajı
+                    }
+                });
+            }
+        });
+    });
+</script>
+

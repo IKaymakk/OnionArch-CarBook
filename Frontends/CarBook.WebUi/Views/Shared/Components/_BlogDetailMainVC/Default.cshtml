@@ -29,7 +29,7 @@
     <!----------------------------------------------------------->
     @await Component.InvokeAsync("_BlogDetailTagCloudByBlogVC")
     <!----------------------------------------------------------->
-    @await Component.InvokeAsync("_BlogDetailAuthorAboutVC" , new {id = ViewBag.id})
+    @await Component.InvokeAsync("_BlogDetailAuthorAboutVC", new { id = ViewBag.id })
     <!----------------------------------------------------------->
 
     <div class="pt-5 mt-5">
@@ -37,7 +37,7 @@
         <!----------------------------------------------------------->
         @await Component.InvokeAsync("_CommentListByBlogVC", new { id = ViewBag.id })
         <!----------------------------------------------------------->
-        @await Component.InvokeAsync("_CommentAddVC")
+        @await Html.PartialAsync("~/Views/Blog/AddComment.cshtml", new { id = ViewBag.id })
         <!----------------------------------------------------------->
 
     </div>

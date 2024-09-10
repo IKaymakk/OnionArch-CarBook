@@ -4,8 +4,10 @@ using CarBook.Application.Mediator.Authors.Commands;
 using CarBook.Application.Mediator.Authors.Results;
 using CarBook.Application.Mediator.Blogs.Commands;
 using CarBook.Application.Mediator.Blogs.Results;
+using CarBook.Application.Mediator.CarFeatures.Results;
 using CarBook.Application.Mediator.CarPricings.Results;
 using CarBook.Application.Mediator.Cars.Results;
+using CarBook.Application.Mediator.Comment.Commands;
 using CarBook.Application.Mediator.Comment.Results;
 using CarBook.Application.Mediator.Contacts.Commands;
 using CarBook.Application.Mediator.Contacts.Results;
@@ -44,7 +46,11 @@ namespace CarBook.Application.Mapping
             CreateMap<Car, UpdateCarCommand>().ReverseMap();
 
             CreateMap<Comments, CommentListQueryResult>().ReverseMap();
+            CreateMap<Comments, CreateCommentCommand>().ReverseMap();
 
+            CreateMap<CarFeature, GetCarFeatureByCarIdQueryResult>().
+                ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Car.Brand.Name))
+                .ReverseMap();
 
             CreateMap<Feature, GetFeatureQueryResult>().ReverseMap();
             CreateMap<Feature, GetFeatureByIdQueryResult>().ReverseMap();
@@ -120,7 +126,7 @@ namespace CarBook.Application.Mapping
             CreateMap<CarPricing, GetCarsWithPricingsQueryResult>()
                 .ForMember(x => x.BrandName, y => y.MapFrom(x => x.Car.Brand.Name)).ReverseMap();
 
-            CreateMap<Rezervasyon,CreateReservationCommand>() .ReverseMap();
+            CreateMap<Rezervasyon, CreateReservationCommand>().ReverseMap();
         }
     }
 }

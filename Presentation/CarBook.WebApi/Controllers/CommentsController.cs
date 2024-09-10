@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Mediator.Comment.Queries;
+﻿using CarBook.Application.Mediator.Comment.Commands;
+using CarBook.Application.Mediator.Comment.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,5 +21,11 @@ public class CommentsController : ControllerBase
     {
         var values = await _mediator.Send(new CommentListQuery(id));
         return Ok(values);
+    }
+    [HttpPost]
+    public async Task<IActionResult> AddComment(CreateCommentCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Yorum Eklendi");
     }
 }

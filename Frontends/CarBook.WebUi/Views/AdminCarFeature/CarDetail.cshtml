@@ -1,0 +1,35 @@
+﻿@model List<CarBook.DTO.CarFeaturesDtos.CarFeatureListDto>
+@{
+    ViewData["Title"] = "CarDetail";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item "><a href="#">@ViewBag.carid Numaralı Aracın Özelliği - @ViewBag.brandname @ViewBag.carmodel</a></li>
+                        </ol>
+                    </div>
+                    <a href="/AdminCars/Index" style="background-color:#FF6F61" class="btn text-white ml-auto">Geri Dön</a>
+                </div>
+                <form method="post">
+                    @foreach (var x in Model)
+                    {
+                        <div class="form-check">
+
+                            <input type="hidden" asp-for="@x.carFeatureId" />
+                            <input type="checkbox" asp-for="@x.avaible" class="form-check-input" />
+                            <label class="form-check-label" for="@x.avaible">@x.featureName</label>
+                        </div>
+                    }
+                    <br />
+                    <button class="btn btn-outline-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

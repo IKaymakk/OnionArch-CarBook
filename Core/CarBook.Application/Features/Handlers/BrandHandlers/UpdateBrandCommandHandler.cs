@@ -20,9 +20,22 @@ namespace CarBook.Application.Features.Handlers.BrandHandlers
 
         public async Task Handle(UpdateBrandCommand command)
         {
+            // Veriyi id'ye göre al
             var value = await _repository.GetByIdAsync(command.id);
+
+            // Eğer değer null ise uygun bir işlem yap (örneğin bir exception fırlat veya hata mesajı döndür)
+            if (value == null)
+            {
+                // İstenilen işleme göre burayı düzenleyebilirsiniz
+                throw new Exception("Güncellenecek veri bulunamadı.");
+            }
+
+            // Değeri güncelle
             value.Name = command.name;
+
+            // Güncellenmiş değeri kaydet
             await _repository.UpdateAsync(value);
         }
+
     }
 }

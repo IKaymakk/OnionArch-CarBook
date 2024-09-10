@@ -74,13 +74,18 @@ public class AdminBrandController : Controller
     }
     public async Task<IActionResult> RemoveBrand(int id)
     {
+      
         var client = _httpClientFactory.CreateClient();
         var response = await client.DeleteAsync($"https://localhost:7149/api/Brands?id={id}");
+
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
-        return View();
+        else
+        {
+            return Json(new { success = false, message = "Silme işlemi başarısız." });
+        }
     }
     [HttpGet]
     public async Task<IActionResult> CarListByBrand(int id)
