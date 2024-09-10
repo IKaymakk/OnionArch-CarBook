@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mediator\CarFeatures\Commands\" />
     <Folder Include="Mediator\Reservations\Results\" />
     <Folder Include="Mediator\Reservations\Queries\" />
   </ItemGroup>

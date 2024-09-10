@@ -4,6 +4,7 @@ using CarBook.Application.Mediator.Authors.Commands;
 using CarBook.Application.Mediator.Authors.Results;
 using CarBook.Application.Mediator.Blogs.Commands;
 using CarBook.Application.Mediator.Blogs.Results;
+using CarBook.Application.Mediator.CarFeatures.Commands;
 using CarBook.Application.Mediator.CarFeatures.Results;
 using CarBook.Application.Mediator.CarPricings.Results;
 using CarBook.Application.Mediator.Cars.Results;
@@ -51,6 +52,9 @@ namespace CarBook.Application.Mapping
             CreateMap<CarFeature, GetCarFeatureByCarIdQueryResult>().
                 ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Car.Brand.Name))
                 .ReverseMap();
+            CreateMap<CarFeature, CreateCarFeatureByCarCommand>().ReverseMap();
+
+
 
             CreateMap<Feature, GetFeatureQueryResult>().ReverseMap();
             CreateMap<Feature, GetFeatureByIdQueryResult>().ReverseMap();

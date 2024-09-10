@@ -1,0 +1,45 @@
+﻿@model CarBook.DTO.CarFeaturesDtos.CreateCarFeatureDto
+
+@{
+    ViewData["Title"] = "CreateFeatureByCarId";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item "><a href="#">@ViewBag.carid Numaralı Araca Özellik Ata - @ViewBag.brandname @ViewBag.carmodel</a></li>
+                        </ol>
+                    </div>
+                    <a href="/AdminCars/Index" style="background-color:#FF6F61" class="btn text-white ml-auto">Geri Dön</a>
+                </div>
+                @if (Model.Features.Count == 0)
+                {
+                    <h2>Araca Tüm Özellikler Eklenmiş</h2>
+                }
+                else
+                {
+                    <form method="post">
+                        <input type="hidden" value="@ViewBag.carId" asp-for="CarId" />
+                        @for (int i = 0; i < Model.Features.Count; i++)
+                        {
+                            <div class="form-check">
+                                <input type="hidden" asp-for="@Model.Features[i].FeatureId" />
+                                <input type="hidden" asp-for="@Model.Features[i].Name" />
+                                <input type="checkbox" asp-for="@Model.Features[i].Avaible" class="form-check-input" />
+                                <label class="form-check-label">@Model.Features[i].Name</label>
+                            </div>
+                        }
+                        <br />
+                        <button class="btn btn-primary">Araca Ekle</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
