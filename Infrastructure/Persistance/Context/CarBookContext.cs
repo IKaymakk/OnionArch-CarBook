@@ -37,6 +37,7 @@ public class CarBookContext : DbContext
     public DbSet<Comments> Comments { get; set; }
     public DbSet<RentACar> RentACars { get; set; }
     public DbSet<Rezervasyon> Rezervasyons { get; set; }
+    public DbSet<Review> Reviews{ get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

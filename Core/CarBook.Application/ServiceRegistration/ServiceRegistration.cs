@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,7 @@ namespace CarBook.Application.ServiceRegistration
         {
             serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly));
             serviceCollection.AddAutoMapper(Assembly.GetExecutingAssembly());
+            serviceCollection.AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
         }
     }
 }
