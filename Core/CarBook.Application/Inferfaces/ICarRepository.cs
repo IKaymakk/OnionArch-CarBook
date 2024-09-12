@@ -11,5 +11,6 @@ namespace CarBook.Application.Inferfaces
     {
         Task<List<Car>> GetCarsListWithBrand();
         Task<List<Car>> GeTLast5CarsWithBrand();
+        Task<Car> GetCarByIdAsync(int carid);
     }
 }

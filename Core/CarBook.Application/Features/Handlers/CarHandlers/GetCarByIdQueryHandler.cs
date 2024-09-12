@@ -12,16 +12,16 @@ namespace CarBook.Application.Features.Handlers.CarHandlers;
 
 public class GetCarByIdQueryHandler
 {
-    private readonly IRepository<Car> _repository;
+    private readonly ICarRepository _repository;
 
-    public GetCarByIdQueryHandler(IRepository<Car> repository)
+    public GetCarByIdQueryHandler(ICarRepository repository)
     {
         _repository = repository;
     }
 
     public async Task<GetCarByIdQueryResult> Handle(GetCarByIdQuery query)
     {
-        var values = await _repository.GetByIdAsync(query.CarId);
+        var values = await _repository.GetCarByIdAsync(query.CarId);
         return new GetCarByIdQueryResult
         {
             BigImageUrl = values.BigImageUrl,
@@ -34,6 +34,7 @@ public class GetCarByIdQueryHandler
             Luggage = values.Luggage,
             Model = values.Model,
             Seat = values.Seat,
+            BrandName = values.Brand.Name,
             Transmission = values.Transmission
         };
     }

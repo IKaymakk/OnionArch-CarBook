@@ -24,7 +24,7 @@ namespace CarBook.Persistance.Repositories
             var value = await _context.CarFeatures
                 .Where(x => x.CarId == carFeature.CarId && x.FeatureId == carFeature.FeatureId)
                 .FirstOrDefaultAsync();
-            if(value is null)
+            if (value is null)
             {
                 await _context.CarFeatures.AddAsync(carFeature);
                 await _context.SaveChangesAsync();
@@ -47,10 +47,11 @@ namespace CarBook.Persistance.Repositories
             values.Avaible = true;
             _context.SaveChanges();
         }
-        public void CreateCarFeatureByCar(CarFeature carFeature)
+        public async void CreateCarFeatureByCar(CarFeature carFeature)
         {
-            _context.CarFeatures.Add(carFeature);
-            _context.SaveChanges();
+
+                _context.CarFeatures.Add(carFeature);
+                _context.SaveChanges();
 
         }
         public async Task<List<CarFeature>> GetCarFeaturesWithCarAndFeature(int id)

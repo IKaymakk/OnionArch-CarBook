@@ -65,29 +65,23 @@ public class AdminCarFeatureController : Controller
         ViewBag.carId = id;
         var client = _httpClientFactory.CreateClient();
 
-        // Tüm Features'ları API'den çekin
         var featuresResponse = await client.GetAsync("https://localhost:7149/api/Features");
-        // İlgili CarId'ye ait mevcut CarFeatures'ı API'den çekin
         var carFeaturesResponse = await client.GetAsync($"https://localhost:7149/api/CarFeatures/{id}");
 
         if (featuresResponse.IsSuccessStatusCode && carFeaturesResponse.IsSuccessStatusCode)
         {
-            // Gelen JSON verilerini ayrıştırın
             var jsonFeatures = await featuresResponse.Content.ReadAsStringAsync();
             var jsonCarFeatures = await carFeaturesResponse.Content.ReadAsStringAsync();
 
             var allFeatures = JsonConvert.DeserializeObject<List<ResultFeatureWithAvaibleDto>>(jsonFeatures);
             var existingCarFeatures = JsonConvert.DeserializeObject<List<ResultFeatureWithAvaibleDto>>(jsonCarFeatures);
 
-            // Mevcut ilişkileri içeren FeatureId'leri listeleyin
             var existingFeatureIds = existingCarFeatures.Select(cf => cf.FeatureId).ToHashSet();
 
-            // Sadece eklenmemiş olan Feature'ları filtreleyin
             var availableFeatures = allFeatures
                 .Where(f => !existingFeatureIds.Contains(f.FeatureId))
                 .ToList();
 
-            // Modeli oluşturun ve sadece uygun olanları gönderin
             CreateCarFeatureDto model = new CreateCarFeatureDto
             {
                 Features = availableFeatures,

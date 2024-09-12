@@ -97,7 +97,7 @@ public class AdminCarsController : Controller
     public async Task<IActionResult> UpdateCar(UpdateCarDto dto)
     {
         var client = _httpClientFactory.CreateClient();
-        var jsonData =  JsonConvert.SerializeObject(dto);
+        var jsonData = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
         var responseMessage = await client.PutAsync("https://localhost:7149/api/Cars", content);
         if (responseMessage.IsSuccessStatusCode)

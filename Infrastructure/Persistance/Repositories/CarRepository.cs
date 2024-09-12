@@ -19,6 +19,15 @@ public class CarRepository : ICarRepository
         _context = context;
     }
 
+    public async Task<Car> GetCarByIdAsync(int carid)
+    {
+        return await _context.Cars
+            .AsNoTracking()
+            .Include(x => x.Brand)
+            .Where(car => car.CarId == carid)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<List<Car>> GetCarsListWithBrand()
     {
         var values = await _context.Cars
@@ -26,7 +35,7 @@ public class CarRepository : ICarRepository
         return values;
     }
 
-  
+
 
     public async Task<List<Car>> GeTLast5CarsWithBrand()
     {

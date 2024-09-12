@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item "><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item "><a href="#">Dashboard</a></li>
+                        </ol>
+                    </div>
+                    <a href="/Default/Index" style="background-color:#FF6F61" class="btn text-white ml-auto">Siteye Git</a>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    @await Component.InvokeAsync("_DashboardStatsVC")
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">Action</a></li>
+                                            <li><a href="#" class="dropdown-item">Another action</a></li>
+                                            <li><a href="#" class="dropdown-item">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="#" class="dropdown-item">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">Kiralama İstatistiği</h4>
+
+                                    <div id="morris-bar-example" class="morris-chart" style="height: 260px;"></div>
+
+                                    <div class="row text-center mt-4">
+                                        <div class="col-6">
+                                            <h4>1.530.000 ₺</h4>
+                                            <p class="text-muted mb-0">Alınan Ücret</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>470</h4>
+                                            <p class="text-muted mb-0">Kiralama Sayısı</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">Action</a></li>
+                                            <li><a href="#" class="dropdown-item">Another action</a></li>
+                                            <li><a href="#" class="dropdown-item">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="#" class="dropdown-item">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">Marka Araç İstatistiği</h4>
+
+                                    <div id="morris-donut-example" class="morris-chart" style="height: 260px;"></div>
+
+                                    <div class="row text-center mt-4">
+                                        <div class="col-6">
+                                            <h4>10</h4>
+                                            <p class="text-muted mb-0">Toplam Marka</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>43</h4>
+                                            <p class="text-muted mb-0">Araç Sayısı</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">Action</a></li>
+                                            <li><a href="#" class="dropdown-item">Another action</a></li>
+                                            <li><a href="#" class="dropdown-item">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="#" class="dropdown-item">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">Site Ziyaretçi Oranı</h4>
+
+                                    <div id="morris-line-example" class="morris-chart" style="height: 260px;"></div>
+
+                                    <div class="row text-center mt-4">
+                                        <div class="col-6">
+                                            <h4>260.321</h4>
+                                            <p class="text-muted mb-0">Tekil Ziyaret</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>342.430</h4>
+                                            <p class="text-muted mb-0">Toplam Ziyaret</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                
+                    <!-- end row-->
+
+
+                    <div class="row">
+                        @await Component.InvokeAsync("_DashboardPricingListVC")
+                        @await Component.InvokeAsync("_DashboardBlogListVC")
+
+                    </div>
+
+
+                    <!-- jQuery  -->
+                    <script src="~/Admin/horizontal/assets/js/jquery.min.js"></script>
+                    <script src="~/Admin/horizontal/assets/js/bootstrap.bundle.min.js"></script>
+                    <script src="~/Admin/horizontal/assets/js/waves.js"></script>
+                    <script src="~/Admin/horizontal/assets/js/simplebar.min.js"></script>
+
+                    <!-- Morris Js-->
+                    <script src="~/Admin/plugins/morris-js/morris.min.js"></script>
+                    <!-- Raphael Js-->
+                    <script src="~/Admin/plugins/raphael/raphael.min.js"></script>
+
+                    <!-- Morris Custom Js-->
+                    <script src="~/Admin/horizontal/assets/pages/dashboard-demo.js"></script>
+
+
+                    <!-- App js -->
+                    <script src="~/Admin/horizontal/assets/js/theme.js"></script>
+
+
+
+                </div> <!-- container-fluid -->
+            </div>
+
+        </div>
+    </div>

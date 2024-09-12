@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CarBook.DTO.CarPricingsDtos.CarsListForRentDto>
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title ">Son Eklenen 5 Araç</h4>
+            <p class="font-weight-bold card-subtitle mb-4 font-size-13 ">
+                @DateTime.Now.ToShortDateString()
+            </p>
+
+            <div class="table-responsive">
+                <table class="table table-centered table-hover table-xl mb-0" id="recent-orders">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">Marka</th>
+                            <th class="border-top-0">Model</th>
+                            <th class="border-top-0">Günlük</th>
+                            <th class="border-top-0">Haftalık</th>
+                            <th class="border-top-0">Aylık</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model)
+                        {
+                            <tr>
+                                <td>@x.brandName</td>
+                                <td>@x.model</td>
+                                <td>@x.dailyAmount ₺</td>
+                                <td>@x.weeklyAmount ₺</td>
+                                <td>@x.monthlyAmount ₺</td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div> <!-- end col -->

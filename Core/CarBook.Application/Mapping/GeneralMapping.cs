@@ -49,9 +49,7 @@ namespace CarBook.Application.Mapping
             CreateMap<Comments, CommentListQueryResult>().ReverseMap();
             CreateMap<Comments, CreateCommentCommand>().ReverseMap();
 
-            CreateMap<CarFeature, GetCarFeatureByCarIdQueryResult>().
-                ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Car.Brand.Name))
-                .ReverseMap();
+            CreateMap<CarFeature, GetCarFeatureByCarIdQueryResult>().ReverseMap();
             CreateMap<CarFeature, CreateCarFeatureByCarCommand>().ReverseMap();
 
 
