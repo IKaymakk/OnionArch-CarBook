@@ -11,6 +11,6 @@ namespace CarBook.Application.Tools
         public const string ValidAudience = "https://localhost";
         public const string ValidIssuer = "https://localhost";
         public const string Key = "3152315231carbookjwttoken3152315231";
-        public const int Expire = 3;
+        public const int Expire = 5;
     }
 }

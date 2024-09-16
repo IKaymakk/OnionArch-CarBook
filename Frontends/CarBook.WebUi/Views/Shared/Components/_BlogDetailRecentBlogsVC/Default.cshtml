@@ -1,10 +1,10 @@
 ﻿@model List<CarBook.DTO.BlogDtos.RecentBlogsDto>
 <div class="sidebar-box ftco-animate">
-    <h3>Recent Blog</h3>
+    <h3>En Yeni 3 Blog</h3>
 
     @foreach(var x in Model)
     {
-    <div class="block-21 mb-4 d-flex">
+    <div style="min-height:400px;max-height:600px" class="block-21 mb-4 d-flex">
         <a class="blog-img mr-4" style="background-image: url(@x.CoverImageUrl);"></a>
         <div class="text">
             <h3 class="heading"><a href="#">@x.Title</a></h3>

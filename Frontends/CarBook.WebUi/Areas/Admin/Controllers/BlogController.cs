@@ -2,6 +2,7 @@
 using CarBook.DTO.BrandDtos;
 using CarBook.DTO.CommentDtos;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -10,6 +11,8 @@ using System.Text;
 
 namespace CarBook.WebUi.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     [Area("Admin")]
     public class BlogController : Controller
     {

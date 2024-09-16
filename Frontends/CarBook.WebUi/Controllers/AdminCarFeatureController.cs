@@ -1,5 +1,6 @@
 ﻿using CarBook.DTO.CarFeaturesDtos;
 using CarBook.DTO.FeatureDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Transactions;
 
 namespace CarBook.WebUi.Controllers;
+[Authorize(Roles = "Admin")]
 
 public class AdminCarFeatureController : Controller
 {

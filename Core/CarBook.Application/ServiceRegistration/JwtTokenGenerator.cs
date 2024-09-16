@@ -17,11 +17,11 @@ namespace CarBook.Application.ServiceRegistration
         public static TokenResponseDto GenerateToken(GetCheckAppUserQueryResult result)
         {
             var claims = new List<Claim>();
+
             if (!string.IsNullOrWhiteSpace(result.RoleName))
                 claims.Add(new Claim(ClaimTypes.Role, result.RoleName));
-
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, result.AppUserId.ToString()));
-
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, result.AppUserId.ToString()));
+            
             if (!string.IsNullOrWhiteSpace(result.Username))
                 claims.Add(new Claim("Username", result.Username));
 
@@ -29,7 +29,7 @@ namespace CarBook.Application.ServiceRegistration
 
             var signinCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expireDate = DateTime.UtcNow.AddDays(JwtTokenDefaults.Expire);
+            var expireDate = DateTime.UtcNow.AddMinutes(JwtTokenDefaults.Expire);
 
             JwtSecurityToken token = new JwtSecurityToken
                 (

@@ -1,0 +1,62 @@
+﻿@model CarBook.DTO.ServiceDtos.ServiceListDto
+
+@{
+    ViewData["Title"] = "UpdateService";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+else
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message2"])
+    }
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hizmet Bilgileri</h4>
+                <form method="post">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Hizmet Adı</label>
+                                <input asp-for="Title" type="text" class="form-control" maxlength="30" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Küçük Resim</label>
+                                <input asp-for="IconUrl" type="text" class="form-control" />
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Hizmet Açıklaması</label>
+                                <textarea rows="5" asp-for="Description" type="text" class="form-control" maxlength="300"></textarea>
+                            </div>
+
+                            <input readonly="readonly" type="hidden" asp-for="serviceId">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Kaydet</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

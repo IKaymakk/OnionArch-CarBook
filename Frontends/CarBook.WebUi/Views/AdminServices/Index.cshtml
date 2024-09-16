@@ -1,0 +1,73 @@
+﻿@model List<CarBook.DTO.ServiceDtos.ServiceListDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    @section message
+                {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+else
+{
+    @section message
+                {
+    @await Html.PartialAsync("_message", (string)TempData["Message2"])
+    }
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0 font-weight-bolder">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">CarBook</a></li>
+                            <li class="breadcrumb-item"><a href="#">Servis Listesi</a></li>
+                        </ol>
+                    </div>
+                    <a href="/AdminServices/CreateService" style="background-color:#FF6F61" class="btn btn-rounded  text-white ml-auto">Yeni Hizmet Ekle</a>
+                </div>
+                <div class="text-center table-responsive">
+                    <table class="table mb-0">
+                        <thead style="background-color:#8F9DFF">
+                            <tr class="text-white font-weight-bolder">
+                                <th style="width:100px">#</th>
+                                <th style="width:100px">Servis Adı</th>
+                                <th style="width:100px">Açıklama</th>
+                                <th style="width:100px">Sil</th>
+                                <th style="width:100px">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var author in Model)
+                            {
+                                <tr>
+                                    <td style="vertical-align: middle;">@author.serviceId</td>
+                                    <td style="vertical-align: middle;">@author.Title</td>
+                                    <td style="vertical-align: middle;">@author.Description</td>
+                                    <td style="vertical-align: middle;">
+                                        <a style="padding:0.4em 1.7em 0.4em 1.7em" href="/AdminServices/RemoveServiceById/@author.serviceId" class="btn btn-rounded  btn-outline-danger">
+                                            Sil
+                                        </a>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <a href="/AdminServices/UpdateService/@author.serviceId" class="btn btn-rounded  btn-outline-success">
+                                            Güncelle
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

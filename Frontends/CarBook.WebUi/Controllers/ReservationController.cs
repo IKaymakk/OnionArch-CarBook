@@ -57,7 +57,6 @@ public class ReservationController : Controller
         ViewBag.v3 = id;
         ViewBag.Fail = "alert alert-danger";
         TempData["Message2"] = "İşlem Gerçekleştirilmedi, Kontrol Ediniz";
-        // İşlem başarısız olduğunda dropdown verilerini tekrar yükle
         var response2 = await client.GetAsync("https://localhost:7149/api/Locations");
         if (response2.IsSuccessStatusCode)
         {
@@ -71,7 +70,6 @@ public class ReservationController : Controller
             ViewBag.locations = LocationList;
         }
 
-        // Hataları göstermek için view'i model ile döndür
         return View(dto);
     }
 }

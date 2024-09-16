@@ -1,8 +1,21 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(
+    JwtBearerDefaults.AuthenticationScheme, x =>
+    {
+        x.LoginPath = "/Login/SignIn";
+        x.LogoutPath = "/Login/SignOut";
+        x.AccessDeniedPath = "/Pages/AccessDenied";
+        x.Cookie.SameSite = SameSiteMode.Strict;
+        x.Cookie.HttpOnly = true;
+        x.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        x.Cookie.Name = "CarBookJwt";
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,6 +29,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 

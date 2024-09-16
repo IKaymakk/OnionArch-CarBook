@@ -31,12 +31,20 @@ public class CreateAppUserCommand : IRequest
 
         public async Task Handle(CreateAppUserCommand request, CancellationToken cancellationToken)
         {
-            await _repository.CreateAsync(new Domain.Entities.AppUser
+            var existingUser = await _repository.GetByFilterAsync(u => u.Username == request.Username);
+
+            if (existingUser != null)
+            {
+                throw new InvalidOperationException("Kullanıcı adı zaten mevcut.");
+            }
+
+            await _repository.CreateAsync(new CarBook.Domain.Entities.AppUser
             {
                 Password = request.Password,
                 Username = request.Username,
                 AppRoleId = (int)RoleTypes.Member
             });
         }
+
     }
 }

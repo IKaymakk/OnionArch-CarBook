@@ -27,6 +27,7 @@ public class GetCheckAppUserQuery : IRequest<GetCheckAppUserQueryResult>
         {
             GetCheckAppUserQueryResult result = new();
             var user = await _appuserrepository_.GetByFilterAsync(x => x.Username == request.Username && x.Password == request.Password);
+          
             if (user == null)
             {
                 result.IsExist = false;

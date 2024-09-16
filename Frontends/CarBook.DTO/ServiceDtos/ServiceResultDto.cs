@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.DTO.ServiceDtos;
 
-public class ServiceResultDto
+public partial class ServiceResultDto
 {
     public string Title { get; set; }
     public string Description { get; set; }
