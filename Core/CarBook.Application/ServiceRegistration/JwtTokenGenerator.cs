@@ -29,7 +29,7 @@ namespace CarBook.Application.ServiceRegistration
 
             var signinCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expireDate = DateTime.UtcNow.AddMinutes(JwtTokenDefaults.Expire);
+            var expireDate = DateTime.UtcNow.AddHours(JwtTokenDefaults.Expire);
 
             JwtSecurityToken token = new JwtSecurityToken
                 (

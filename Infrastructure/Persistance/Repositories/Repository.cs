@@ -13,11 +13,13 @@ namespace CarBook.Persistance.Repositories
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly CarBookContext _carBookContext;
+        private readonly DbSet<T> _dbSet;
 
 
         public Repository(CarBookContext carBookContext)
         {
             _carBookContext = carBookContext;
+            _dbSet = _carBookContext.Set<T>();
         }
 
         public async Task<int> Count()
@@ -41,7 +43,7 @@ namespace CarBook.Persistance.Repositories
             return await _carBookContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
-       
+
 
         public async Task<T> GetByIdAsync(int id)
         {
@@ -59,5 +61,27 @@ namespace CarBook.Persistance.Repositories
             _carBookContext.Set<T>().Update(entity);
             await _carBookContext.SaveChangesAsync();
         }
+        public async Task<List<T>> GetAllWithIncludesAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.ToListAsync();
+        }
+        public async Task UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            _dbSet.UpdateRange(entities);
+            await _carBookContext.SaveChangesAsync();
+        }
     }
 }
+

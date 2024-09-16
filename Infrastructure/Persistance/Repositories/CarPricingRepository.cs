@@ -1,5 +1,6 @@
 ﻿using CarBook.Application;
 using CarBook.Application.Inferfaces;
+using CarBook.Persistance.Dtos;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
@@ -55,7 +56,7 @@ public class CarPricingRepository : ICarPricingRepository
                                  .ToListAsync();
 
         var result = dailyPricings
-                     .Select(daily => 
+                     .Select(daily =>
                      (
                          BrandName: daily.Name,
                          CarModel: daily.Model,
@@ -82,4 +83,59 @@ public class CarPricingRepository : ICarPricingRepository
                                .Include(z => z.Pricing).Where(x => x.PricingId == 3).AsNoTracking().ToListAsync();
         return values;
     }
+
+
+
+    public async Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id)
+    {
+        var car = await _context.CarPricings.Where(x => x.CarId == id).FirstOrDefaultAsync();
+
+
+        var dailyPricing = await _context.CarPricings
+                                       .Include(x => x.Car)
+                                           .ThenInclude(x => x.Brand)
+                                       .Include(x => x.Pricing)
+                                       .Where(x => x.Pricing.Name == "Günlük" && x.CarId == car.CarId)
+                                       .Select(x => new
+                                       {
+                                           x.Car.Brand.Name,
+                                           x.Car.Model,
+                                           x.Car.CoverImageUrl,
+                                           DailyAmount = (decimal)x.Amount
+                                       })
+                                       .FirstOrDefaultAsync();
+
+        var weeklyPricings = await _context.CarPricings
+                                 .Where(x => x.Pricing.Name == "Haftalık" && x.CarId == car.CarId)
+                                 .Select(x => new
+                                 {
+                                     x.Car.Model,
+                                     WeeklyAmount = (decimal)x.Amount
+                                 })
+                                 .FirstOrDefaultAsync();
+
+        var monthlyPricings = await _context.CarPricings
+                                 .Where(x => x.Pricing.Name == "Aylık" && x.CarId == car.CarId)
+                                 .Select(x => new
+                                 {
+                                     x.Car.Model,
+                                     MonthlyAmount = (decimal)x.Amount
+                                 })
+                                  .FirstOrDefaultAsync();
+
+        Application.Dtos.CarsDetailForAdminDto dto = new Application.Dtos.CarsDetailForAdminDto
+        {
+            CarId = car.CarId,
+            BrandName = dailyPricing.Name,
+            CarModel = dailyPricing.Model,
+            CoverImageUrl = dailyPricing.CoverImageUrl,
+            DailyAmount = dailyPricing.DailyAmount,
+            WeeklyAmount = weeklyPricings.WeeklyAmount,
+            MonthlyAmount = monthlyPricings.MonthlyAmount
+        };
+
+        return dto;
+    }
+
+   
 }

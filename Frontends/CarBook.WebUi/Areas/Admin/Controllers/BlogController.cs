@@ -11,7 +11,7 @@ using System.Text;
 
 namespace CarBook.WebUi.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
 
     [Area("Admin")]
     public class BlogController : Controller

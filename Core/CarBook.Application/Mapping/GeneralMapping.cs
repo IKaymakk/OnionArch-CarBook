@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarBook.Application.Dtos;
 using CarBook.Application.Features.Commands.CarCommands;
 using CarBook.Application.Mediator.Authors.Commands;
 using CarBook.Application.Mediator.Authors.Results;
@@ -129,6 +130,9 @@ namespace CarBook.Application.Mapping
 
             CreateMap<CarPricing, GetCarsWithPricingsQueryResult>()
                 .ForMember(x => x.BrandName, y => y.MapFrom(x => x.Car.Brand.Name)).ReverseMap();
+            CreateMap<CarsDetailForAdminDto, CarPricingForAdminQueryResult>().ReverseMap();
+
+
 
             CreateMap<Rezervasyon, CreateReservationCommand>().ReverseMap();
             CreateMap<Review, CreateReviewCommand>().ReverseMap();

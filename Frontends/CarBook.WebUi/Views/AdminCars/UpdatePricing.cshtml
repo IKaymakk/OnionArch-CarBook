@@ -1,0 +1,38 @@
+﻿@model CarBook.DTO.CarPricingsDtos.UpdateCarPricingDto
+
+@{
+    ViewData["Title"] = "UpdatePricing";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post" asp-controller="AdminCars" asp-action="UpdatePricing">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Günlük Fiyat</label>
+                <input asp-for="dailyAmount" type="number" class="form-control" maxlength="100" id="placement" />
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label>Haftalık Fiyat</label>
+                <input asp-for="weeklyAmount" type="number" class="form-control" maxlength="4" id="placement" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label>Aylık Fiyat</label>
+                <input asp-for="monthlyAmount" type="number" class="form-control" maxlength="15" id="placement" />
+            </div>
+        </div>
+
+
+        <input readonly="readonly" type="text" asp-for="carId">
+    </div>
+    <button class="btn btn-primary">Fiyatı Değiştir</button>
+
+</form>
+

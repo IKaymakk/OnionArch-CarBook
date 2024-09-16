@@ -17,6 +17,8 @@ public interface IRepository<T> where T : class
     Task RemoveAsync(T entity);
     Task<int> Count();
     Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter);
-   
+    Task<List<T>> GetAllWithIncludesAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
+    Task UpdateRangeAsync(IEnumerable<T> entities);
+
 
 }

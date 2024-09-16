@@ -1,7 +1,9 @@
-﻿using Domain.Entities;
+﻿using CarBook.Application.Dtos;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,5 +13,7 @@ namespace CarBook.Application.Inferfaces
     {
         Task<List<CarPricing>> CarPricingsWithCars();
         Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount)>> CarsListWithPricings();
+        Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id);
+
     }
 }

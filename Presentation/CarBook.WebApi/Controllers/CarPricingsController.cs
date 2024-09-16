@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Mediator.CarPricings.Queries;
+﻿using CarBook.Application.Mediator.CarPricings.Commands;
+using CarBook.Application.Mediator.CarPricings.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,17 @@ public class CarPricingsController : ControllerBase
     {
         var values = await _mediator.Send(new CarPricingListQuery());
         return Ok(values);
+    }
+    [HttpGet("CarDetailForAdmin" + "{id}")]
+    public async Task<IActionResult> CarDetailForAdmin(int id)
+    {
+        var values = await _mediator.Send(new CarPricingForAdminQuery(id));
+        return Ok(values);
+    }
+    [HttpPut]
+    public async Task<IActionResult> UpdateCarDetail(UpdateCarPricingCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Kayıt Güncellendi");
     }
 }

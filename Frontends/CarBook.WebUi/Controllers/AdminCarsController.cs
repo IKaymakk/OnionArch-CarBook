@@ -1,5 +1,6 @@
 ﻿using CarBook.DTO.BrandDtos;
 using CarBook.DTO.CarDtos;
+using CarBook.DTO.CarPricingsDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -72,7 +73,7 @@ public class AdminCarsController : Controller
     [HttpGet]
     public async Task<IActionResult> UpdateCar(int id)
     {
-        ViewBag.CarId = 0;
+        ViewBag.CarId = id;
         var client = _httpClientFactory.CreateClient();
 
         var response = await client.GetAsync("https://localhost:7149/api/Brands");
@@ -122,5 +123,32 @@ public class AdminCarsController : Controller
             return View();
         }
     }
-   
+    [HttpGet]
+    public async Task<IActionResult> UpdatePricing(int id)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var response = await client.GetAsync("https://localhost:7149/api/CarPricings/CarDetailForAdmin" + id);
+        if (response.IsSuccessStatusCode)
+        {
+            var jsondata = await response.Content.ReadAsStringAsync();
+            var carvalues = JsonConvert.DeserializeObject<UpdateCarPricingDto>(jsondata); // `UpdateCarDto`'ya deseralize edin
+            return View(carvalues); // Bu modeli view'e gönderin
+        }
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> UpdatePricing(UpdateCarPricingDto dto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var wrapper = new { pricingDto = dto };
+        var jsonData = JsonConvert.SerializeObject(wrapper);
+        var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+        var responseMessage = await client.PutAsync("https://localhost:7149/api/CarPricings", content);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+        return View();
+
+    }
 }

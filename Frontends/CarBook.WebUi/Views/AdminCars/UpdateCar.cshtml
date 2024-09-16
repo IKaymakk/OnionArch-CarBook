@@ -42,7 +42,7 @@
                                 <input asp-for="CoverImageUrl" type="text" class="form-control" maxlength="300" id="placement" />
                             </div>
 
-                            <button class="btn btn-primary">Kaydet</button>
+                            <button class="btn btn-primary">Bilgileri Güncelle</button>
 
                         </div>
 
@@ -77,6 +77,15 @@
                         </div>
                     </div>
                 </form>
+                <br />
+                <br />
+                <h4 class="card-title">Fiyat Bilgileri</h4>
+
+                @await Component.InvokeAsync("_AdminCarDetailPricingVC", new { id = ViewBag.CarId })
+
+
+
+
             </div>
         </div>
     </div>

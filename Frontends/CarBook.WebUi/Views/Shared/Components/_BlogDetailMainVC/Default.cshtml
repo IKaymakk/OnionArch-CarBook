@@ -19,7 +19,9 @@
     <h2 class="mb-3">@Model.Title</h2>
     <h1>@ViewBag.blogid</h1>
 
-    <p>@Model.Description</p>
+    <p>
+        @Html.Raw(Model.Description)
+    </p>
 
     <p>
         <img src="" alt="" class="img-fluid">

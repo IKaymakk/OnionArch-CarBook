@@ -29,10 +29,11 @@
                                 <th>Model</th>
                                 <th>Yıl</th>
                                 <th style="width:150px">Sil</th>
-                                <th style="width:150px">Güncelle</th>
+                                <th style="width:150px">Araç Bilgileri</th>
                                 <th style="width:150px">Araç Özellikleri</th>
                                 <th style="width:150px">Özellik Ata</th>
-                            </tr>
+@*                                 <th style="width:150px">Fiyatlandırma</th>
+ *@                            </tr>
                         </thead>
                         <tbody>
                             @foreach (var car in Model)
@@ -66,6 +67,12 @@
                                             Özellik Ata
                                         </a>
                                     </td>
+                                   @*  <td>
+                                        <a href="/AdminCars/UpdatePricing/@car.CarId" class="btn btn-outline-secondary">
+                                            <span class="mdi mdi-arrow-down-drop-circle-outline mdi-18px"></span>
+                                            Fiyatlandırma
+                                        </a>
+                                    </td> *@
                                 </tr>
                             }
                         </tbody>
