@@ -1,6 +1,7 @@
 ﻿using CarBook.DTO.CarDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUi.Controllers;
 
@@ -30,7 +31,33 @@ public class CarController : Controller
         ViewBag.v1 = "Araç Detayı";
         ViewBag.v2 = id + "Numaralı Araç";
         ViewBag.carid = id;
-       
+        TempData["carid"] = id;
+
         return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> AddCarReview(AddCarReviewDto dto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        dto.customerName = TempData["userName"].ToString();
+        dto.reviewDate = DateTime.Now;
+        dto.customerImage = "Yok";
+        dto.carId = Convert.ToInt32(TempData["carid"]);
+        dto.appUserId = Convert.ToInt32(TempData["userId"]);
+        var jsonData = JsonConvert.SerializeObject(dto);
+        StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync("https://localhost:7149/api/Reviews", content);
+        if (response.IsSuccessStatusCode)
+        {
+            ViewBag.Success = "alert alert-success";
+            TempData["Message"] = "Değerlendirmeniz Kaydedildi";
+            return RedirectToAction("CarDetail", "Car", new { id = dto.carId });
+        }
+        else
+        {
+            ViewBag.Fail = "alert alert-danger";
+            TempData["Message2"] = "Değerlendirme Yapabilmeniz İçin Rezervasyon Yapmanız Gerekmektedir.";
+            return RedirectToAction("CarDetail", "Car", new { id = dto.carId });
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace CarBook.WebApi.ServiceRegistration
             Services.AddScoped(typeof(IStatsRepository), typeof(StatsRepository));
             Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
             Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
+            Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
 
             Services.AddScoped<GetAboutByIdQueryHandler>();
             Services.AddScoped<GetAboutQueryHandler>();

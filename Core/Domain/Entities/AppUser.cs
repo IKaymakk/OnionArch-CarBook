@@ -16,5 +16,6 @@ namespace CarBook.Domain.Entities
         public int AppRoleId { get; set; }
         public AppRole AppRole { get; set; }
         public List<Rezervasyon> Rezervasyons { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }

@@ -22,13 +22,14 @@ public class AdminCarFeatureController : Controller
     [HttpGet]
     public async Task<IActionResult> CarDetail(int id)
     {
+        ViewBag.carid = id;
+        TempData["arabaid"] = id;
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync($"https://localhost:7149/api/CarFeatures/{id}");
         if (response.IsSuccessStatusCode)
         {
             var jsondata = await response.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<CarFeatureListDto>>(jsondata);
-            ViewBag.carid = id;
             var firstItem = values?.FirstOrDefault();
             if (firstItem != null)
             {
@@ -43,7 +44,7 @@ public class AdminCarFeatureController : Controller
     public async Task<IActionResult> CarDetail(List<CarFeatureListDto> dto)
     {
 
-        int carId = dto.First().carId;
+        int carId = Convert.ToInt16(TempData["arabaid"]);
         var client = _httpClientFactory.CreateClient();
         foreach (var x in dto)
         {

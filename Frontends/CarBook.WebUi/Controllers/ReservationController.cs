@@ -44,12 +44,10 @@ public class ReservationController : Controller
     {
         // POST isteğini yap
         var client = _httpClientFactory.CreateClient();
+        dto.AppUserId = Convert.ToInt32(TempData["userId"]);
         var jsondata2 = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsondata2, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:7149/api/Reservations", content);
-        ViewBag.userid = dto.AppUserId;
-
-
         if (response.IsSuccessStatusCode)
         {
             ViewBag.Success = "alert alert-success";

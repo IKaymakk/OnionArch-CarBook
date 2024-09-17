@@ -14,6 +14,7 @@ namespace CarBook.Application.Mediator.Reviews.Commands
     {
         public int CarId { get; set; }
         public string CustomerName { get; set; }
+        public int AppUserId { get; set; }
         public string CustomerImage { get; set; }
         public string Comment { get; set; }
         public int RatingValue { get; set; }
@@ -22,18 +23,29 @@ namespace CarBook.Application.Mediator.Reviews.Commands
         public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand>
         {
             private readonly IRepository<Review> _repository;
+            private readonly IReviewRepository _reviewRepository;
             IMapper _mapper;
 
-            public CreateReviewCommandHandler(IMapper mapper, IRepository<Review> repository)
+            public CreateReviewCommandHandler(IMapper mapper, IRepository<Review> repository, IReviewRepository reviewRepository)
             {
                 _mapper = mapper;
                 _repository = repository;
+                _reviewRepository = reviewRepository;
             }
 
             public async Task Handle(CreateReviewCommand request, CancellationToken cancellationToken)
             {
                 var values = _mapper.Map<Review>(request);
-                await _repository.CreateAsync(values);
+                var isExist = await _reviewRepository.UserReservationCheck(values.AppUserId, values.CarId);
+                if (isExist != null)
+                {
+                    await _repository.CreateAsync(values);
+                }
+                else
+                {
+                    throw new Exception("Rezervasyon Kaydı Yok");
+                }
+
             }
         }
     }

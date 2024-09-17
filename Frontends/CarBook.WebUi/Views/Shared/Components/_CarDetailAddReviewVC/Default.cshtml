@@ -1,0 +1,79 @@
+﻿@model CarBook.DTO.CarDtos.AddCarReviewDto
+<style>
+    .star-rating {
+        direction: rtl;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .star {
+        font-size: 1.5em;
+        color: #FFD700;
+        cursor: pointer;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+        input[type="radio"]:checked ~ label.star {
+            color: #FFB400;
+        }
+
+    label.star:hover,
+    label.star:hover ~ label.star {
+        color: #FFB400;
+    }
+</style>
+
+<div class="review-form my-5">
+    <h4 class="text-center">Yorum Yap</h4>
+    <b class="text-center">*Yorum Yapabilmeniz İçin Araç İle Rezervasyon Kaydınız Bulunması Gerekmektedir.</b>
+    <form method="post" asp-action="AddCarReview" asp-controller="Car" class="p-4 shadow-sm bg-light rounded">
+        <div class="form-group mb-3">
+            <label for="reviewText">Yorumunuz</label>
+            <textarea class="form-control" id="reviewText" asp-for="comment" rows="4" placeholder="Yorumunuzu buraya yazın"></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <div class="star-rating">
+                <input type="radio" asp-for="ratingValue" value="5" id="5-stars" name="ratingValue" >
+                <label for="5-stars" class="star">&#9733;</label>
+                <input type="radio" asp-for="ratingValue" value="4" id="4-stars" name="ratingValue">
+                <label for="4-stars" class="star">&#9733;</label>
+                <input type="radio" asp-for="ratingValue" value="3" id="3-stars" name="ratingValue">
+                <label for="3-stars" class="star">&#9733;</label>
+                <input type="radio" asp-for="ratingValue" value="2" id="2-stars" name="ratingValue">
+                <label for="2-stars" class="star">&#9733;</label>
+                <input type="radio" asp-for="ratingValue" value="1" id="1-star" name="ratingValue">
+                <label for="1-star" class="star">&#9733;</label>
+            </div>
+        </div>
+
+        <div class="text-center">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <button type="submit" class="btn btn-primary">Gönder</button>
+            }
+            else
+            {
+                <a href="/Login/SignIn" class="btn btn-danger">Değerlendirme Yapmak İçin Giriş Yapın</a>
+            }
+        </div>
+    </form>
+</div>
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        var selectedRating = document.querySelector('input[name="ratingValue"]:checked');
+        var reviewText = document.getElementById('reviewText').value.trim();
+        if (!selectedRating) {
+            event.preventDefault(); // Formun gönderilmesini engelle
+            alert('Lütfen bir değerlendirme puanı seçin.');
+        }
+        if (reviewText === '') {
+            event.preventDefault(); // Formun gönderilmesini engelle
+            alert('Yorumunuzu yazmalısınız.');
+        }
+    });
+</script>
+

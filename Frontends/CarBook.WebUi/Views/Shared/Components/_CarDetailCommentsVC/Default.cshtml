@@ -1,5 +1,5 @@
 ﻿<div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-    <div class="row">
+@*     <div class="row">
         <div class="col-md-7">
             <h3 class="head">23 Reviews</h3>
             <div class="review d-flex">
@@ -126,4 +126,8 @@
             </div>
         </div>
     </div>
+    *@
+    <h4>Henüz Değerlendirme Yapılmamış</h4>
+    @await Component.InvokeAsync("_CarDetailAddReviewVC", new { id = ViewBag.carid })
+    
 </div>

@@ -2,6 +2,7 @@
 using CarBook.WebUi.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -43,6 +44,8 @@ public class LoginController : Controller
             {
                 JwtSecurityTokenHandler handler = new();
                 var token = handler.ReadJwtToken(tokenModel.Token);
+                var username = token.Claims.First(claim => claim.Type == "Username").Value;
+
                 var claims = token.Claims.ToList();
                 if (tokenModel.Token != null)
                 {
@@ -54,7 +57,10 @@ public class LoginController : Controller
                         IsPersistent = true
                     };
                     await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
-                    return RedirectToAction("Index", "Default");
+                    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    TempData["userId"] = userId;
+                    TempData["userName"] = username;
+                    return RedirectToAction("Index", "Car");
                 }
             }
         }

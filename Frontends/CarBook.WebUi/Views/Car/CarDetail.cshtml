@@ -5,6 +5,20 @@
 
 
 <section class="ftco-section ftco-car-details">
+    @if (TempData["Message"] != null)
+    {
+        @section message
+    {
+        @await Html.PartialAsync("_message", (string)TempData["Message"])
+        }
+    }
+    else
+    {
+        @section message
+    {
+        @await Html.PartialAsync("_message", (string)TempData["Message2"])
+        }
+    }
     @await Component.InvokeAsync("_CarDetailMainVC", new { id = ViewBag.carid })
     <div class="container">
         <div class="row">

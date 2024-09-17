@@ -24,7 +24,7 @@ public class CreateReservationCommand : IRequest
     public int Age { get; set; }
     public int DriverLicenseYear { get; set; }
     public string? Description { get; set; }
-    public int AppUserId { get; set; }
+    public int? AppUserId { get; set; }
 
     public class CreateReservationCommandHandler : IRequestHandler<CreateReservationCommand>
     {

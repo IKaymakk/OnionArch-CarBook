@@ -26,6 +26,6 @@ namespace CarBook.Domain.Entities
         public Location DropOffLocation { get; set; }
         public string Status { get; set; }
         public AppUser AppUser { get; set; }
-        public int AppUserId { get; set; }
+        public int? AppUserId { get; set; }
     }
 }
