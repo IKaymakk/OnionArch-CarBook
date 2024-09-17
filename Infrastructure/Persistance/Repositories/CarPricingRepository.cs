@@ -83,6 +83,16 @@ public class CarPricingRepository : ICarPricingRepository
                                .Include(z => z.Pricing).Where(x => x.PricingId == 3).AsNoTracking().ToListAsync();
         return values;
     }
+    public async Task<List<CarPricing>> GetCarListByBrandId(int id)
+    {
+        return await _context.CarPricings
+            .AsNoTracking()
+            .Include(x=>x.Pricing)
+            .Include(x => x.Car)
+            .ThenInclude(x => x.Brand)
+            .Where(x => x.Car.BrandId == id && x.PricingId == 3)
+            .ToListAsync();
+    }
 
 
 
@@ -133,7 +143,7 @@ public class CarPricingRepository : ICarPricingRepository
 
             // Haftalık fiyatı çekiyoruz
             var weeklyPricing2 = carPricings
-                                .Where(x => x.PricingId ==4)
+                                .Where(x => x.PricingId == 4)
                                 .Select(x => new
                                 {
                                     WeeklyAmount = (decimal)x.Amount
@@ -142,7 +152,7 @@ public class CarPricingRepository : ICarPricingRepository
 
             // Aylık fiyatı çekiyoruz
             var monthlyPricing2 = carPricings
-                                .Where(x => x.PricingId==5)
+                                .Where(x => x.PricingId == 5)
                                 .Select(x => new
                                 {
                                     MonthlyAmount = (decimal)x.Amount

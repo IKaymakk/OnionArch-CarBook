@@ -14,6 +14,7 @@ namespace CarBook.Application.Inferfaces
         Task<List<CarPricing>> CarPricingsWithCars();
         Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount)>> CarsListWithPricings();
         Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id);
-
+        Task<List<CarPricing>> GetCarListByBrandId(int id);
+        
     }
 }

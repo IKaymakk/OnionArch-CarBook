@@ -34,6 +34,12 @@ public class CarPricingsController : ControllerBase
         var values = await _mediator.Send(new CarPricingForAdminQuery(id));
         return Ok(values);
     }
+    [HttpGet("GetCarsByBrandIdQuery" + "{id}")]
+    public async Task<IActionResult> CarListByBrandId(int id)
+    {
+        var values = await _mediator.Send(new GetCarsByBrandIdQuery(id));
+        return Ok(values);
+    }
     [HttpPut]
     public async Task<IActionResult> UpdateCarDetail(UpdateCarPricingCommand command)
     {

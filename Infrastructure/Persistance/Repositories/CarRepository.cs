@@ -28,6 +28,7 @@ public class CarRepository : ICarRepository
             .FirstOrDefaultAsync();
     }
 
+   
     public async Task<List<Car>> GetCarsListWithBrand()
     {
         var values = await _context.Cars

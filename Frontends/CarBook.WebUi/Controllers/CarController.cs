@@ -1,4 +1,5 @@
 ﻿using CarBook.DTO.CarDtos;
+using CarBook.DTO.CarPricingsDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -22,7 +23,29 @@ public class CarController : Controller
         {
             var jsondata = await responsemessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<CarResultDto>>(jsondata);
+
             return View(values);
+        }
+        return View();
+    }
+    public async Task<IActionResult> FilterIndex(int id)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings/GetCarsByBrandIdQuery" + id);
+        if (responsemessage.IsSuccessStatusCode)
+        {
+            var jsondata = await responsemessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CarListFilterDto>>(jsondata);
+
+            if (values == null || !values.Any() )
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.SelectedBrandId = id; // Seçili BrandId'yi ViewBag ile geçiyoruz
+                return View(values);
+            }
         }
         return View();
     }

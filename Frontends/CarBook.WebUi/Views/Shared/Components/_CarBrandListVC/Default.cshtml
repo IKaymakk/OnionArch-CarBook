@@ -1,0 +1,63 @@
+﻿@model List<CarBook.DTO.BrandDtos.CreateCarBrandListDto>
+<style>
+    .filter-bar {
+        display: flex;
+        align-items: baseline; /* Öğeleri aynı hizaya getirir */
+        justify-content: flex-start; /* Sol hizalama */
+        margin-bottom: 20px;
+        background-color: #e5e5e5;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+        .filter-bar h5 {
+            margin-right: 20px; /* Sağ tarafa boşluk bırak */
+            font-weight: bold;
+            color: deepskyblue;
+            font-size: 20px; /* Başlığı biraz daha büyük yap */
+            line-height: 1; /* Yüksekliği sıkıştırarak diğer öğelerle hizala */
+        }
+
+        .filter-bar a {
+            margin-right: 15px;
+            color: #6c757d;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+            .filter-bar a:hover {
+                color: #007bff;
+                transform: scale(1.05);
+            }
+
+    .filter-item {
+        color: gray;
+        padding: 5px;
+        text-decoration: none;
+    }
+
+        .filter-item.selected {
+            color: deepskyblue; /* Seçilen markaya mavi renk */
+            font-weight: bold;
+        }
+</style>
+
+@{
+    int selectedBrandId = ViewBag.SelectedBrandId ?? 0;
+}
+<div class="row">
+    <div class="filter-bar">
+        <h5><b>Filtreleme</b></h5>
+        <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
+
+        @foreach (var brand in Model)
+        {
+            <a href="/Car/FilterIndex/@brand.BrandId" class="filter-item @(brand.BrandId == selectedBrandId ? "selected" : "")">
+                @brand.Name
+            </a>
+        }
+    </div>
+</div>
