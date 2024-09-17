@@ -63,7 +63,7 @@ namespace CarBook.Persistance.Repositories
         }
         public async Task<List<T>> GetAllWithIncludesAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T> query = _carBookContext.Set<T>();
 
             if (filter != null)
             {

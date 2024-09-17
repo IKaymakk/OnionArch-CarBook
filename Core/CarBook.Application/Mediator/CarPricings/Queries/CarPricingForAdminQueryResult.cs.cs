@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CarBook.Application.Inferfaces;
 using CarBook.Application.Mediator.CarPricings.Results;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
         public class CarPricingForAdminQueryHandler : IRequestHandler<CarPricingForAdminQuery, CarPricingForAdminQueryResult>
         {
             private readonly ICarPricingRepository _repository;
-            IMapper _mapper;
+            private readonly IMapper _mapper;
 
             public CarPricingForAdminQueryHandler(ICarPricingRepository repository, IMapper mapper)
             {
@@ -33,8 +34,8 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
             public async Task<CarPricingForAdminQueryResult> Handle(CarPricingForAdminQuery request, CancellationToken cancellationToken)
             {
                 var car = await _repository.CarDetailsForAdmin(request.id);
-                var mappedcar = _mapper.Map<CarPricingForAdminQueryResult>(car);
-                return mappedcar;
+                var mappedCar = _mapper.Map<CarPricingForAdminQueryResult>(car);
+                return mappedCar;
             }
         }
     }
