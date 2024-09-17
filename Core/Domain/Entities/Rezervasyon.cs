@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,7 @@ namespace CarBook.Domain.Entities
         public Location PickUpLocation { get; set; }
         public Location DropOffLocation { get; set; }
         public string Status { get; set; }
+        public AppUser AppUser { get; set; }
+        public int AppUserId { get; set; }
     }
 }

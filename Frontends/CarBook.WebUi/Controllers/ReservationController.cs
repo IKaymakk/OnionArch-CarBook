@@ -47,6 +47,8 @@ public class ReservationController : Controller
         var jsondata2 = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsondata2, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:7149/api/Reservations", content);
+        ViewBag.userid = dto.AppUserId;
+
 
         if (response.IsSuccessStatusCode)
         {

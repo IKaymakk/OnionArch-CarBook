@@ -37,17 +37,27 @@ public class CarBookContext : DbContext
     public DbSet<Comments> Comments { get; set; }
     public DbSet<RentACar> RentACars { get; set; }
     public DbSet<Rezervasyon> Rezervasyons { get; set; }
-    public DbSet<Review> Reviews{ get; set; }
-    public DbSet<AppUser> AppUsers{ get; set; }
-    public DbSet<AppRole> AppRoles{ get; set; }
+    public DbSet<Review> Reviews { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<AppRole> AppRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        // Çoka çok ilişki konfigürasyonu
+
+        //modelBuilder.Entity<AppUser>()
+        //    .HasMany(u => u.Rezervasyons)
+        //    .WithOne(r => r.AppUser)
+        //    .HasForeignKey(r => r.AppUserId);
+
+        //modelBuilder.Entity<Rezervasyon>()
+        //    .HasOne(r => r.AppUser)
+        //    .WithMany(u => u.Rezervasyons)
+        //    .HasForeignKey(r => r.AppUserId);
+
         modelBuilder.Entity<BlogTagCloud>()
-            .HasKey(bt => new { bt.BlogId, bt.TagCloudId });
+                .HasKey(bt => new { bt.BlogId, bt.TagCloudId });
 
         modelBuilder.Entity<BlogTagCloud>()
             .HasOne(bt => bt.Blogs)
