@@ -21,7 +21,7 @@ public class CarPricingRepository : ICarPricingRepository
     {
         _context = context;
     }
-    public async Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount)>> CarsListWithPricings()
+    public async Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount, int CarId)>> CarsListWithPricings()
     {
         var dailyPricings = await _context.CarPricings
                                  .Include(x => x.Car)
@@ -30,6 +30,7 @@ public class CarPricingRepository : ICarPricingRepository
                                  .Where(x => x.Pricing.Name == "Günlük")
                                  .Select(x => new
                                  {
+                                     x.CarId,
                                      x.Car.Brand.Name,
                                      x.Car.Model,
                                      x.Car.CoverImageUrl,
@@ -65,7 +66,8 @@ public class CarPricingRepository : ICarPricingRepository
                          WeeklyAmount: weeklyPricings
                                         .FirstOrDefault(weekly => weekly.Model == daily.Model)?.WeeklyAmount,
                          MonthlyAmount: monthlyPricings
-                                         .FirstOrDefault(monthly => monthly.Model == daily.Model)?.MonthlyAmount
+                                         .FirstOrDefault(monthly => monthly.Model == daily.Model)?.MonthlyAmount,
+                         CarId: daily.CarId
                      ))
                      .ToList();
 
@@ -87,7 +89,7 @@ public class CarPricingRepository : ICarPricingRepository
     {
         return await _context.CarPricings
             .AsNoTracking()
-            .Include(x=>x.Pricing)
+            .Include(x => x.Pricing)
             .Include(x => x.Car)
             .ThenInclude(x => x.Brand)
             .Where(x => x.Car.BrandId == id && x.PricingId == 3)

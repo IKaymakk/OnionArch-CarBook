@@ -35,101 +35,100 @@
     <!------------------------------------------------------>
     @await Component.InvokeAsync("_DefaultCoverVC")
     <!------------------------------------------------------>
+    @await Component.InvokeAsync("_DefaultLast5CarsVC")
+    <!------------------------------------------------------>
+
     <section class="ftco-section ftco-no-pt bg-light">
+        <style>
+            /* Çerçeveye gölgelendirme ve ışık efekti ekleme */
+            .services-wrap {
+                max-width: 1200px; /* Maksimum genişlik */
+                margin: 0 auto; /* Ortalamak için */
+                box-shadow: 0 0px 50px rgba(0, 0, 0, 0.1); /* Gölgelendirme arttırıldı */
+                transition: all 0.5s ease-in-out;
+                border-radius: 15px; /* Köşeleri yuvarlatma */
+                background: #fff; /* Arka plan rengini beyaz yap */
+            }
+
+           
+
+            .grow-button {
+                transition: all 0.3s ease-in-out;
+            }
+
+                /* Butona büyüme efekti ekleme */
+                .grow-button:hover {
+                    transform: scale(1.05);
+                    transition: all 0.3s ease-in-out;
+                }
+        </style>
+
         <div class="container">
-            <div class="row no-gutters">
-                <div class="col-md-12	featured-top">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                 
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <div class="row no-gutters">
-                        <div style="margin-top:3em" class="col-md-4 d-flex align-items-center">
-                            <form method="post" class="request-form ftco-animate bg-primary">
-
-                                <h2>Hemen Aracınızı Kiralayın</h2>
-                                <div class="form-group">
-                                    <label for="" class="label">Teslim Alma Yeri</label>
-                                    <select name="locationid" asp-for="LocationId" asp-items="@ViewBag.locations" class="form-control custom-select">
-                                        <option value="1">Seçiniz</option>
-                                    </select>
-
-                                </div>
-                                <div class="d-flex">
-                                    <div class="form-group mr-2">
-                                        <label for="" class="label">Teslim Alma Tarihi</label>
-                                        <input type="text" class="form-control" name="pickdate" id="book_pick_date" placeholder="Date">
-                                    </div>
-                                    <div class="form-group ml-2">
-                                        <label for="" class="label">Teslim Etme Tarihi</label>
-                                        <input type="text" class="form-control" name="offdate" id="book_off_date" placeholder="Date">
+       
+            <div class="row no-gutters justify-content-center">
+                <div class="col-md-12">
+                    <!-- Kart çerçevesinin genişliğini artırıyoruz -->
+                    <div class="services-wrap rounded-right w-100 p-5">
+                        <!-- İç dolgu alanını artırdık -->
+                        <h3 class="heading-section mb-4 text-center">Araç Kiralamanın En Kolay Hali</h3>
+                        <div class="row d-flex mb-4 justify-content-around">
+                            <!-- Kartlar buraya yerleştiriliyor -->
+                            <div class="col-md-2 d-flex align-self-stretch ftco-animate mx-3">
+                                <div class="services w-100 text-center p-3">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-2">Rotanızı Belirleyin</h3>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="" class="label">Teslim Alma Saati</label>
-                                    <input type="text" class="form-control" name="picktime" id="time_pick" placeholder="Time">
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="label">Teslim Etme Saati</label>
-                                    <input type="text" class="form-control" name="offtime" placeholder="Time">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Uygun Araçları Listele" class="btn btn-secondary py-3 px-4">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-8 d-flex align-items-center">
-                            <div class="services-wrap rounded-right w-100">
-                                <h3 class="heading-section mb-4">Araç Kiralamanın En Kolay Hali</h3>
-                                <div class="row d-flex mb-4">
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">Teslim Alacağınız Yeri Seçin</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">En Uygun Aracı Alın</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">Tadını Çıkarın</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p><a href="/CarPricings/Index" class="btn btn-primary py-3 px-4">Araç Kiralama Ücretleri</a></p>
                             </div>
+                            <div class="col-md-2 d-flex align-self-stretch ftco-animate mx-3">
+                                <div class="services w-100 text-center p-3">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-2">En Uygun Aracı Bulun</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 d-flex align-self-stretch ftco-animate mx-3">
+                                <div class="services w-100 text-center p-3">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-2">Hızlı Rezervasyon Yapın</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 d-flex align-self-stretch ftco-animate mx-3">
+                                <div class="services w-100 text-center p-3">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-2">Tadını Çıkarın :)</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-self-stretch ftco-animate mx-3">
+                                <div class="services w-100 text-center p-3">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-2">7/24 Destek Alın</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Buton -->
+                        <div class="text-center">
+                            <a href="/Car/Index" class="btn btn-primary py-3 px-4 grow-button" style="background-color: #007bff; border-radius: 25px; font-weight: bold; font-size: 18px;">
+                                Tüm Araçları Gör
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            @if (TempData["Message2"] != null)
-            {
-                @section message
-            {
-                @await Html.PartialAsync("_message", (string)TempData["Message2"])
-                }
-            }
+        </div>
     </section>
-    <!------------------------------------------------------>
-    @await Component.InvokeAsync("_DefaultLast5CarsVC")
+
+
     <!------------------------------------------------------>
     @await Component.InvokeAsync("_AboutUsVC")
     <!------------------------------------------------------>

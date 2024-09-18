@@ -8,7 +8,7 @@ namespace CarBook.DTO.CarPricingsDtos
 {
     public class CarsListForRentDto
     {
-
+        public int id { get; set; }
         public string brandName { get; set; }
         public string model { get; set; }
         public decimal dailyAmount { get; set; }

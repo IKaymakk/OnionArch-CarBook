@@ -17,6 +17,8 @@ public class CarController : Controller
 
     public async Task<IActionResult> Index()
     {
+        ViewBag.v1 = "Araçlar";
+        ViewBag.v2 = "Araç Kirala";
         var client = _httpClientFactory.CreateClient();
         var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings");
         if (responsemessage.IsSuccessStatusCode)
@@ -30,6 +32,9 @@ public class CarController : Controller
     }
     public async Task<IActionResult> FilterIndex(int id)
     {
+        ViewBag.v1 = "Araçlar";
+        ViewBag.v2 = "Araç Kirala";
+
         var client = _httpClientFactory.CreateClient();
         var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings/GetCarsByBrandIdQuery" + id);
         if (responsemessage.IsSuccessStatusCode)

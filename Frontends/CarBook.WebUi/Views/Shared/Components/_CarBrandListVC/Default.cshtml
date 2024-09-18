@@ -2,15 +2,39 @@
 <style>
     .filter-bar {
         display: flex;
-        align-items: baseline; /* Öğeleri aynı hizaya getirir */
-        justify-content: flex-start; /* Sol hizalama */
+        align-items: baseline;
+        justify-content: center; /* Öğeleri yatayda ortalar */
+        flex-wrap: wrap; /* Fazla veri olduğunda satır aşağıya iner */
         margin-bottom: 20px;
         background-color: #e5e5e5;
         padding: 15px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease-in-out;
+        width: 100%; /* Kapsayıcının genişliği tam ekran olacak şekilde */
+        text-align: center; /* İçerikleri merkezler */
+        overflow: hidden; /* Taşmayı önler */
     }
+
+        .filter-bar a {
+            margin-right: 15px;
+            color: #6c757d;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            text-align: center;
+            padding: 5px 10px; /* Daha fazla boşluk ekler, öğeler arası mesafeyi arttırır */
+        }
+
+            .filter-bar a:hover {
+                color: #007bff;
+                transform: scale(1.05);
+            }
+
+
+        
+
+
 
         .filter-bar h5 {
             margin-right: 20px; /* Sağ tarafa boşluk bırak */
@@ -20,13 +44,7 @@
             line-height: 1; /* Yüksekliği sıkıştırarak diğer öğelerle hizala */
         }
 
-        .filter-bar a {
-            margin-right: 15px;
-            color: #6c757d;
-            font-size: 16px;
-            text-decoration: none;
-            transition: color 0.3s, transform 0.3s;
-        }
+       
 
             .filter-bar a:hover {
                 color: #007bff;
@@ -50,7 +68,7 @@
 }
 <div class="row">
     <div class="filter-bar">
-        <h5><b>Filtreleme</b></h5>
+        <h5 style=""><b>Filtreleme</b></h5>
         <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
 
         @foreach (var brand in Model)

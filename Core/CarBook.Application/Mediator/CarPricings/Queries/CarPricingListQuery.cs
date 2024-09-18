@@ -29,6 +29,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
                 var values = await _repository.CarsListWithPricings();
                 return values.Select(x => new CarPricingListQueryResult
                 {
+                    Id = x.CarId,
                     BrandName = x.BrandName,
                     CoverImageUrl = x.CoverImageUrl,
                     DailyAmount = x.DailyAmount,

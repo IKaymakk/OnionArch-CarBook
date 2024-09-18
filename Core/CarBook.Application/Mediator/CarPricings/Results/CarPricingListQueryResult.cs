@@ -8,6 +8,7 @@ namespace CarBook.Application.Mediator.CarPricings.Results
 {
     public class CarPricingListQueryResult
     {
+        public int Id { get; set; }
         public string BrandName { get; set; }
         public string Model { get; set; }
         public decimal? DailyAmount { get; set; }
