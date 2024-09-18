@@ -68,7 +68,8 @@
 }
 <div class="row">
     <div class="filter-bar">
-        <h5 style=""><b>Filtreleme</b></h5>
+        @await Component.InvokeAsync("_CarBodyTypeListVC")
+
         <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
 
         @foreach (var brand in Model)

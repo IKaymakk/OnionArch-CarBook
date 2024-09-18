@@ -35,7 +35,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
                     DailyAmount = x.DailyAmount,
                     Model = x.CarModel,
                     MonthlyAmount = x.MonthlyAmount,
-                    WeeklyAmount = x.WeeklyAmount
+                    WeeklyAmount = x.WeeklyAmount,
                 }).ToList();
             }
         }

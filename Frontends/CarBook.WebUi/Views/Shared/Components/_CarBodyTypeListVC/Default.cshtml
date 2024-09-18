@@ -1,0 +1,25 @@
+﻿<form asp-action="FilterByBodyType" asp-controller="Car" method="post" id="bodyTypeForm">
+    <select name="bodytype" class="form-control" id="bodyType" onchange="submitForm()">
+       
+        @if(ViewBag.SelectedBodyType != null)
+        {
+            <option value="@ViewBag.SelectedBodyType" selected>@ViewBag.SelectedBodyType</option>
+            <option value="">Araç Tipi</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="SUV">SUV</option>
+        }
+        else
+        {
+            <option value="">Araç Tipi</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="SUV">SUV</option>
+        }
+    </select>
+</form>
+<script>
+    function submitForm() {
+        document.getElementById('bodyTypeForm').submit();
+    }
+</script>

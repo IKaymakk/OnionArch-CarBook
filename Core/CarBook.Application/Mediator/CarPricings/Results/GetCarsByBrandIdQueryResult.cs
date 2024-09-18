@@ -14,5 +14,6 @@ namespace CarBook.Application.Mediator.CarPricings.Results
         public string CarModel { get; set; }
         public string CoverImageUrl { get; set; }
         public decimal DailyAmount { get; set; }
+        public string BodyType { get; set; }
     }
 }

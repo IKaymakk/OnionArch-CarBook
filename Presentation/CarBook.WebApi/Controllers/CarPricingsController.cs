@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Mediator.CarPricings.Commands;
 using CarBook.Application.Mediator.CarPricings.Queries;
+using CarBook.Application.Mediator.CarPricings.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +46,11 @@ public class CarPricingsController : ControllerBase
     {
         await _mediator.Send(command);
         return Ok("Kayıt Güncellendi");
+    }
+    [HttpGet("GetCarsByBodyTypeQuery")]
+    public async Task<IActionResult> GetCarsByBodyTypeQuery(string bodytype)
+    {
+        var values = await _mediator.Send(new GetCarsByBodyTypeQuery(bodytype));
+        return Ok(values);
     }
 }

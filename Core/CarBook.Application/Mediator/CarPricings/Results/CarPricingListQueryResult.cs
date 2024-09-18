@@ -15,5 +15,6 @@ namespace CarBook.Application.Mediator.CarPricings.Results
         public decimal? WeeklyAmount { get; set; }
         public decimal? MonthlyAmount { get; set; }
         public string CoverImageUrl { get; set; }
+        public string BodyType{ get; set; }
     }
 }

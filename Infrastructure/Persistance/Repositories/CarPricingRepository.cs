@@ -21,7 +21,7 @@ public class CarPricingRepository : ICarPricingRepository
     {
         _context = context;
     }
-    public async Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount, int CarId)>> CarsListWithPricings()
+    public async Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount, int CarId, string BodyType)>> CarsListWithPricings()
     {
         var dailyPricings = await _context.CarPricings
                                  .Include(x => x.Car)
@@ -30,6 +30,7 @@ public class CarPricingRepository : ICarPricingRepository
                                  .Where(x => x.Pricing.Name == "Günlük")
                                  .Select(x => new
                                  {
+                                     x.Car.BodyType,
                                      x.CarId,
                                      x.Car.Brand.Name,
                                      x.Car.Model,
@@ -67,7 +68,8 @@ public class CarPricingRepository : ICarPricingRepository
                                         .FirstOrDefault(weekly => weekly.Model == daily.Model)?.WeeklyAmount,
                          MonthlyAmount: monthlyPricings
                                          .FirstOrDefault(monthly => monthly.Model == daily.Model)?.MonthlyAmount,
-                         CarId: daily.CarId
+                         CarId: daily.CarId,
+                         BodyType: daily.BodyType
                      ))
                      .ToList();
 
@@ -229,5 +231,14 @@ public class CarPricingRepository : ICarPricingRepository
 
     }
 
-
+    public async Task<List<CarPricing>> GetCarListByBodyType(string bodytype)
+    {
+        return await _context.CarPricings
+                   .AsNoTracking()
+                   .Include(x=>x.Pricing)
+                   .Include(x => x.Car)
+                   .ThenInclude(x => x.Brand)
+                   .Where(x => x.Car.BodyType == bodytype && x.PricingId == 3)
+                   .ToListAsync();
+    }
 }

@@ -31,6 +31,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
                 var cars = await _repository.GetCarListByBrandId(request.id);
                 return cars.Select(x => new GetCarsByBrandIdQueryResult
                 {
+                    BodyType = x.Car.BodyType,
                     CarId = x.CarId,
                     BrandId = x.Car.Brand.BrandId,
                     BrandName = x.Car.Brand.Name,
