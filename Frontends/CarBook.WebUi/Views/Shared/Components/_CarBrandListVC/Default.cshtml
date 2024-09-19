@@ -32,7 +32,7 @@
             }
 
 
-        
+
 
 
 
@@ -44,12 +44,12 @@
             line-height: 1; /* Yüksekliği sıkıştırarak diğer öğelerle hizala */
         }
 
-       
 
-            .filter-bar a:hover {
-                color: #007bff;
-                transform: scale(1.05);
-            }
+
+        .filter-bar a:hover {
+            color: #007bff;
+            transform: scale(1.05);
+        }
 
     .filter-item {
         color: gray;
@@ -66,17 +66,13 @@
 @{
     int selectedBrandId = ViewBag.SelectedBrandId ?? 0;
 }
-<div class="row">
-    <div class="filter-bar">
-        @await Component.InvokeAsync("_CarBodyTypeListVC")
 
-        <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
 
-        @foreach (var brand in Model)
-        {
-            <a href="/Car/FilterIndex/@brand.BrandId" class="filter-item @(brand.BrandId == selectedBrandId ? "selected" : "")">
-                @brand.Name
-            </a>
-        }
-    </div>
-</div>
+@foreach (var brand in Model)
+{
+    <a href="/Car/FilterIndex/@brand.BrandId" class="filter-item @(brand.BrandId == selectedBrandId ? "selected" : "")">
+        @brand.Name
+    </a>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

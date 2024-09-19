@@ -100,8 +100,8 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
-        
-        @await Component.InvokeAsync("_CarBrandListVC")
+
+        <partial name="~/Views/Car/_CarFilterBarPartial.cshtml" />
 
         <div class="row">
             @if (Model != null && Model.Any()) // Model null değilse ve boş değilse

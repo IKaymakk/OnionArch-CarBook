@@ -16,19 +16,31 @@ public class CarController : Microsoft.AspNetCore.Mvc.Controller
     {
         _httpClientFactory = httpClientFactory;
     }
+    [Microsoft.AspNetCore.Mvc.HttpGet]
+    public async Task<IActionResult> JsonIndex()
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client.GetAsync("https://localhost:7149/api/CarPricings");
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CarIndexDto>>(jsonData);
+            return PartialView("_CarListIndexPartial", values); // PartialView ile dönecek
+        }
+        return BadRequest();
 
+    }
     public async Task<IActionResult> Index()
     {
         ViewBag.v1 = "Araçlar";
         ViewBag.v2 = "Araç Kirala";
         var client = _httpClientFactory.CreateClient();
         var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings");
+        ViewBag.indexList = responsemessage;
         if (responsemessage.IsSuccessStatusCode)
         {
             var jsondata = await responsemessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<CarResultDto>>(jsondata);
-
-
 
             return View(values);
         }
@@ -87,7 +99,7 @@ public class CarController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> CarDetail(int id)
     {
         ViewBag.v1 = "Araç Detayı";
-        ViewBag.v2 = id + "Numaralı Araç";
+        ViewBag.v2 = id + " Numaralı Araç";
         ViewBag.carid = id;
         TempData["carid"] = id;
 
@@ -118,4 +130,41 @@ public class CarController : Microsoft.AspNetCore.Mvc.Controller
             return RedirectToAction("CarDetail", "Car", new { id = dto.carId });
         }
     }
+    public async Task<IActionResult> GetSortedCars(string sortOrder)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responsemessage = await client.GetAsync("https://localhost:7149/api/CarPricings");
+        if (responsemessage.IsSuccessStatusCode)
+        {
+            var jsondata = await responsemessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CarResultDto>>(jsondata);
+
+            List<CarResultDto> sortedValues;
+            if (sortOrder == "asc")
+            {
+                sortedValues = values.OrderBy(x => x.Amount).ToList();
+            }
+            else
+            {
+                sortedValues = values.OrderByDescending(x => x.Amount).ToList();
+            }
+
+            return PartialView("_CarListPartial", sortedValues);
+        }
+        return BadRequest();
+    }
+    [Microsoft.AspNetCore.Mvc.HttpGet]
+    public async Task<IActionResult> GetCarsByBodyType(string bodytype)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/GetCarsByBodyTypeQuery?bodytype={bodytype}");
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CarFilterBodyTypeDto>>(jsonData);
+            return PartialView("_CarListBodyTypePartial", values); // PartialView ile dönecek
+        }
+        return BadRequest();
+    }
+
 }

@@ -96,9 +96,22 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
-        @await Component.InvokeAsync("_CarBrandListVC")
 
+        <!----------------------------------------------FilterBar----------------------------------------------------->
         <div class="row">
+            <partial name="~/Views/Car/_CarFilterBarPartial.cshtml" />
+            <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
+        </div>
+        <!----------------------------------------------FilterBar----------------------------------------------------->
+        <a></a>
+        <!----------------------------------------------AjaxList----------------------------------------------------->
+        <div class="doldur"></div>
+        <div class="carList"></div>
+        <div class="index"></div>
+        <!----------------------------------------------AjaxList----------------------------------------------------->
+
+        <div class="row xd">
+
             @foreach (var car in Model)
             {
                 <div class="col-md-4">
@@ -122,4 +135,74 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $("#sortDropdown").change(function () {
+            var sortOrder = $(this).val(); // Seçilen sıralama türünü al
+            if (sortOrder === "asc" || sortOrder === "desc") {
+                $.ajax({
+                    url: '/Car/GetSortedCars',
+                    type: 'GET',
+                    data: { sortOrder: sortOrder },
+                    success: function (data) {
+                        $('.carList').html('');
+                        $('.doldur').html(data);
+                        $('.xd').html('');
+                    }
+                });
+            } else if (sortOrder === "sıfırla") {
+                // Filtreleme kaldırıldığında varsayılan listeyi getir
+                $.ajax({
+                    url: '/Car/JsonIndex',
+                    type: 'GET',
+                    success: function (data) {
+                        $('.index').html(data);  // Varsayılan listeyi doldur
+                        $('.xd').html('');
+                        $('.doldur').html('');
+                        $('.carList').html('');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#bodyTypeDropdown').change(function () {
+            var selectedBodyType = $(this).val(); // Seçilen gövde tipini al
+
+            if (selectedBodyType != "sıfırla") {
+                $.ajax({
+                    url: '/Car/GetCarsByBodyType',
+                    type: 'GET',
+                    data: { bodytype: selectedBodyType },
+                    success: function (data) {
+                        $('.carList').html(data); // Partial view verisini #carList içine yerleştir
+                        $('.xd').html('');
+                        $('.doldur').html('');
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                    }
+                });
+            } else {
+                // Filtreleme kaldırıldığında varsayılan listeyi getir
+                $.ajax({
+                    url: '/Car/JsonIndex',
+                    type: 'GET',
+                    success: function (data) {
+                        $('.index').html('');  // Varsayılan listeyi doldur
+                        $('.xd').html('');
+                        $('.doldur').html('');
+                        $('.carList').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
