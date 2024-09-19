@@ -16,6 +16,7 @@ namespace CarBook.Application.Inferfaces
         Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id);
         Task<List<CarPricing>> GetCarListByBrandId(int id);
         Task<List<CarPricing>> GetCarListByBodyType(string bodytype);
+        Task<List<CarPricing>> GetCarFilterList(string? bodytype, string? sort, int? brandid);
         
     }
 }

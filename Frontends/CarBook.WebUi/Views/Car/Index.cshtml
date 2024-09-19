@@ -3,53 +3,22 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
+
 <style>
-    .filter-bar {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        background-color: #e5e5e5;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-        .filter-bar h5 {
-            margin-right: 20px;
-            font-weight: bold;
-            color: deepskyblue;
-            font-size: 18px;
-        }
-
-        .filter-bar a {
-            margin-right: 15px;
-            color: #6c757d;
-            font-size: 16px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-            .filter-bar a:hover {
-                color: #007bff;
-            }
 
     .car-wrap {
         transition: transform 0.3s, box-shadow 0.3s;
+        height: 380px;
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
         .car-wrap:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
         }
 
-        .car-wrap .img {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px 8px 0 0;
-        }
+
 
         .car-wrap .text {
             padding: 15px;
@@ -67,142 +36,112 @@
                 color: #007bff;
             }
 
+
     .price {
         color: #28a745;
         font-size: 18px;
         font-weight: bold;
     }
 
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004080;
-        }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border-color: #6c757d;
-    }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #4e555b;
-        }
 </style>
 
 <section class="ftco-section bg-light">
+
     <div class="container">
 
         <!----------------------------------------------FilterBar----------------------------------------------------->
         <div class="row">
             <partial name="~/Views/Car/_CarFilterBarPartial.cshtml" />
-            <a href="/Car/Index" class="filter-item"><b>Temizle</b></a>
         </div>
         <!----------------------------------------------FilterBar----------------------------------------------------->
-        <a></a>
-        <!----------------------------------------------AjaxList----------------------------------------------------->
-        <div class="doldur"></div>
-        <div class="carList"></div>
-        <div class="index"></div>
-        <!----------------------------------------------AjaxList----------------------------------------------------->
 
-        <div class="row xd">
-
-            @foreach (var car in Model)
-            {
-                <div class="col-md-4">
-                    <div class="car-wrap rounded ftco-animate">
-                        <div class="img" style="background-image: url(@car.CarCoverImageUrl);">
-                        </div>
-                        <div class="text">
-                            <h2 class="mb-0"><a href="car-single.html">@car.BrandName @car.CarModel</a></h2>
-                            <div class="d-flex mb-3">
-                                <span style="color:black">#@car.CarId</span>
-                                <p class="price ml-auto">@Convert.ToInt32(@car.Amount)₺ <span>Günlük</span></p>
+        <div class="xd">
+            <div class="row">
+                @foreach (var car in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="car-wrap rounded ftco-animate">
+                            <div class="img" style="background-image: url(@car.CarCoverImageUrl);">
                             </div>
-                            <p class="d-flex mb-0 d-block">
-                                <a href="/Reservation/Index/@car.CarId" class="btn btn-primary py-2 mr-1">Hemen Kirala</a>
-                                <a href="/Car/CarDetail/@car.CarId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a>
-                            </p>
+                            <div class="text">
+                                <h2 class="mb-0"><a href="car-single.html">@car.BrandName @car.CarModel</a></h2>
+                                <div class="d-flex mb-3">
+                                    <span style="color:black">#@car.CarId</span>
+                                    <p class="price ml-auto">@Convert.ToInt32(@car.Amount)₺ <span>Günlük</span></p>
+                                </div>
+                                <p class="d-flex mb-0 d-block">
+                                    <a href="/Reservation/Index/@car.CarId?brandName=@car.BrandName&carModel=@car.CarModel" class="btn btn-primary py-2 mr-1">Hemen Kirala</a>
+                                    <a href="/Car/CarDetail/@car.CarId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
+
 </section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     $(document).ready(function () {
+        // Sort Dropdown
         $("#sortDropdown").change(function () {
-            var sortOrder = $(this).val(); // Seçilen sıralama türünü al
-            if (sortOrder === "asc" || sortOrder === "desc") {
-                $.ajax({
-                    url: '/Car/GetSortedCars',
-                    type: 'GET',
-                    data: { sortOrder: sortOrder },
-                    success: function (data) {
-                        $('.carList').html('');
-                        $('.doldur').html(data);
-                        $('.xd').html('');
-                    }
-                });
-            } else if (sortOrder === "sıfırla") {
-                // Filtreleme kaldırıldığında varsayılan listeyi getir
-                $.ajax({
-                    url: '/Car/JsonIndex',
-                    type: 'GET',
-                    success: function (data) {
-                        $('.index').html(data);  // Varsayılan listeyi doldur
-                        $('.xd').html('');
-                        $('.doldur').html('');
-                        $('.carList').html('');
-                    }
-                });
-            }
+            applyFilters(); // Filtreleri uygula
         });
-    });
-</script>
 
-
-
-<script>
-    $(document).ready(function () {
+        // BodyType Dropdown
         $('#bodyTypeDropdown').change(function () {
-            var selectedBodyType = $(this).val(); // Seçilen gövde tipini al
-
-            if (selectedBodyType != "sıfırla") {
-                $.ajax({
-                    url: '/Car/GetCarsByBodyType',
-                    type: 'GET',
-                    data: { bodytype: selectedBodyType },
-                    success: function (data) {
-                        $('.carList').html(data); // Partial view verisini #carList içine yerleştir
-                        $('.xd').html('');
-                        $('.doldur').html('');
-                    },
-                    error: function () {
-                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-                    }
-                });
-            } else {
-                // Filtreleme kaldırıldığında varsayılan listeyi getir
-                $.ajax({
-                    url: '/Car/JsonIndex',
-                    type: 'GET',
-                    success: function (data) {
-                        $('.index').html('');  // Varsayılan listeyi doldur
-                        $('.xd').html('');
-                        $('.doldur').html('');
-                        $('.carList').html(data);
-                    }
-                });
-            }
+            applyFilters(); // Filtreleri uygula
         });
+
+        // Brand Dropdown
+        $("#brandDropDown").change(function () {
+            applyFilters(); // Filtreleri uygula
+        });
+
+        // "Temizle" Butonuna Tıklama Olayı
+        $("#clearFilters").click(function () {
+            $.ajax({
+                url: '/Car/JsonIndex',
+                type: 'GET',
+                success: function (data) {
+                    $('.xd').html(''); // Filtrelenmiş sonuçları temizle
+                    $('.xd').html(data); // Varsayılan listeyi doldur
+                    $("#sortDropdown, #bodyTypeDropdown, #brandDropDown").prop('selectedIndex', 0); // Dropdownları sıfırla
+                },
+                error: function () {
+                    alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            });
+        });
+
+        // Filtreleri Uygulayan Fonksiyon
+        function applyFilters() {
+            var sortOrder = $("#sortDropdown").val();  // Sıralama türü
+            var selectedBodyType = $('#bodyTypeDropdown').val();  // Gövde tipi
+            var brandId = $("#brandDropDown").val();  // Marka ID
+
+            // Yeni veri yüklenmeden önce mevcut içeriği temizle
+            $('.xd').html('');  // İçeriği boşalt
+
+            $.ajax({
+                url: '/Car/JsonIndex',
+                type: 'GET',
+                data: {
+                    sortOrder: sortOrder,
+                    bodytype: selectedBodyType,
+                    brandid: brandId
+                },
+                success: function (data) {
+                    $('.xd').html(data);  // Yeni veriyi ekle
+                },
+                error: function () {
+                    alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            });
+        }
     });
 </script>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.DTO.CarDtos
 {
-    public class CarIndexDto
+    public class CarListByBrandIdDto
     {
 
             public int carId { get; set; }
@@ -16,5 +16,6 @@ namespace CarBook.DTO.CarDtos
             public string coverImageUrl { get; set; }
             public decimal dailyAmount { get; set; }
             public string bodyType { get; set; }
+
     }
 }

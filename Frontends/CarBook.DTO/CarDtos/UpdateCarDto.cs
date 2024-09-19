@@ -19,6 +19,7 @@ public class UpdateCarDto
     public string Fuel { get; set; }
     public int Year { get; set; }
     public string BigImageUrl { get; set; }
+    public string BodyType { get; set; }
     ////public decimal weeklyAmount { get; set; }
     ////public decimal dailyAmount { get; set; }
     //public int carId { get; set; }

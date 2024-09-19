@@ -22,6 +22,7 @@ namespace CarBook.Application.Features.Handlers.CarHandlers
         {
             await _repository.CreateAsync(new Car
             {
+                BodyType = command.BodyType,
                 BigImageUrl = command.BigImageUrl,
                 BrandId = command.BrandId,
                 CoverImageUrl = command.CoverImageUrl,

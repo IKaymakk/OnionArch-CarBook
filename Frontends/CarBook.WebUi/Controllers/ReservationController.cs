@@ -17,12 +17,13 @@ public class ReservationController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(int id)
+    public async Task<IActionResult> Index(int id, string brandName, string carModel)
     {
         ViewBag.v1 = "Rezervasyon";
         ViewBag.v2 = "Araç Kiralama Formu";
-        ViewBag.v3 = id;
 
+        ViewBag.BrandName = brandName;
+        ViewBag.CarModel = carModel;
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync("https://localhost:7149/api/Locations");
         if (response.IsSuccessStatusCode)
@@ -45,6 +46,7 @@ public class ReservationController : Controller
         // POST isteğini yap
         var client = _httpClientFactory.CreateClient();
         dto.AppUserId = Convert.ToInt32(TempData["userId"]);
+        dto.CarId = id;
         var jsondata2 = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsondata2, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:7149/api/Reservations", content);
@@ -54,7 +56,6 @@ public class ReservationController : Controller
             TempData["Message"] = "İşlem Başarıyla Gerçekleşti , Rezervasyon Detayları İçin Mail Kutunuzu Kontrol Ediniz";
             return RedirectToAction("Index");
         }
-        ViewBag.v3 = id;
         ViewBag.Fail = "alert alert-danger";
         TempData["Message2"] = "İşlem Gerçekleştirilmedi, Kontrol Ediniz";
         var response2 = await client.GetAsync("https://localhost:7149/api/Locations");

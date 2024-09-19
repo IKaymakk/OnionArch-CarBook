@@ -1,78 +1,8 @@
 ﻿@model List<CarBook.DTO.BrandDtos.CreateCarBrandListDto>
-<style>
-    .filter-bar {
-        display: flex;
-        align-items: baseline;
-        justify-content: center; /* Öğeleri yatayda ortalar */
-        flex-wrap: wrap; /* Fazla veri olduğunda satır aşağıya iner */
-        margin-bottom: 20px;
-        background-color: #e5e5e5;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease-in-out;
-        width: 100%; /* Kapsayıcının genişliği tam ekran olacak şekilde */
-        text-align: center; /* İçerikleri merkezler */
-        overflow: hidden; /* Taşmayı önler */
+<select name="bodytype" style="width:150px;margin-left:0.5em" id="brandDropDown" class="form-control">
+    <option value="">Marka</option>
+    @foreach (var x in Model)
+    {
+        <option value="@x.BrandId">@x.Name</option>
     }
-
-        .filter-bar a {
-            margin-right: 15px;
-            color: #6c757d;
-            font-size: 16px;
-            text-decoration: none;
-            transition: color 0.3s, transform 0.3s;
-            text-align: center;
-            padding: 5px 10px; /* Daha fazla boşluk ekler, öğeler arası mesafeyi arttırır */
-        }
-
-            .filter-bar a:hover {
-                color: #007bff;
-                transform: scale(1.05);
-            }
-
-
-
-
-
-
-        .filter-bar h5 {
-            margin-right: 20px; /* Sağ tarafa boşluk bırak */
-            font-weight: bold;
-            color: deepskyblue;
-            font-size: 20px; /* Başlığı biraz daha büyük yap */
-            line-height: 1; /* Yüksekliği sıkıştırarak diğer öğelerle hizala */
-        }
-
-
-
-        .filter-bar a:hover {
-            color: #007bff;
-            transform: scale(1.05);
-        }
-
-    .filter-item {
-        color: gray;
-        padding: 5px;
-        text-decoration: none;
-    }
-
-        .filter-item.selected {
-            color: deepskyblue; /* Seçilen markaya mavi renk */
-            font-weight: bold;
-        }
-</style>
-
-@{
-    int selectedBrandId = ViewBag.SelectedBrandId ?? 0;
-}
-
-
-@foreach (var brand in Model)
-{
-    <a href="/Car/FilterIndex/@brand.BrandId" class="filter-item @(brand.BrandId == selectedBrandId ? "selected" : "")">
-        @brand.Name
-    </a>
-}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</select>

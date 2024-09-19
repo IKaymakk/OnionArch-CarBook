@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -75,10 +76,6 @@ public class CarPricingRepository : ICarPricingRepository
 
         return result;
     }
-
-
-
-
     public async Task<List<CarPricing>> CarPricingsWithCars()
     {
         var values = await _context.CarPricings
@@ -97,9 +94,6 @@ public class CarPricingRepository : ICarPricingRepository
             .Where(x => x.Car.BrandId == id && x.PricingId == 3)
             .ToListAsync();
     }
-
-
-
     public async Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id)
     {
         // İlk carPricing nesnesini çekiyoruz
@@ -230,15 +224,43 @@ public class CarPricingRepository : ICarPricingRepository
         }
 
     }
-
     public async Task<List<CarPricing>> GetCarListByBodyType(string bodytype)
     {
         return await _context.CarPricings
                    .AsNoTracking()
-                   .Include(x=>x.Pricing)
+                   .Include(x => x.Pricing)
                    .Include(x => x.Car)
                    .ThenInclude(x => x.Brand)
                    .Where(x => x.Car.BodyType == bodytype && x.PricingId == 3)
                    .ToListAsync();
+    }
+    public async Task<List<CarPricing>> GetCarFilterList(string? bodytype, string? sort, int? brandid)
+    {
+        var query = _context.CarPricings
+                            .Include(x => x.Car)
+                            .ThenInclude(x => x.Brand)
+                            .Include(x => x.Pricing)
+                            .Where(x => x.Pricing.Name == "Günlük");
+
+        if (bodytype != null)
+        {
+            query = query.Where(x => x.Car.BodyType == bodytype);
+        }
+
+        if (brandid != null)
+        {
+            query = query.Where(x => x.Car.BrandId == brandid);
+        }
+
+        if (sort == "asc")
+        {
+            query = query.OrderBy(x => x.Amount);
+        }
+        else if (sort == "desc")
+        {
+            query = query.OrderByDescending(x => x.Amount);
+        }
+
+        return await query.ToListAsync();
     }
 }

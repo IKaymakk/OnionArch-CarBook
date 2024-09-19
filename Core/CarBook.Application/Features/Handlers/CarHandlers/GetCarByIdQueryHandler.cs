@@ -24,6 +24,7 @@ public class GetCarByIdQueryHandler
         var values = await _repository.GetCarByIdAsync(query.CarId);
         return new GetCarByIdQueryResult
         {
+            BodyType = values.BodyType,
             BigImageUrl = values.BigImageUrl,
             BrandId = values.BrandId,
             Year = values.Year,

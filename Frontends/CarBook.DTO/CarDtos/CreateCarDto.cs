@@ -18,5 +18,6 @@ namespace CarBook.DTO.CarDtos
         public string Fuel { get; set; }
         public int Year{ get; set; }
         public string BigImageUrl { get; set; }
+        public string BodyType { get; set; }
     }
 }
