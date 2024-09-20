@@ -15,12 +15,14 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
         string? bodytype;
         string? sort;
         int? brandid;
+        string? search;
 
-        public CarFilteretListQuery(string? bodytype, string? sort, int? brandid)
+        public CarFilteretListQuery(string? bodytype, string? sort, int? brandid, string? search)
         {
             this.bodytype = bodytype;
             this.sort = sort;
             this.brandid = brandid;
+            this.search = search;
         }
 
         public class CarFilteretListQueryHandler : IRequestHandler<CarFilteretListQuery, List<CarFilteretListQueryResult>>
@@ -34,7 +36,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
 
             public async Task<List<CarFilteretListQueryResult>> Handle(CarFilteretListQuery request, CancellationToken cancellationToken)
             {
-                var values = await _carPricingRepository.GetCarFilterList(request.bodytype, request.sort, request.brandid);
+                var values = await _carPricingRepository.GetCarFilterList(request.bodytype, request.sort, request.brandid,request.search);
                 return values.Select(x => new CarFilteretListQueryResult
                 {
                     BodyType = x.Car.BodyType,

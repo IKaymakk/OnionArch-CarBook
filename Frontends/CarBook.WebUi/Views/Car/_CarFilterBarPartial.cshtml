@@ -5,25 +5,53 @@
         margin-bottom: 20px;
         background-color: transparent; /* Hafif mavi arka plan */
     }
-        .filter-bar select {
-            width: 150px;
+
+        .filter-bar input[type="text"] {
+            width: 250px; /* Diğerlerinden daha uzun */
             padding: 10px;
             margin-right: 10px;
             border-radius: 8px;
             font-size: 16px;
             color: #495057;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+            border: 0.5px solid Darkgray; /* Varsayılan sınır */
+            transition: border-color 0.2s; /* Kenarlık geçişi */
         }
-            .filter-bar select:focus {
+
+            .filter-bar input[type="text"]:focus {
+                border-color: #1089ff; /* Fokus olduğunda mavi kenarlık */
+            }
+
+        .filter-bar select,
+        .filter-bar button {
+            width: 150px; /* Daha geniş */
+            padding: 10px;
+            margin-right: 10px; /* Aralarında boşluk */
+            border-radius: 8px;
+            font-size: 16px;
+            color: #fff; /* Beyaz yazı */
+            background-color: #1089ff; /* Varsayılan arka plan */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+            transition: transform 0.2s, background-color 0.2s; /* Animasyon için geçiş süreleri */
+        }
+
+            .filter-bar button:hover {
+                transform: scale(1.02); /* Büyüme efekti */
+                background-color: #01d28e; /* Yeşil renk */
+                color:#fff;
+            }
+
+            .filter-bar select:focus,
+            .filter-bar button:focus {
                 outline: none;
                 border: 2px solid;
-                border-color: #1089ff; /* Fokus olduğunda kırmızı kenarlık */
-                box-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Fokus kırmızı gölge */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Fokus gölge */
             }
+
             .filter-bar select option {
                 padding: 10px;
                 color: #333;
             }
+
                 .filter-bar select option:checked {
                     background-color: #1089ff; /* Mavi renk */
                     color: #fff; /* Beyaz yazı */
@@ -31,15 +59,16 @@
 
 </style>
 <div class="filter-bar">
+    <input class="form-control" type="text" id="searchInput" placeholder="Ara..." />
 
-    <select style="width:150px" id="sortDropdown" class="form-control">
+    <select id="sortDropdown" class="form-control">
         <option value="">Sıralama</option>
         <option value="asc">Fiyat Artan</option>
         <option value="desc">Fiyat Azalan</option>
     </select>
 
-    <select name="bodytype" style="width:150px;margin-left:0.5em" id="bodyTypeDropdown" class="form-control">
-        <option value="">Araç Tipi </option>
+    <select name="bodytype" id="bodyTypeDropdown" class="form-control">
+        <option value="">Araç Tipi</option>
         <option value="Sedan">Sedan</option>
         <option value="Hatchback">Hatchback</option>
         <option value="SUV">SUV</option>
@@ -47,6 +76,6 @@
     </select>
 
     @await Component.InvokeAsync("_CarBrandListVC")
-    <button id="clearFilters" class="filter-item btn btn-outline-primary">Temizle</button>
 
+    <button id="clearFilters" class="filter-item btn">Temizle</button>
 </div>

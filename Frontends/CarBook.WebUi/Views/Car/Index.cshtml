@@ -102,6 +102,11 @@
             applyFilters(); // Filtreleri uygula
         });
 
+        // Search Input
+        $("#searchInput").on('input', function () {
+            applyFilters(); // Filtreleri uygula
+        });
+
         // "Temizle" Butonuna Tıklama Olayı
         $("#clearFilters").click(function () {
             $.ajax({
@@ -111,6 +116,7 @@
                     $('.xd').html(''); // Filtrelenmiş sonuçları temizle
                     $('.xd').html(data); // Varsayılan listeyi doldur
                     $("#sortDropdown, #bodyTypeDropdown, #brandDropDown").prop('selectedIndex', 0); // Dropdownları sıfırla
+                    $("#searchInput").val(''); // Arama inputunu temizle
                 },
                 error: function () {
                     alert('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -123,9 +129,7 @@
             var sortOrder = $("#sortDropdown").val();  // Sıralama türü
             var selectedBodyType = $('#bodyTypeDropdown').val();  // Gövde tipi
             var brandId = $("#brandDropDown").val();  // Marka ID
-
-            // Yeni veri yüklenmeden önce mevcut içeriği temizle
-            $('.xd').html('');  // İçeriği boşalt
+            var searchQuery = $("#searchInput").val(); // Arama terimi
 
             $.ajax({
                 url: '/Car/JsonIndex',
@@ -133,9 +137,11 @@
                 data: {
                     sortOrder: sortOrder,
                     bodytype: selectedBodyType,
-                    brandid: brandId
+                    brandid: brandId,
+                    search: searchQuery // Arama terimini gönder
                 },
                 success: function (data) {
+                    $('.xd').html('');  // İçeriği boşalt
                     $('.xd').html(data);  // Yeni veriyi ekle
                 },
                 error: function () {
@@ -144,4 +150,5 @@
             });
         }
     });
+
 </script>

@@ -32,10 +32,10 @@ public class CarController : Controller
     }
    
     [HttpGet]
-    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid)
+    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid, string? search)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}");
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}&search={search}");
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();

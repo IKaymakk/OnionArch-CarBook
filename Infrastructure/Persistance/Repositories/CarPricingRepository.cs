@@ -234,7 +234,7 @@ public class CarPricingRepository : ICarPricingRepository
                    .Where(x => x.Car.BodyType == bodytype && x.PricingId == 3)
                    .ToListAsync();
     }
-    public async Task<List<CarPricing>> GetCarFilterList(string? bodytype, string? sort, int? brandid)
+    public async Task<List<CarPricing>> GetCarFilterList(string? bodytype, string? sort, int? brandid,string? search)
     {
         var query = _context.CarPricings
                             .Include(x => x.Car)
@@ -260,6 +260,28 @@ public class CarPricingRepository : ICarPricingRepository
         {
             query = query.OrderByDescending(x => x.Amount);
         }
+        if (!string.IsNullOrEmpty(search))
+        {
+            search = search.Trim();  // Boşlukları temizler
+            var searchTerms = search.Split(' ');
+
+            // Eğer birden fazla kelime varsa
+            if (searchTerms.Length > 1)
+            {
+                var brandName = searchTerms[0];  // İlk kelime marka adı
+                var modelName = searchTerms[1];   // İkinci kelime model adı
+
+                query = query.Where(c => c.Car.Brand.Name.Contains(brandName) &&
+                                         c.Car.Model.Contains(modelName));
+            }
+            else // Tek kelime durumu
+            {
+                query = query.Where(c => c.Car.Brand.Name.Contains(search) ||
+                                         c.Car.Model.Contains(search));
+            }
+        }
+
+
 
         return await query.ToListAsync();
     }
