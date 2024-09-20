@@ -19,15 +19,15 @@
                     {
                     <div class="itemxxx">
                         <div class="car-wrap rounded ftco-animate">
-                            <div class="img rounded d-flex align-items-end" style="background-image: url(@car.CarCoverImageUrl);">
+                            <div class="img rounded d-flex align-items-end" style="background-image: url(@car.carCoverImageUrl);">
                             </div>
                             <div class="text">
-                                <h2 class="mb-0"><a href="#">@car.CarModel</a></h2>
+                                <h2 class="mb-0"><a href="#">@car.carModel</a></h2>
                                 <div class="d-flex mb-3">
-                                    <span class="cat">@car.BrandName</span>
-                                    <p class="price ml-auto">@car.Amount ₺ <span>/ Günlük</span></p>
+                                    <span class="cat">@car.brandName</span>
+                                    <p class="price ml-auto">@car.amount ₺ <span>/ Günlük</span></p>
                                 </div>
-                                <p class="d-flex mb-0 d-block"><a href="/Reservation/Index/@car.CarId" class="btn btn-primary py-2 mr-1">Hemen Kirala</a> <a href="/Car/CarDetail/@car.CarId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a></p>
+                                <p class="d-flex mb-0 d-block"><a href="/Reservation/Index/@car.carId" class="btn btn-primary py-2 mr-1">Hemen Kirala</a> <a href="/Car/CarDetail/@car.carId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a></p>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,9 @@
             transition: all 0.3s ease-in-out;
     }
 
-    .car-wrap{
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    .car-wrap {
+        margin-top: 10px; /* Üstte 10px boşluk bırak */
+        box-shadow: 0 1px 15px rgba(0, 0, 0, 0.6);
         transition: all 0.3s ease-in-out;
     }
 

@@ -3,63 +3,73 @@
         display: flex;
         align-items: center;
         margin-bottom: 20px;
-        background-color: transparent; /* Hafif mavi arka plan */
+        background-color: transparent;
     }
 
+        /* Uzun input */
         .filter-bar input[type="text"] {
-            width: 250px; /* Diğerlerinden daha uzun */
+            width: 200px;
             padding: 10px;
             margin-right: 10px;
             border-radius: 8px;
             font-size: 16px;
             color: #495057;
-            border: 0.5px solid Darkgray; /* Varsayılan sınır */
-            transition: border-color 0.2s; /* Kenarlık geçişi */
+            border: 0.5px solid Darkgray;
+            transition: border-color 0.2s;
         }
 
             .filter-bar input[type="text"]:focus {
-                border-color: #1089ff; /* Fokus olduğunda mavi kenarlık */
+                border-color: #1089ff;
             }
 
+        /* Diğer input ve select elemanları aynı boyutta */
         .filter-bar select,
+        .filter-bar input[type="number"],
         .filter-bar button {
-            width: 150px; /* Daha geniş */
+            width: 140px;
             padding: 10px;
-            margin-right: 10px; /* Aralarında boşluk */
+            margin-right: 10px;
             border-radius: 8px;
             font-size: 16px;
-            color: #fff; /* Beyaz yazı */
-            background-color: #1089ff; /* Varsayılan arka plan */
+            color: #fff;
+            background-color: #1089ff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
-            transition: transform 0.2s, background-color 0.2s; /* Animasyon için geçiş süreleri */
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .filter-bar button {
+            width: 100px !important;
         }
 
             .filter-bar button:hover {
-                transform: scale(1.02); /* Büyüme efekti */
-                background-color: #01d28e; /* Yeşil renk */
-                color:#fff;
+                transform: scale(1.02);
+                background-color: #01d28e;
+                color: #fff;
             }
 
             .filter-bar select:focus,
-            .filter-bar button:focus {
+            .filter-bar button:focus,
+            .filter-bar input[type="number"]:focus {
                 outline: none;
                 border: 2px solid;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Fokus gölge */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+                border-color: #1089ff;
             }
 
-            .filter-bar select option {
-                padding: 10px;
-                color: #333;
+        .filter-bar select option {
+            padding: 10px;
+            color: #333;
+        }
+
+            .filter-bar select option:checked {
+                background-color: #1089ff;
+                color: #fff;
             }
-
-                .filter-bar select option:checked {
-                    background-color: #1089ff; /* Mavi renk */
-                    color: #fff; /* Beyaz yazı */
-                }
-
 </style>
-<div class="filter-bar">
-    <input class="form-control" type="text" id="searchInput" placeholder="Ara..." />
+<div style="margin-left:0.8em" class="filter-bar">
+    <input class="form-control" type="text" id="searchInput" placeholder="Araç Ara" />
+
+
 
     <select id="sortDropdown" class="form-control">
         <option value="">Sıralama</option>
@@ -72,10 +82,21 @@
         <option value="Sedan">Sedan</option>
         <option value="Hatchback">Hatchback</option>
         <option value="SUV">SUV</option>
+        <option value="Coupe">Coupe</option>
         <option value="Station Wagon">Station Wagon</option>
     </select>
 
-    @await Component.InvokeAsync("_CarBrandListVC")
+    <select name="fuel" id="fuelTypeDropdown" class="form-control">
+        <option value="">Yakıt Tipi</option>
+        <option value="Benzin">Benzin</option>
+        <option value="Dizel">Dizel</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Elektrik">Elektrik</option>
+    </select>
 
+    @await Component.InvokeAsync("_CarBrandListVC")
+    <input style="width:100px" class="form-control" type="number" id="minKm" placeholder="Min Km" />
+
+    <input style="width:100px" class="form-control" type="number" id="maxKm" placeholder="Max Km" />
     <button id="clearFilters" class="filter-item btn">Temizle</button>
 </div>

@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Inferfaces;
+﻿using CarBook.Application.Dtos;
+using CarBook.Application.Inferfaces;
 using CarBook.Application.Mediator.CarPricings.Results;
 using MediatR;
 using System;
@@ -9,23 +10,29 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Mediator.CarPricings.Queries
 {
-    public class CarFilteretListQuery : IRequest<List<CarFilteretListQueryResult>>
+    public class CarFilteretListQuery : IRequest<List<CarFilterDto>>
     {
 
-        string? bodytype;
-        string? sort;
-        int? brandid;
-        string? search;
+        public string? bodytype;
+        public string? sort;
+        public int? brandid;
+        public string? search;
+        public string? fuel;
+        public int? minkm;
+        public int? maxkm;
 
-        public CarFilteretListQuery(string? bodytype, string? sort, int? brandid, string? search)
+        public CarFilteretListQuery(string? bodytype, string? sort, int? brandid, string? search, string? fuel, int? maxkm, int? minkm)
         {
             this.bodytype = bodytype;
             this.sort = sort;
             this.brandid = brandid;
             this.search = search;
+            this.fuel = fuel;
+            this.maxkm = maxkm;
+            this.minkm = minkm;
         }
 
-        public class CarFilteretListQueryHandler : IRequestHandler<CarFilteretListQuery, List<CarFilteretListQueryResult>>
+        public class CarFilteretListQueryHandler : IRequestHandler<CarFilteretListQuery, List<CarFilterDto>>
         {
             private readonly ICarPricingRepository _carPricingRepository;
 
@@ -34,18 +41,32 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
                 _carPricingRepository = carPricingRepository;
             }
 
-            public async Task<List<CarFilteretListQueryResult>> Handle(CarFilteretListQuery request, CancellationToken cancellationToken)
+            public async Task<List<CarFilterDto>> Handle(CarFilteretListQuery request, CancellationToken cancellationToken)
             {
-                var values = await _carPricingRepository.GetCarFilterList(request.bodytype, request.sort, request.brandid,request.search);
-                return values.Select(x => new CarFilteretListQueryResult
+                var options = new CarFilterOptions
                 {
-                    BodyType = x.Car.BodyType,
-                    BrandId = x.Car.BrandId,
-                    BrandName = x.Car.Brand.Name,
-                    CarId = x.Car.CarId,
-                    CarModel = x.Car.Model,
-                    CoverImageUrl = x.Car.CoverImageUrl,
-                    DailyAmount = x.Amount
+                    bodytype = request.bodytype,
+                    sort = request.sort,
+                    brandid = request.brandid,
+                    search = request.search,
+                    fuel = request.fuel,
+                    minkm = request.minkm,
+                    maxkm = request.maxkm
+                };
+
+
+                var values = await _carPricingRepository.GetCarFilterList(options);
+                return values.Select(x => new CarFilterDto
+                {
+                    bodyType = x.Car.BodyType,
+                    brandId = x.Car.BrandId,
+                    brandName = x.Car.Brand.Name,
+                    carId = x.Car.CarId,
+                    carModel = x.Car.Model,
+                    coverImageUrl = x.Car.CoverImageUrl,
+                    dailyAmount = x.Amount,
+                    carFuel = x.Car.Fuel,
+                    carTransmission = x.Car.Transmission
                 }).ToList();
             }
         }

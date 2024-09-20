@@ -21,7 +21,7 @@ namespace CarBook.WebUi.ViewComponents.DefaultViewComponents
             if (responsemessage.IsSuccessStatusCode)
             {
                 var jsondata = await responsemessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<IEnumerable<CarResultDto>>(jsondata).OrderByDescending(x=>x.CarId).Take(6);
+                var values = JsonConvert.DeserializeObject<IEnumerable<CarResultDto>>(jsondata).OrderByDescending(x=>x.carId).Take(6);
                 return View(values);
             }
             return View();

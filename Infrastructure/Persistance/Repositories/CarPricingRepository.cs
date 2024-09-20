@@ -1,4 +1,5 @@
 ﻿using CarBook.Application;
+using CarBook.Application.Dtos;
 using CarBook.Application.Inferfaces;
 using CarBook.Persistance.Dtos;
 using Domain.Entities;
@@ -234,36 +235,56 @@ public class CarPricingRepository : ICarPricingRepository
                    .Where(x => x.Car.BodyType == bodytype && x.PricingId == 3)
                    .ToListAsync();
     }
-    public async Task<List<CarPricing>> GetCarFilterList(string? bodytype, string? sort, int? brandid,string? search)
+    public async Task<List<CarPricing>> GetCarFilterList(CarFilterOptions options)
     {
         var query = _context.CarPricings
+                            .AsNoTracking()
                             .Include(x => x.Car)
                             .ThenInclude(x => x.Brand)
                             .Include(x => x.Pricing)
                             .Where(x => x.Pricing.Name == "Günlük");
 
-        if (bodytype != null)
+        if (options.bodytype != null)
         {
-            query = query.Where(x => x.Car.BodyType == bodytype);
+            query = query.Where(x => x.Car.BodyType == options.bodytype);
+        }
+        if (options.fuel != null)
+        {
+            query = query.Where(x => x.Car.Fuel == options.fuel);
         }
 
-        if (brandid != null)
+        if (options.brandid != null)
         {
-            query = query.Where(x => x.Car.BrandId == brandid);
+            query = query.Where(x => x.Car.BrandId == options.brandid);
         }
 
-        if (sort == "asc")
+        if (options.sort == "asc")
         {
             query = query.OrderBy(x => x.Amount);
         }
-        else if (sort == "desc")
+
+        else if (options.sort == "desc")
         {
             query = query.OrderByDescending(x => x.Amount);
         }
-        if (!string.IsNullOrEmpty(search))
+
+        if (options.minkm.HasValue && options.maxkm.HasValue)
         {
-            search = search.Trim();  // Boşlukları temizler
-            var searchTerms = search.Split(' ');
+            query = query.Where(x => x.Car.Km >= options.minkm.Value && x.Car.Km <= options.maxkm.Value);
+        }
+        else if (options.minkm.HasValue)
+        {
+            query = query.Where(x => x.Car.Km >= options.minkm.Value);
+        }
+        else if (options.maxkm.HasValue)
+        {
+            query = query.Where(x => x.Car.Km <= options.maxkm.Value);
+        }
+
+        if (!string.IsNullOrEmpty(options.search))
+        {
+            options.search = options.search.Trim();  // Boşlukları temizler
+            var searchTerms = options.search.Split(' ');
 
             // Eğer birden fazla kelime varsa
             if (searchTerms.Length > 1)
@@ -276,13 +297,13 @@ public class CarPricingRepository : ICarPricingRepository
             }
             else // Tek kelime durumu
             {
-                query = query.Where(c => c.Car.Brand.Name.Contains(search) ||
-                                         c.Car.Model.Contains(search));
+                query = query.Where(c => c.Car.Brand.Name.Contains(options.search) ||
+                                         c.Car.Model.Contains(options.search));
             }
         }
-
-
-
         return await query.ToListAsync();
+
     }
+
+
 }

@@ -1,11 +1,12 @@
 ﻿@model List<CarBook.DTO.CarDtos.CarIndexDto>
+<style>
+    .custom-margin {
+        margin-top: 20px !important;
+    }
+</style>
 <div class="row">
-
     @if (Model != null && Model.Any())
     {
-
-
-
         @foreach (var car in Model)
         {
             <div class="col-md-4">
@@ -15,13 +16,16 @@
                     <div class="text">
                         <h2 class="mb-0"><a href="car-single.html">@car.brandName @car.carModel</a></h2>
                         <div class="d-flex mb-3">
-                            <span style="color:black">#@car.carId</span>
+                            <span class="mr-auto" style="color:gray;">
+                                <i></i> @car.carTransmission |
+                                <i></i> @car.carFuel
+                            </span>
                             <p class="price ml-auto">@Convert.ToInt32(@car.dailyAmount)₺ <span>Günlük</span></p>
                         </div>
-                        <p class="d-flex mb-0 d-block">
-                            <a href="/Reservation/Index/@car.carId?brandName=@car.brandName&carModel=@car.carModel" class="btn btn-primary py-2 mr-1">Hemen Kirala</a>
-                            <a href="/Car/CarDetail/@car.carId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a>
-                        </p>
+                            <p class="d-flex mb-0 d-block custom-margin">
+                                <a href="/Reservation/Index/@car.carId?brandName=@car.brandName&carModel=@car.carModel" class="btn btn-primary py-2 mr-1">Hemen Kirala</a>
+                                <a href="/Car/CarDetail/@car.carId" class="btn btn-secondary py-2 ml-1">Araç Bilgileri</a>
+                            </p>
                     </div>
                 </div>
             </div>

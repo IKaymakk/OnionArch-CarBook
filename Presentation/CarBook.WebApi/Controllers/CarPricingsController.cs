@@ -54,9 +54,9 @@ public class CarPricingsController : ControllerBase
         return Ok(values);
     }
     [HttpGet("CarFilteredList")]
-    public async Task<IActionResult> CarFilteredList(string? bodytype, string? sort, int? brandid,string? search)
+    public async Task<IActionResult> CarFilteredList(string? bodytype, string? sort, int? brandid, string? search, string? fuel, int? maxkm, int? minkm)
     {
-        var values = await _mediator.Send(new CarFilteretListQuery(bodytype, sort, brandid,search));
+        var values = await _mediator.Send(new CarFilteretListQuery(bodytype, sort, brandid, search, fuel, maxkm, minkm));
         return Ok(values);
     }
 }

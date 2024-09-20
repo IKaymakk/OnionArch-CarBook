@@ -17,5 +17,7 @@ namespace CarBook.Application.Mediator.CarPricings.Results
         public string PricingName { get; set; }
         public decimal Amount { get; set; }
         public string CarBodyType{ get; set; }
+        public string CarFuel { get; set; }
+        public string CarTransmission { get; set; }
     }
 }

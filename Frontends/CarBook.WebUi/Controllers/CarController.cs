@@ -30,21 +30,22 @@ public class CarController : Controller
         }
         return View();
     }
-   
+
     [HttpGet]
-    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid, string? search)
+    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid, string? search, string? fuel, int? maxkm, int? minkm)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}&search={search}");
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}&search={search}&fuel={fuel}&maxkm={maxkm}&minkm={minkm}");
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<CarIndexDto>>(jsonData);
+            CarIndexDto dtos = new CarIndexDto();
             return PartialView("_CarListIndexPartial", values); // PartialView ile dönecek
         }
         return BadRequest();
     }
-  
+
     public IActionResult CarDetail(int id)
     {
         ViewBag.v1 = "Araç Detayı";
@@ -53,7 +54,7 @@ public class CarController : Controller
         TempData["carid"] = id;
         return View();
     }
-   
+
     [HttpPost]
     public async Task<IActionResult> AddCarReview(AddCarReviewDto dto)
     {
@@ -79,5 +80,5 @@ public class CarController : Controller
             return RedirectToAction("CarDetail", "Car", new { id = dto.carId });
         }
     }
-   
+
 }
