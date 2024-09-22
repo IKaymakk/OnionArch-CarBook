@@ -19,6 +19,7 @@
 }
 <div class="col-md-12 block-9 mb-mbd-5">
     <form class="bg-light p-5 contact-form" method="post" asp-controller="Reservation" asp-action="Index">
+        <input type="hidden" asp-for="AppUserId" value="@ViewBag.appuserid" />
         <div class="form-group">
             <h2>@ViewBag.BrandName @ViewBag.CarModel Kirala</h2>
         </div>

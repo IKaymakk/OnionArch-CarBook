@@ -22,6 +22,8 @@ public class Car
     public string Fuel { get; set; }
     public string BigImageUrl { get; set; }
     public string BodyType { get; set; }
+    public string Power { get; set; }
+    public string Engine { get; set; }
     public List<CarFeature> CarFeatures { get; set; }
     public List<CarDescription> CarDescriptions { get; set; }
     public List<CarPricing> CarPricings { get; set; }

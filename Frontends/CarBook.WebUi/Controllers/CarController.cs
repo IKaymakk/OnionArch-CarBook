@@ -32,15 +32,15 @@ public class CarController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid, string? search, string? fuel, int? maxkm, int? minkm)
+    public async Task<IActionResult> JsonIndex(string? sortOrder, string? bodytype, int? brandid, string? search, string? fuel, int? maxkm, int? minkm, int pageNumber = 1, int pageSize = 6)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}&search={search}&fuel={fuel}&maxkm={maxkm}&minkm={minkm}");
+        var responseMessage = await client.GetAsync($"https://localhost:7149/api/CarPricings/CarFilteredList?sort={sortOrder}&bodytype={bodytype}&brandid={brandid}&search={search}&fuel={fuel}&maxkm={maxkm}&minkm={minkm}&pageNumber={pageNumber}&pageSize={pageSize}");
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<CarIndexDto>>(jsonData);
-            CarIndexDto dtos = new CarIndexDto();
+            
             return PartialView("_CarListIndexPartial", values); // PartialView ile dönecek
         }
         return BadRequest();

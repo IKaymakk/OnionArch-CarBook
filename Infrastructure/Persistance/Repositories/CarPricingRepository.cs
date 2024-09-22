@@ -25,6 +25,7 @@ public class CarPricingRepository : ICarPricingRepository
     }
     public async Task<List<(string BrandName, string CarModel, string CoverImageUrl, decimal? DailyAmount, decimal? WeeklyAmount, decimal? MonthlyAmount, int CarId, string BodyType)>> CarsListWithPricings()
     {
+        //Aracın Bilgilerini Aracın Günlük Fiyatı Filtresi Üzerinden Çekiyoruz
         var dailyPricings = await _context.CarPricings
                                  .Include(x => x.Car)
                                      .ThenInclude(x => x.Brand)
@@ -97,17 +98,17 @@ public class CarPricingRepository : ICarPricingRepository
     }
     public async Task<Application.Dtos.CarsDetailForAdminDto> CarDetailsForAdmin(int id)
     {
-        // İlk carPricing nesnesini çekiyoruz
+        // Araca Ait Fiyatlandırma Var Mı Diye Bakıyoruz
         var carPricings = await _context.CarPricings
                                          .Include(x => x.Car)
                                          .ThenInclude(x => x.Brand)
-                                       .Include(x => x.Pricing)
-                                        .Where(x => x.CarId == id)
-                                        .ToListAsync();
+                                         .Include(x => x.Pricing)
+                                         .Where(x => x.CarId == id)
+                                         .ToListAsync();
 
+        // Eğer Araca Ait Fiyat Bulunamasa Default Değerler Atıyoruz (Yeni Eklenen Aracın Fiyat Durumu Bulunmuyor Ve Default Değer Atamış Oluyoruz)
         if (carPricings == null || !carPricings.Any())
         {
-            // Eğer carPricing bulunamazsa yeni 3 kayıt ekliyoruz
             var newCarPricings = new List<CarPricing>
               {
             new CarPricing { CarId = id, PricingId = 3 , Amount = 1 }, // Varsayılan Günlük
@@ -115,11 +116,9 @@ public class CarPricingRepository : ICarPricingRepository
             new CarPricing { CarId = id,  PricingId = 5 , Amount = 1 }   // Varsayılan Aylık
              };
 
-            // Yeni kayıtları veritabanına ekliyoruz
             await _context.CarPricings.AddRangeAsync(newCarPricings);
             await _context.SaveChangesAsync();
 
-            // Eklenen yeni carPricings'i tekrar çekiyoruz
             carPricings = newCarPricings;
 
 
@@ -140,7 +139,7 @@ public class CarPricingRepository : ICarPricingRepository
 
 
 
-            // Haftalık fiyatı çekiyoruz
+            // Haftalık fiyat
             var weeklyPricing2 = carPricings
                                 .Where(x => x.PricingId == 4)
                                 .Select(x => new
@@ -149,7 +148,7 @@ public class CarPricingRepository : ICarPricingRepository
                                 })
                                 .FirstOrDefault();
 
-            // Aylık fiyatı çekiyoruz
+            // Aylık fiyat
             var monthlyPricing2 = carPricings
                                 .Where(x => x.PricingId == 5)
                                 .Select(x => new
@@ -158,7 +157,7 @@ public class CarPricingRepository : ICarPricingRepository
                                 })
                                 .FirstOrDefault();
 
-            // DTO'yu oluşturuyoruz
+            // DTO
             Application.Dtos.CarsDetailForAdminDto dto2 = new Application.Dtos.CarsDetailForAdminDto
             {
                 CarId = id,
@@ -174,10 +173,10 @@ public class CarPricingRepository : ICarPricingRepository
 
 
         }
+        // Eğer Aracın Fiyat Değerleri Varsa Direkt Aracı Çekiyoruz
         else
         {
 
-            // Günlük fiyatı çekiyoruz
             var dailyPricing = carPricings
                                 .Where(x => x.Pricing.Name == "Günlük")
                                 .Select(x => new
@@ -189,7 +188,6 @@ public class CarPricingRepository : ICarPricingRepository
                                 })
                                 .FirstOrDefault();
 
-            // Haftalık fiyatı çekiyoruz
             var weeklyPricing = carPricings
                                 .Where(x => x.Pricing.Name == "Haftalık")
                                 .Select(x => new
@@ -199,7 +197,6 @@ public class CarPricingRepository : ICarPricingRepository
                                 })
                                 .FirstOrDefault();
 
-            // Aylık fiyatı çekiyoruz
             var monthlyPricing = carPricings
                                 .Where(x => x.Pricing.Name == "Aylık")
                                 .Select(x => new
@@ -209,7 +206,7 @@ public class CarPricingRepository : ICarPricingRepository
                                 })
                                 .FirstOrDefault();
 
-            // DTO'yu oluşturuyoruz
+            // DTO
             Application.Dtos.CarsDetailForAdminDto dto = new Application.Dtos.CarsDetailForAdminDto
             {
                 CarId = id,
@@ -283,19 +280,19 @@ public class CarPricingRepository : ICarPricingRepository
 
         if (!string.IsNullOrEmpty(options.search))
         {
-            options.search = options.search.Trim();  // Boşlukları temizler
+            options.search = options.search.Trim();  // Boşlukları temizle
             var searchTerms = options.search.Split(' ');
 
             // Eğer birden fazla kelime varsa
             if (searchTerms.Length > 1)
             {
-                var brandName = searchTerms[0];  // İlk kelime marka adı
-                var modelName = searchTerms[1];   // İkinci kelime model adı
+                var brandName = searchTerms[0];  // İlk kelimeyi marka adı olarak al
+                var modelName = searchTerms[1];   // İkinci kelimeyi model adı olarak al
 
                 query = query.Where(c => c.Car.Brand.Name.Contains(brandName) &&
                                          c.Car.Model.Contains(modelName));
             }
-            else // Tek kelime durumu
+            else // Tek kelime ise direkt ara
             {
                 query = query.Where(c => c.Car.Brand.Name.Contains(options.search) ||
                                          c.Car.Model.Contains(options.search));

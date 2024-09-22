@@ -1,5 +1,11 @@
 ﻿@model CarBook.DTO.CarDtos.CarDetailDto
 <style>
+  
+
+    .col-md {
+        margin-bottom: 0.5rem; /* Kolonlar arasındaki boşluğu da azaltıyoruz */
+    }
+
     .car-details {
         display: flex;
         flex-direction: column;
@@ -40,7 +46,7 @@
             <div class="media block-6 services">
                 <div class="media-body py-md-4">
                     <div class="d-flex mb-3 align-items-center">
-                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                         <div class="text">
                             <h3 class="heading mb-0 pl-3">
                                 Kilometre
@@ -72,6 +78,68 @@
             <div class="media block-6 services">
                 <div class="media-body py-md-4">
                     <div class="d-flex mb-3 align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
+                        <div class="text">
+                            <h3 class="heading mb-0 pl-3">
+                                Motor Hacmi
+                                <span>@Model.Engine</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+                <div class="media-body py-md-4">
+                    <div class="d-flex mb-3 align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+                        <div class="text">
+                            <h3 class="heading mb-0 pl-3">
+                                Motor Gücü
+                                <span>@Model.Power</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:-4.3em">
+        <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+                <div class="media-body py-md-4">
+                    <div class="d-flex mb-3 align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+                        <div class="text">
+                            <h3 class="heading mb-0 pl-3">
+                                Yakıt Tipi
+                                <span>@Model.Fuel</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+                <div class="media-body py-md-4">
+                    <div class="d-flex mb-3 align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
+                        <div class="text">
+                            <h3 class="heading mb-0 pl-3">
+                                Kasa Tipi
+                                <span>@Model.BodyType</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+                <div class="media-body py-md-4">
+                    <div class="d-flex mb-3 align-items-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
                         <div class="text">
                             <h3 class="heading mb-0 pl-3">
@@ -90,23 +158,8 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-backpack"></span></div>
                         <div class="text">
                             <h3 class="heading mb-0 pl-3">
-                                Bagaj Hacmi
-                                <span>@Model.Luggage Litre</span>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services">
-                <div class="media-body py-md-4">
-                    <div class="d-flex mb-3 align-items-center">
-                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
-                        <div class="text">
-                            <h3 class="heading mb-0 pl-3">
-                                Yakıt Tipi
-                                <span>@Model.Fuel</span>
+                                Bagaj Hacmi (Litre)
+                                <span>@Model.Luggage</span>
                             </h3>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace CarBook.WebUi.ViewComponents.CarDetailViewComponents
 {
-    public class _CarDetailMainVC:ViewComponent
+    public class _CarDetailMainVC : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -22,6 +22,8 @@ namespace CarBook.WebUi.ViewComponents.CarDetailViewComponents
             {
                 var jsondata = await responsemessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<CarDetailDto>(jsondata);
+                TempData["bigcoverimage"] = values.CoverImageUrl;
+                TempData["carfullname"] = values.BrandName + " " + values.Model + " (" + values.Year + ")";
                 return View(values);
             }
             return View();

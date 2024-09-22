@@ -8370,9 +8370,9 @@ h1, h2, h3, h4, h5,
     .hero-wrap.hero-wrap-2 .overlay {
       width: 100%;
       opacity: .3;
-      height: 600px; }
+      height: 800px !important; }
     .hero-wrap.hero-wrap-2 .slider-text {
-      height: 600px !important; }
+      height: 800px !important; }
 
 .slider-text {
   height: 850px; }

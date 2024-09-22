@@ -14,4 +14,7 @@ public class CarDetailDto
     public byte Luggage { get; set; }
     public string Fuel { get; set; }
     public string BigImageUrl { get; set; }
+    public string BodyType { get; set; }
+    public string Engine { get; set; }
+    public string Power { get; set; }
 }

@@ -20,6 +20,7 @@ namespace CarBook.Application.Mediator.CarPricings.Queries
         public string? fuel;
         public int? minkm;
         public int? maxkm;
+       
 
         public CarFilteretListQuery(string? bodytype, string? sort, int? brandid, string? search, string? fuel, int? maxkm, int? minkm)
         {

@@ -8,6 +8,8 @@
     .custom-margin {
         margin-top: 20px !important;
     }
+
+   
     .car-wrap {
         transition: transform 0.3s, box-shadow 0.3s;
         height: 375px;
@@ -60,8 +62,8 @@
 
         <div class="xd">
             <div class="row">
-                 @foreach (var car in Model)
-        {
+                @foreach (var car in Model)
+                {
                     <div class="col-md-4">
                         <div class="car-wrap rounded ftco-animate">
                             <div class="img" style="background-image: url(@car.carCoverImageUrl);">
@@ -70,8 +72,8 @@
                                 <h2 class="mb-0"><a href="car-single.html">@car.brandName @car.carModel</a></h2>
                                 <div class="d-flex mb-3">
                                     <span class="mr-auto" style="color:gray;">
-                                        <i ></i> @car.carTransmission |
-                                        <i ></i> @car.carFuel
+                                        <i></i> @car.carTransmission |
+                                        <i></i> @car.carFuel
                                     </span>
                                     <p class="price ml-auto">@Convert.ToInt32(@car.amount)₺ <span>Günlük</span></p>
                                 </div>
@@ -82,10 +84,12 @@
                             </div>
                         </div>
                     </div>
-        }
+                }
             </div>
         </div>
-    </div>
+
+   
+
 
 </section>
 
@@ -93,48 +97,28 @@
 
 <script>
     $(document).ready(function () {
-        // Sort Dropdown
-        $("#sortDropdown").change(function () {
-            applyFilters(); // Filtreleri uygula
+
+        $("#sortDropdown, #bodyTypeDropdown, #brandDropDown, #fuelTypeDropdown").change(function () {
+            applyFilters();
         });
 
-        // BodyType Dropdown
-        $('#bodyTypeDropdown').change(function () {
-            applyFilters(); // Filtreleri uygula
+        // Arama ve kilometre filtreleme işlemlerini tetikleyen inputlar
+        $("#searchInput, #minKm, #maxKm").on('input', function () {
+            applyFilters();
         });
 
-        // Brand Dropdown
-        $("#brandDropDown").change(function () {
-            applyFilters(); // Filtreleri uygula
-        });
-        $("#fuelTypeDropdown").change(function () {
-            applyFilters(); // Filtreleri uygula
-        });
-
-        // Search Input
-        $("#searchInput").on('input', function () {
-            applyFilters(); // Filtreleri uygula
-        });
-        $("#minKm").on('input', function () {
-            applyFilters(); // Filtreleri uygula
-        });
-        $("#maxKm").on('input', function () {
-            applyFilters(); // Filtreleri uygula
-        });
-
-
-        // "Temizle" Butonuna Tıklama Olayı
         $("#clearFilters").click(function () {
+            currentPage = 1;
             $.ajax({
                 url: '/Car/JsonIndex',
                 type: 'GET',
                 success: function (data) {
-                    $('.xd').html(''); // Filtrelenmiş sonuçları temizle
-                    $('.xd').html(data); // Varsayılan listeyi doldur
-                    $("#sortDropdown, #bodyTypeDropdown, #brandDropDown, #fuelTypeDropdown").prop('selectedIndex', 0); // Dropdownları sıfırla
-                    $("#searchInput").val(''); // Arama inputunu temizle
-                    $("#minKm").val(''); // Arama inputunu temizle
-                    $("#maxKm").val(''); // Arama inputunu temizle
+                    $('.xd').html('');
+                    $('.xd').html(data);
+                    $("#sortDropdown, #bodyTypeDropdown, #brandDropDown, #fuelTypeDropdown").prop('selectedIndex', 0); //
+                    $("#searchInput").val('');
+                    $("#minKm").val('');
+                    $("#maxKm").val('');
                 },
                 error: function () {
                     alert('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -144,13 +128,13 @@
 
         // Filtreleri Uygulayan Fonksiyon
         function applyFilters() {
-            var sortOrder = $("#sortDropdown").val();  // Sıralama türü
+            var sortOrder = $("#sortDropdown").val();       // Sıralama türü
             var selectedBodyType = $('#bodyTypeDropdown').val();  // Gövde tipi
-            var brandId = $("#brandDropDown").val();  // Marka ID
-            var searchQuery = $("#searchInput").val(); // Arama terimi
-            var fuelType = $("#fuelTypeDropdown").val(); // Arama terimi
-            var minimumKm = $("#minKm").val(); // Arama terimi
-            var maximumKm = $("#maxKm").val(); // Arama terimi
+            var brandId = $("#brandDropDown").val();        // Marka ID
+            var searchQuery = $("#searchInput").val();      // Arama terimi
+            var fuelType = $("#fuelTypeDropdown").val();    // Arama terimi
+            var minimumKm = $("#minKm").val();      // Arama terimi
+            var maximumKm = $("#maxKm").val();      // Arama terimi
 
             $.ajax({
                 url: '/Car/JsonIndex',
@@ -159,20 +143,20 @@
                     sortOrder: sortOrder,
                     bodytype: selectedBodyType,
                     brandid: brandId,
-                    search: searchQuery, // Arama terimini gönder
-                    fuel: fuelType,// Arama terimini gönder
-                    maxkm: maximumKm,// Arama terimini gönder
-                    minkm: minimumKm// Arama terimini gönder
+                    search: searchQuery,    // Arama terimini gönder
+                    fuel: fuelType,         // Arama terimini gönder
+                    maxkm: maximumKm,       // Arama terimini gönder
+                    minkm: minimumKm      // Arama terimini gönder
                 },
                 success: function (data) {
-                    $('.xd').html('');  // İçeriği boşalt
-                    $('.xd').html(data);  // Yeni veriyi ekle
+                    $('.xd').html('');      // İçeriği boşalt
+                    $('.xd').html(data);    // Yeni veriyi ekle
                 },
                 error: function () {
                     alert('Bir hata oluştu. Lütfen tekrar deneyin.');
                 }
             });
         }
-    });
 
+    });
 </script>

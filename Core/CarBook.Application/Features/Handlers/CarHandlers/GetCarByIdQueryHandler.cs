@@ -36,7 +36,9 @@ public class GetCarByIdQueryHandler
             Model = values.Model,
             Seat = values.Seat,
             BrandName = values.Brand.Name,
-            Transmission = values.Transmission
+            Transmission = values.Transmission,
+            Engine = values.Engine,
+            Power = values.Power
         };
     }
 }

@@ -59,4 +59,5 @@ public class CarPricingsController : ControllerBase
         var values = await _mediator.Send(new CarFilteretListQuery(bodytype, sort, brandid, search, fuel, maxkm, minkm));
         return Ok(values);
     }
+
 }

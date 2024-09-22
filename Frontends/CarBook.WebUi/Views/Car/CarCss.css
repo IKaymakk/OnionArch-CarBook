@@ -1,0 +1,107 @@
+﻿.custom-margin {
+    margin-top: 20px !important;
+}
+
+.car-wrap {
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 375px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+    .car-wrap:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+    }
+
+
+
+    .car-wrap .text {
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .car-wrap h2 a {
+        font-size: 20px;
+        color: #343a40;
+        text-decoration: none;
+    }
+
+        .car-wrap h2 a:hover {
+            color: #007bff;
+        }
+
+
+.price {
+    color: #28a745;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+    /* Uzun input */
+    .filter-bar input[type="text"] {
+        width: 200px;
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #495057;
+        border: 0.5px solid Darkgray;
+        transition: border-color 0.2s;
+    }
+
+        .filter-bar input[type="text"]:focus {
+            border-color: #1089ff;
+        }
+
+    /* Diğer input ve select elemanları aynı boyutta */
+    .filter-bar select,
+    .filter-bar input[type="number"],
+    .filter-bar button {
+        width: 140px;
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #1089ff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .filter-bar button {
+        width: 100px !important;
+    }
+
+        .filter-bar button:hover {
+            transform: scale(1.02);
+            background-color: #01d28e;
+            color: #fff;
+        }
+
+        .filter-bar select:focus,
+        .filter-bar button:focus,
+        .filter-bar input[type="number"]:focus {
+            outline: none;
+            border: 2px solid;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            border-color: #1089ff;
+        }
+
+    .filter-bar select option {
+        padding: 10px;
+        color: #333;
+    }
+
+        .filter-bar select option:checked {
+            background-color: #1089ff;
+            color: #fff;
+        }

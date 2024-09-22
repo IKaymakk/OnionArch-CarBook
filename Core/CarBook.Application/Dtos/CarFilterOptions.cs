@@ -13,7 +13,9 @@ namespace CarBook.Application.Dtos
         public int? brandid { get; set; }
         public string? search { get; set; }
         public string? fuel { get; set; }
-        public int? minkm { get; set; } 
-        public int? maxkm { get; set; }  
+        public int? minkm { get; set; }
+        public int? maxkm { get; set; }
+        public int pageNumber { get; set; }
+        public int pageSize { get; set; }
     }
 }

@@ -32,7 +32,10 @@ public class GetCarQueryHandler
             Luggage = x.Luggage,
             Model = x.Model,
             Seat = x.Seat,
-            Transmission = x.Transmission
+            Transmission = x.Transmission,
+            BodyType = x.BodyType,
+            Power = x.Power,
+            Engine = x.Engine
         }).ToList();
     }
 }

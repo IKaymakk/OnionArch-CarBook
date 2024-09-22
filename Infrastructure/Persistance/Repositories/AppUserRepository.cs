@@ -19,9 +19,8 @@ namespace CarBook.Persistance.Repositories
             _carbookContext_ = ctx;
         }
 
-        public async Task<AppUser> GetByFilterAsync(
-     Expression<Func<AppUser, bool>> filter,
-     params Expression<Func<AppUser, object>>[] includes)
+        public async Task<AppUser> GetByFilterAsync(Expression<Func<AppUser, bool>> filter,
+                                                    params Expression<Func<AppUser, object>>[] includes)
         {
             // DbSet<AppUser> ile sorguya başla
             IQueryable<AppUser> query = _carbookContext_.Set<AppUser>();
@@ -35,7 +34,6 @@ namespace CarBook.Persistance.Repositories
                 }
             }
 
-            // Filtreyi uygula ve sonuçları listele
             return await query.Where(filter).FirstOrDefaultAsync();
         }
 
